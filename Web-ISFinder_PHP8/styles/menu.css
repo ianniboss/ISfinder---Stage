@@ -1,0 +1,73 @@
+/* le nav */
+nav{
+	background-image:url(../images/bandeau-onglet-2012.png);
+	padding:0.5em 0em 2em 15em;
+	font-size:0.9em;
+	text-align:center;
+	}
+nav, ul {
+	list-style: none;
+	}
+nav li{
+	float: left;
+	width: 10em;
+}	
+nav li ul {
+	position: absolute;
+	width: 10em;
+}
+nav li:hover ul {
+	left: auto;
+}
+nav li:hover > .sousmenu{
+	display: block;
+}
+nav a{
+	display:block;
+	width: 10em;
+	font-weight:bold;
+	color:#babcc3;
+}
+nav a:hover{text-decoration:none;color:#B95432}
+nav a:active{color:#B95432}
+#en-cours a{
+	color:#B95432;
+	border-radius:0px 8px 8px 8px;
+
+}
+.sousmenu{
+	display:none;
+	position:absolute;
+	left:30em;
+	border-radius: 0px 10px 10px 10px;
+	background-color:#f3f3f3;
+	padding:0em 0.5em;
+	line-height: 22px;
+	text-align:left;
+}
+.sousmenu ul li{
+	padding:0em 0.5em;
+/*	margin-left:1em;				//ces 2 lignes remplace le padding pour
+	list-style: square; 			// avoir un carré en début de ligne */
+}
+
+.sousmenu li:hover > .sousmenu2{
+	display: block;
+}
+.sousmenu2 > li{
+	display:block;
+	float:none;						/* Pour annuler le float left: indispensable pour IE et chrome */
+}
+.sousmenu2{
+	display:none;
+	background-color:#9ca8ba;
+	color:#FFF;
+	padding:0em 0.5em;
+	white-space: nowrap;
+	width:22em;
+	margin:-1em 0em 0em 6em;
+	border-radius: 0px 10px 10px 10px;
+}
+.sousmenu2 a{
+	color:#FFF;
+}

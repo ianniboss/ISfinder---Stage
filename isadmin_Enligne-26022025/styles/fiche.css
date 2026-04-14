@@ -1,0 +1,172 @@
+@charset "utf-8";
+/****************************************** CSS Document */
+.enteteSection{
+	margin-top:2em;
+	margin-bottom:1em;
+}
+
+/*************************************    Partie Submission ***************/
+th{
+	background-color:#9ca8ba;
+ }
+fieldset#submitter, #infoIS, #bacterial{
+	margin-top:2em;
+	padding:1.5em 0em 1em 2em;
+	background: #f3f3f3;
+	border:0px;
+	-webkit-border-radius: 0px 8px 8px 8px;
+	border-radius:0px 8px 8px 8px;
+	width: 920px;
+}
+fieldset#submitter li, #infoIS li{
+	padding:1em 1em 0em 0em;
+	display:block;
+	float: left;
+}
+fieldset#bacterial li{
+	padding:1em 1em 0em 0em;
+	display:block;
+}
+fieldset#submitter ul, #infoIS ul, #bacterial ul{
+	display:inline-block;
+}
+fieldset#submitter legend, #infoIS legend, #bacterial legend{
+	font-weight:bold;
+	background-color:#f3f3f3;
+	color:#a70003;
+}
+fieldset#infoIS li input, #submitter input, #bacterial li input{
+	margin-right:2.6em;
+}
+fieldset#submitter label{
+	display: block;
+	width: 100px;
+	float: left;
+}
+label.label_court{
+	display: block;
+	width: 40px;
+	float: left;
+}	
+label.label_large{
+	width: 109px;
+	float: left;
+}
+fieldset#infoIS table{
+	margin-top:1.5em;
+}
+fieldset#infoIS textarea{
+	vertical-align:top;
+}
+input[type="radio"]{
+	margin-left:20px;
+	width:1em;
+}
+.entete_propriete{
+	font-size:14px;
+	color:#00788e;
+	font-weight:bold;
+	padding-top:1em;
+	padding-bottom:0.5em;
+}
+.seq{
+	font-family:"Courier New", Courier, monospace;
+	font-size:12px;
+	text-transform:uppercase;
+	word-wrap:break-word;
+}
+.orf_function{
+    height:1.5em;
+    display:inline;
+}
+.requis{
+	font-family:Verdana, Geneva, sans-serif;
+	color:#bc5937;
+	text-align:right;
+	margin-right:50px;
+}
+.ascenseurAuto
+{
+	max-height: 100px;
+	overflow: auto;
+}
+#seq_ident{
+	font-family:arial,calibri,verdana,sans-serif;
+	font-size:18px;
+	text-align:center;
+	font-weight:bold;
+	padding-bottom:2em;
+}
+#seq_ident ul{
+	padding-top:1em;
+}
+#seq_ident li{
+	margin:2em;
+	display:inline;
+	text-align:center;
+	font-weight:normal;
+	font-size:16px;
+}
+.entete_propriete ul{
+	padding-top:1em;
+}
+.entete_propriete li{
+	display:inline;
+	text-align:center;
+	font-weight:normal;
+	font-size:16px;
+}
+.entete_propriete_bis{
+	font-size:14px;
+	color:#00788e;
+	font-weight:bold;
+	display:inline-block;
+	width:2.5em;
+}
+.entete_propriete_tri{
+	font-size:14px;
+	color:#00788e;
+	font-weight:bold;
+	display:inline-block;
+	width:5.5em;
+}
+.entete_propriete_decal{
+	font-size:12px;
+	color:#00788e;
+	font-weight:bold;
+	padding-top:0.5em;
+	padding-left:2em;
+}
+#droite{
+	float:right;
+	display:block;
+	padding-right:2em;
+}
+.texte{
+	padding:1em 4em 0em 0em;
+	text-align:justify;
+}
+#image{
+	float:none;
+	padding:1em;
+	margin-right:4em;
+	margin-bottom:2em;
+	border-color:#9ca8ba;
+	border-width:1px;
+	border-style:double;
+}
+.espace_dessous{
+	padding-bottom:2em;
+}
+.label_gros{
+	font-size:14px;
+	color:#00788e;
+	font-weight:bold;
+	padding-top:2em;
+}
+.label_gros_decal{
+	font-size:14px;
+	color:#00788e;
+	font-weight:bold;
+	padding-left:3em;
+}

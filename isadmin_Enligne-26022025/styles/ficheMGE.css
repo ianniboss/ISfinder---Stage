@@ -1,0 +1,87 @@
+@charset "utf-8";
+/* CSS Document */
+/******************************** Affichage d'une FICHE IS   ********************/
+#seq_ident{
+	font-family:arial,calibri,verdana,sans-serif;
+	font-size:18px;
+	text-align:center;
+	font-weight:bold;
+	padding-bottom:2em;
+}
+#seq_ident ul{
+	padding-top:1em;
+}
+#seq_ident li{
+	margin:2em;
+	display:inline;
+	text-align:center;
+	font-weight:normal;
+	font-size:16px;
+}
+.entete_propriete{
+	font-size:14px;
+	color:#00788e;
+	font-weight:bold;
+	padding-top:0.5em;
+}
+.entete_propriete ul{
+	padding-top:1em;
+}
+.entete_propriete li{
+	display:inline;
+	text-align:center;
+	font-weight:normal;
+	font-size:16px;
+}
+.entete_propriete_bis{
+	font-size:14px;
+	color:#00788e;
+	font-weight:bold;
+	display:inline-block;
+	width:2.5em;
+}
+.entete_propriete_tri{
+	font-size:14px;
+	color:#00788e;
+	font-weight:bold;
+	display:inline-block;
+	width:5.5em;
+}
+.entete_propriete_decal{
+	font-size:14px;
+	color:#00788e;
+	font-weight:bold;
+	padding-top:0.5em;
+	padding-left:2em;
+}
+.seq{
+	font-family:"Courier New", Courier, monospace;
+	font-size:14px;
+	text-transform:uppercase;
+	word-wrap:break-word;
+}
+.ascenseurAuto
+{
+	max-height: 100px;
+	overflow: auto;
+}
+#droite{
+	float:right;
+	display:block;
+	padding-right:2em;
+}
+.texte{
+	padding:1em 4em 0em 0em;
+	text-align:justify;
+}
+#imag-droite{
+	float:right;
+	width:500px;
+	padding:1em;
+	margin-right:4em;
+	margin-bottom:2em;
+	border-color:#9ca8ba;
+	border-width:1px;
+	border-style:double;
+}
+

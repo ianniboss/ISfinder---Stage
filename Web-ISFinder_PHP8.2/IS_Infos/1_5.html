@@ -1,0 +1,68 @@
+<h2>IS Identification </h2>
+  <p class="info">The families in ISfinder
+    are defined using an initial manual BLAST analysis often followed by
+    reiterative BLAST analyses with the primary transposase sequence of
+    representative elements used as a query in a BLASTP (Altschul<i>, et al.</i>, 1990) search of microbial genomes. Potential full-length Tpases are retained and that
+    with the lowest score then used as a query in a second BLASTP search. This is
+    continued until no new potential candidates are detected. The ClustalW multiple
+    alignment algorithm (Thompson<i>, et al.</i>, 1994) is then used and
+    the results displayed using the Jalview alignment editor (Clamp<i>, et al.</i>,
+    2004) for assessment. The corresponding DNA together with 1000 base
+    pairs up- and down-stream is then extracted and examined manually for the IRs
+    or other typical features such as secondary structures and flanking DRs. This,
+    together with comparison of the DNA extremities of various elements, allows
+    identification of both ends of the collected elements. In cases where more than
+    a single IS copy is identified, BLASTN can be used to define the IS ends. Where
+    only a single copy is found, the ends can often be defined by identifying and
+    comparing with empty sites.</p>
+  <p class="info">In a second step, we use the Markov Cluster Algorithm (MCL) (<a target="_blank"
+href="http://micans.org/mcl/">http://micans.org/mcl/</a>) (Van Dongen, 2000, Enright<i>, et al.</i>, 2002) to weigh the relationships between clusters
+    of ISs and to validate prior ISfinder classification of ISs into families and
+    subgroups (Siguier<i>, et al.</i>, 2009). This is explained in detail in Siguier<i>, et al.</i> (2009) and is based on the parameters used in the MCL (<a
+href="javascript:fenetre('1_5_1.jpg','Titre',960,720);">Fig 1.5.1</a>) in addition to characteristics such as the
+    specificity of target site duplications, the detailed sequence of the ends,
+    genetic organisation. It
+    should be understood that the distinction between families and subgroups can
+    evolve as the number of ISs in the database increases.</p>
+  <p class="info">Several semi-automatic IS annotation
+    pipelines are now available. The interested reader is directed to three of
+    these: ISsaga (Varani<i>, et al.</i>, 2011) which is now integrated into the ISfinder
+    platform (Siguier<i>, et al.</i>, 2006), ISScan (Wagner<i>, et al.</i>, 2007) and Oasis (Robinson<i>, et al.</i>, 2012). At present, <i>de novo</i> prediction of ISs is not efficient and these pipelines all
+    employ the ISfinder database to function. While all three pipelines permit
+    identification of IS fragments as well as full length ISs, a certain level of
+    manual assessment is essential.</p>
+    
+   <ul class="infoRef">
+  References :<br />
+  <li class="ref">Altschul SF, Gish W, Miller W, Myers EW &amp; Lipman DJ
+    (1990) Basic local alignment search tool. <i>J
+    Mol Biol</i> <b>215</b>: 403-410.</li>
+   
+  <li class="ref">Clamp M, Cuff J, Searle SM &amp; Barton GJ (2004) The
+    Jalview Java alignment editor. <i>Bioinformatics</i> <b>20</b>: 426-427.</li>
+
+  <li class="ref">Enright AJ, Van Dongen S &amp; Ouzounis CA (2002) An
+    efficient algorithm for large-scale detection of protein families. <i>Nucleic Acids Res</i> <b>30</b>: 1575-1584.</li>
+  <li class="ref">Robinson DG, Lee MC &amp; Marx CJ (2012) OASIS: an
+    automated program for global investigation of bacterial and archaeal insertion
+    sequences. <i>Nucleic Acids Res</i> <b>40</b>: e174.</li>
+  <li class="ref">Siguier P, Gagnevin L &amp; Chandler M (2009) The new
+    IS1595 family, its relation to IS1 and the frontier between insertion sequences
+    and transposons. <i>Res Microbiol</i> <b>160</b>: 232-241.</li>
+  <li class="ref">Siguier P, Perochon J, Lestrade L, Mahillon J &amp;
+    Chandler M (2006) ISfinder: the reference centre for bacterial insertion
+    sequences. <i>Nucleic Acids Res</i> <b>34</b>: D32-36.</li>
+  <li class="ref">Thompson JD, Higgins DG &amp; Gibson TJ (1994) CLUSTAL
+    W: improving the sensitivity of progressive multiple sequence alignment through
+    sequence weighting, position-specific gap penalties and weight matrix choice. <i>Nucleic Acids Res</i> <b>22</b>: 4673-4680.</li>
+  <li class="ref">Van Dongen S (2000) A cluster algorithm for graphs. <i>Technical Report INS-R0010, National
+    Research Institute for Mathematics and Computer Science in the Netherlands.
+    Amsterdam.</i></p>
+  <li class="ref">Varani A, Siguier P, Gourbeyre E, Charneau V &amp;
+    Chandler M (2011) ISsaga is an ensemble of web-based methods for high throughput
+    identification and semi-automatic annotation of insertion sequences in
+    prokaryotic genomes. <i>Genome Biol</i> <b>12</b>: R30.</li>
+  <li class="ref">Wagner
+    A, Lewis C &amp; Bichsel M (2007) A survey of bacterial insertion sequences
+    using IScan. <i>Nucleic Acids Research</i> <b>35</b>: 5284-5293.</li>
+</ul>

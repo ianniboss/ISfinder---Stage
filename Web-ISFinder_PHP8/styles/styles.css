@@ -1,0 +1,153 @@
+/* initialisation des balises html */
+body, h1, h2, h3, p, ul, li, form, fieldset, input {margin:0; padding:0}
+ul, li {list-style:none}     /* Pour enlever les points noirs des listes */
+
+a{text-decoration:none;			/* Pour les liens par defaut */
+	color:#bc5937;
+}
+a:hover{color:#333;
+		text-decoration:underline}
+a:active{color:#bc5937}
+
+	/* les elements texte ou font sont hérités */
+	/* donc font par défaut défini à body est vrai pour tous les blocs */
+body {font-family:arial,calibri,verdana,sans-serif;
+	font-size:0.8em;
+	color:#0b4255 ;
+	background-color:#F2F2F2;
+	margin:0px 0px 0px 0px
+	}
+h1,h2,h3{font-family:arial,cambria,"times new roman",serif;
+		font-weight:normal}				/* enleve le gras */
+
+#page{
+	width:1024px;
+	margin-top:2px;					/* Décalage en haut de la page */
+	margin-left:auto;
+	margin-right:auto;
+	border:1px solid #9ca8ba;
+	background: #FFF;	
+	-webkit-border-radius:0px 8px 8px 8px ;
+	-moz-border-radius:0px 8px 8px 8px;
+	border-radius:0px 8px 8px 8px;
+	-webkit-box-shadow: #666 5px 10px 10px;
+	-moz-box-shadow: #666 5px 10px 10px;
+	box-shadow: #666 5px 10px 10px;
+	behavior: url(PIE.htc);
+	}	
+pre{
+	font-size:12px;
+}
+/* pour le header */
+header{padding:0em 0em 0em 0em;        /* marge intérieure*/
+	color:#fff;
+	height:134px;
+	background-image:url(../images/IS-finder-bandeau-garde-2012.png);
+	}	
+header h1 {font-family:arial,calibri,verdana,sans-serif;}
+header h2{font-size:0.9em;}
+
+/* le nav est dans menu.css */
+
+/* le aside */
+aside{
+	padding:1em;
+	width:12em;
+	overflow:hidden;
+	font-size:0.8em;
+	}
+
+/* le bloc article */
+article{margin:0em 0em 5em 0em;
+	padding:2em 0em 0em 2em;
+	font-family:arial,cambria,"times new roman",serif;
+	font-weight:normal;
+	background: #FFF;
+	}	
+article h2{color:#00788e}
+article h3{border-top:0px solid #f40;
+	padding-left:12em;
+	margin-top:1em;
+	}
+article h3:first-letter{font-size:1.5em; font-weight:bold; color:#bc5937; text-transform:capitalize}
+.image{
+	padding:0em 0em 0em 0em;
+	float:right;
+}
+pre{
+	font-size:12px;
+}
+table{
+	border-spacing:2px 2px;
+    margin-bottom:10px;
+	margin-top:1.5em;	 
+	width:95%;
+	}
+th{
+	background-color:#9ca8ba;
+ }
+tr{
+	background-color:#f3f3f3;
+} 
+td.seq{
+	font-family:"Courier New", Courier, monospace;
+	font-size:12px;
+}
+hr{
+	display:block;
+	margin-right:60px;
+}
+.enteteSection{
+	border: 1px #bc5937 solid;
+	clear:both;
+	width:92%;
+	padding-left:2em;
+	margin-top:2em;
+	margin-bottom:1em;	
+}
+.piedSection{
+	margin:2em 0em 0em 5em;
+}
+.piedSection li{
+	display:inline;
+	font-size:0.8em;
+	padding-right:5em;
+}
+
+
+/********************************** pour le footer */
+.lastmaj{
+	float:right;
+	font-family:arial,calibri,verdana,sans-serif;
+	color:#95b1c7;
+	padding-right:2em;
+}
+footer{	
+	height:2em;
+	text-align:center;
+	font-size:0.8em;
+	clear:both;
+	padding:0.6em 0em 0.6em 0em;
+	-webkit-border-radius: 0px 0px 8px 8px;
+	-moz-border-radius: 0px 0px 8px 8px;
+	border-radius: 0px 0px 8px 8px;
+	-webkit-box-shadow: #666 5px 10px 10px;
+	-moz-box-shadow: #666 5px 10px 10px;
+	box-shadow: #666 5px 10px 10px;
+	background: #f3f3f3;
+	background: -webkit-linear-gradient(#f3f3f3, #9ca8ba);
+	background: -moz-linear-gradient(#f3f3f3, #9ca8ba);
+	background: -ms-linear-gradient(#f3f3f3, #9ca8ba);
+	background: -o-linear-gradient(#f3f3f3, #9ca8ba);
+	background: linear-gradient(#f3f3f3, #9ca8ba);
+	-pie-background: linear-gradient(#f3f3f3, #9ca8ba);
+	behavior: url(PIE.htc);
+	}
+footer li{
+	display:inline;
+	padding:0em 5em;
+}					/* Liste du pied de page en ligne  */
+footer a:hover{text-decoration:none;font-size:1.2em;color:#0b4255}
+
+/* Accessibilite */
+.accessibility{display:none}

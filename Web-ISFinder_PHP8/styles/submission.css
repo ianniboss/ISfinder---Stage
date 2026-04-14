@@ -1,0 +1,92 @@
+
+.enteteSection{
+	margin-top:2em;
+	margin-bottom:1em;
+}
+
+/*************************************    Partie Submission ***************/
+fieldset#submitter, #infoIS, #bacterial{
+	margin-top:2em;
+	padding:1.5em 0em 1em 2em;
+	background: #f3f3f3;
+	border:0px;
+	-moz-border-radius: 0px 8px 8px 8px;
+	-webkit-border-radius: 0px 8px 8px 8px;
+	border-radius:0px 8px 8px 8px;
+	width: 920px;
+}
+fieldset#submitter li, #infoIS li{
+	padding:1em 1em 0em 0em;
+	display:block;
+	float: left;
+}
+fieldset#bacterial li{
+	padding:1em 1em 0em 0em;
+	display:block;
+}
+fieldset#submitter ul, #infoIS ul, #bacterial ul{
+	display:inline-block;
+}
+fieldset#submitter legend, #infoIS legend, #bacterial legend{
+	font-weight:bold;
+	color:#bc5937;
+}
+fieldset#infoIS li input, #submitter input, #bacterial li input{
+	margin-right:2.6em;
+}
+fieldset#submitter label{
+	display: block;
+	width: 100px;
+	float: left;
+}
+label.label_court{
+	display: block;
+	width: 100px;
+	float: left;
+}	
+label.label_large{
+	width:200px;
+}
+fieldset#infoIS table{
+	margin-top:1,5em;
+}
+fieldset#infoIS textarea{
+	vertical-align:top;
+}
+.entete_propriete{
+	font-size:14px;
+	color:#00788e;
+	font-weight:bold;
+	padding-top:1em;
+	padding-bottom:0.5em;
+}
+.seq{
+	font-family:"Courier New", Courier, monospace;
+	font-size:12px;
+	text-transform:uppercase;
+	word-wrap:break-word;
+}
+.orf_function{
+    height:1.5em;
+    display:inline;
+}
+.erreur{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:14px;
+	color:#bc5937;
+	font-weight:bold;
+}
+.requis{
+	font-family:Verdana, Geneva, sans-serif;
+	color:#bc5937;
+	text-align:right;
+	margin-right:50px;
+}
+.infosuppl{
+	color:#bc0007;
+	font-weight:lighter;
+}
+.etoile{
+	color:#bc0037;
+	font-weight:bold;
+}

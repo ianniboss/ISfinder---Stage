@@ -1,0 +1,35 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*************************************    Partie SEARCH ***************/
+fieldset#search1, #search2, #search3 {
+	margin-top:2em;
+	padding:1.5em 0em 1em 2em;
+	background: #f3f3f3;
+	border:0px;
+	-moz-border-radius: 0px 8px 8px 8px;
+	-webkit-border-radius: 0px 8px 8px 8px;
+	border-radius:0px 8px 8px 8px;
+	width: 920px;
+}
+fieldset#search1 li, #search2 li{
+	padding:1em 4em 0em 0em;
+	display:block;
+	float: left;
+}
+fieldset#search1 legend,#search2 legend,#search3 legend{
+	font-weight:bold;
+	color:#bc5937;
+}
+
+fieldset#search1 label,#search2 label,#search3 label{
+	display: block;
+	width: 140px;
+	float: left;
+}
+fieldset#search1 select,#search2 select{
+	width:85px;
+}
+#search2 li{padding-right:7em;}
+#search2 li label{width: 100px;}
+

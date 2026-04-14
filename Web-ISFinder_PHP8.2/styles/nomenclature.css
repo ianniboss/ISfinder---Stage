@@ -1,0 +1,88 @@
+@charset "utf-8";
+/* CSS Document */
+
+.bouton_ligne li{
+	padding:1em 0em 0em 4em;
+	display:block;
+	float: left;
+	width:130px;
+}
+.lettre_select{
+	font-weight:bold;
+	font-size:14px;
+}
+.new_div{
+	display:inline-block;
+}
+.recherche{
+	display:block;	
+	float:right;
+	width: 200px;
+	padding:0em 0em 1em 1em;
+	margin:-25px 55px 20px 0px;
+}
+.recherche_listNCA{
+	display:block;	
+	float:right;
+	width: 210px;
+	padding:0em 0em 1em 1em;
+	margin:-55px 55px 20px 0px;
+}
+fieldset{
+	margin-top:2em;
+	padding:1.5em 0em 1em 2em;
+	background: #f3f3f3;
+	border:0px;
+	-moz-border-radius: 0px 8px 8px 8px;
+	-webkit-border-radius: 0px 8px 8px 8px;
+	border-radius:0px 8px 8px 8px;
+	width: 920px;
+}
+fieldset li{
+	padding:1em 4em 0em 0em;
+	display:block;
+	float: left;
+}
+fieldset legend{
+	font-weight:bold;
+	color:#bc5937;
+}
+
+fieldset label{
+	display: block;
+	width: 140px;
+	float: left;
+}
+fieldset select{
+	width:85px;
+}
+th{
+	padding:5px;
+}
+th.large{
+	padding-left:10px;
+	padding-right:10px;
+}
+tr{
+	background-color:#f5f3f3;
+} 
+td{
+	padding-left:5px;
+	padding-right:5px;
+}
+/*
+div.colonnes{
+	display: table;
+}
+p.colonne {
+    clear:left;
+	padding: 5px;
+    vertical-align: middle;
+    border: 1px solid black;
+}
+span{
+		padding: 5px;
+    vertical-align: middle;
+    border: 1px solid black;
+}
+*/

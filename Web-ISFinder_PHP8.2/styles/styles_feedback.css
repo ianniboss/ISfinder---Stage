@@ -1,0 +1,40 @@
+fieldset{
+	margin-top:2em;
+	padding:1.5em 0em 1em 2em;
+	background: #f3f3f3;
+	border:0px;
+	-moz-border-radius: 0px 8px 8px 8px;
+	-webkit-border-radius: 0px 8px 8px 8px;
+	border-radius:0px 8px 8px 8px;
+	width: 920px;
+}
+fieldset legend{
+	font-weight:bold;
+	color:#bc5937;
+}
+fieldset label{
+	display: block;
+	width: 100px;
+	float: left;
+}
+fieldset ul{
+	display:inline-block;
+}
+fieldset li{
+	padding:1em 1em 0em 0em;
+	display:block;
+	float: left;
+}
+fieldset li input{
+	margin-right:2.6em;
+}
+.requis{
+	font-family:Verdana, Geneva, sans-serif;
+	color:#bc5937;
+	text-align:right;
+	margin-right:50px;
+}
+.etoile{
+	color:#bc5937;
+	font-weight:bold;
+}

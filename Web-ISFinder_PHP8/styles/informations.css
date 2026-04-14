@@ -1,0 +1,91 @@
+@charset "utf-8";
+/* CSS Document */
+p{
+	margin:4px;
+	font-weight:normal;
+}
+fieldset{
+	margin-top:2em;
+	padding:1.5em 0em 1em 2em;
+	background: #f3f3f3;
+	border:0px;
+	-moz-border-radius: 0px 8px 8px 8px;
+	-webkit-border-radius: 0px 8px 8px 8px;
+	border-radius:0px 8px 8px 8px;
+	width: 920px;
+}
+fieldset legend{
+	font-weight:bold;
+	color:#bc5937;
+}
+fieldset label{
+	width: 140px;
+	float: left;
+}
+fieldset select{
+	width:85px;
+}
+ul.info{
+    list-style-type: none;
+	margin-left:10px;
+	font-size:14px;
+}
+li.info{
+    list-style-type: none;
+	font-weight:bold;
+	margin-top:8px;
+}
+li.ref{
+    list-style-type: none;
+	font-weight:normal;
+	font-size:12px;
+	margin-top:5px;
+	color:#0b4255 ;
+}
+.info{
+	margin-top:10px;
+	margin-right:20px;
+    text-align: justify;
+	font-family:arial,calibri,verdana,sans-serif;
+	font-size:14px;
+}
+.info a{
+	color:#00788e;
+}
+/*
+.info a:visited{
+	color:#babcc3;
+}
+*/
+.infoRef{
+	margin-top:40px;
+	margin-right:20px;
+    text-align: justify;
+	font-family:arial,calibri,verdana,sans-serif;
+	font-size:14px;
+	color:#00788e;	
+	font-weight:bold;
+}
+.infoTitre{
+	margin-top:30px;
+	font-family:arial,cambria,"times new roman",serif;
+	color:#00788e;
+	font-weight:bold;
+}
+.colonne{
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+  column-count: 2;
+}
+.back{
+	float:right;
+	margin-right:60px;
+	font-size:14px;
+}
+.source{
+	text-align:center;
+    list-style-type: none;
+	font-weight:bold;
+	margin-top:20px;
+}
+	
