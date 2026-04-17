@@ -59,3 +59,4 @@
 - Échange avec la tutrice de stage pour faire un point sur l’avancement du travail et validation des premières analyses réalisées.
 - Organisation d’un point prévu en début de semaine suivante.
 - Proposition d’un échange avec la développeuse du projet afin d’approfondir la compréhension du code et du flux de données.
+- petit continuation sur le flux de donnes apres la submission
