@@ -60,3 +60,4 @@
 - Organisation d’un point prévu en début de semaine suivante.
 - Proposition d’un échange avec la développeuse du projet afin d’approfondir la compréhension du code et du flux de données.
 - petit continuation sur le flux de donnes apres la submission
+- Définition des premiers objectifs techniques du stage : migration des scripts d’affichage du site vers PHP 8.4 (hors traitement des formulaires).
