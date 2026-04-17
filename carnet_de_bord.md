@@ -45,8 +45,17 @@
 
 
 ### Jour 4 (16 AVril 2026)
-- Comprehension plus detaille sur le modele de bases ISSubmit & ISFinder
-- Echange avec ma tutrice et Mr Pierre, responsable de l'administrateur systeme pour discuter d'avoir mes acces au serveur et a la bd
-- pour avoir acces au serveur, bd, consulter les logs et tt
-- premiere jetter avec tchap pour la discussion de isfinder
-- installation de WINSCP pour pouvoir mettre mes fichiers de modif pour isfinder
+- Approfondissement de l’analyse du code source du projet ISfinder, en particulier dans le répertoire "scripts", afin de mieux comprendre le flux de données côté client (JavaScript) et côté serveur (PHP).
+- Identification des scripts liés aux soumissions (subIS.php, submission.php) et aux requêtes (search-db.php, recherche.php) pour suivre le cheminement des données dans l’application.
+- Échanges avec la tutrice de stage (Mme Siguier) ainsi qu’avec M. Pierre et Théo (équipe informatique) concernant l’accès aux serveurs de développement et aux bases de données.
+- Mise en place de l’environnement de travail :
+    -  accès au serveur interne (SSH)
+    - installation de WinSCP pour le transfert de fichiers
+    - accès aux logs et aux ressources nécessaires au développement
+- Première utilisation de Tchap pour les échanges au sein de l’équipe ISfinder.
+- Discussion avec la tutrice sur la suite du stage, avec une présentation prévue de l’architecture et du flux du site afin de faciliter la compréhension globale.
+
+### Jour 5 (17 Avril 2026)
+- Échange avec la tutrice de stage pour faire un point sur l’avancement du travail et validation des premières analyses réalisées.
+- Organisation d’un point prévu en début de semaine suivante.
+- Proposition d’un échange avec la développeuse du projet afin d’approfondir la compréhension du code et du flux de données.
