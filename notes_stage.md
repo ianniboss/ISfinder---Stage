@@ -63,3 +63,9 @@ Implication :
 
 serveurs
 acces a la bd
+
+display pages remain :
+  reserved_blocks.php 
+  nomenclature.php
+  search.php
+  list_names_attributed.php 

@@ -44,7 +44,7 @@
 - Mise en place d’un système de documentation personnelle pour le suivi du stage et la préparation du rapport final.
 
 
-### Jour 4 (16 AVril 2026)
+### Jour 4 (16 Avril 2026)
 - Approfondissement de l’analyse du code source du projet ISfinder, en particulier dans le répertoire "scripts", afin de mieux comprendre le flux de données côté client (JavaScript) et côté serveur (PHP).
 - Identification des scripts liés aux soumissions (subIS.php, submission.php) et aux requêtes (search-db.php, recherche.php) pour suivre le cheminement des données dans l’application.
 - Échanges avec la tutrice de stage (Mme Siguier) ainsi qu’avec M. Pierre et Théo (équipe informatique) concernant l’accès aux serveurs de développement et aux bases de données.
@@ -61,3 +61,11 @@
 - Proposition d’un échange avec la développeuse du projet afin d’approfondir la compréhension du code et du flux de données.
 - petit continuation sur le flux de donnes apres la submission
 - Définition des premiers objectifs techniques du stage : migration des scripts d’affichage du site vers PHP 8.4 (hors traitement des formulaires).
+
+### Jour 6 (20 Avril 2026)
+- Réalisation de la formation obligatoire NEO (hygiène et sécurité) pour les nouveaux entrants au CBI.
+- Échange avec Théo pour la mise en place des accès au serveur de développement, notamment l’accès aux fichiers racine nécessaires pour le projet.
+- Prise en main de l’environnement de travail côté serveur :
+    - utilisation de WinSCP pour le transfert de fichiers
+    - compréhension de l’organisation des répertoires sur le serveur
+- Préparation à la phase de développement (mise en place des outils nécessaires pour modifier et déployer les fichiers du projet ISfinder).
