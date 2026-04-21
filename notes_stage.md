@@ -65,7 +65,10 @@ serveurs
 acces a la bd
 
 display pages remain :
-  reserved_blocks.php 
-  nomenclature.php
-  search.php
-  list_names_attributed.php 
+  - [x] reserved_blocks.php 
+  - [x] nomenclature.php
+  - [x] search.php
+  - [x] list_names_attributed.php
+  - [ ] under_construct.php
+  - [ ] erreur404.php
+  - [ ] blast.php

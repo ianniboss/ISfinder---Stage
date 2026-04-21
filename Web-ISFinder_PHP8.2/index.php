@@ -17,40 +17,40 @@
 
     <?php
     $nav_en_cours = 'home';
-    include_once('include/menu.inc.php'); 
+    include_once('include/menu.inc.php');
     ?>
 
     <article>
-        <p>
-            <!-- <div class="ecran">contenu de mon écran</div> -->
-        </p>
-        <p>
-            <img src="images/IS-garde.png" width="1024" height="531" border="0" usemap="#Map_logo" class="image">
-            
-            <map name="Map_logo">
-                <area shape="rect" coords="15,445,150,510" href="https://lmgm.cbi-toulouse.fr/en/home/" target="_blank">
-                <area shape="rect" coords="920,430,1000,520" href="http://www.cnrs.fr/index.php" target="_blank">
-            </map>
-            
-            <?php
-            include_once ("include/function.inc.php");
+        <img src="images/IS-garde.png" width="1024" height="531" border="0" usemap="#Map_logo" class="image">
 
-            // Connexion à la base isfinder et Récupération de la date de la dernière soumission validée
-            $cnx = connexion("ISfinder");
+        <map name="Map_logo">
+            <area shape="rect" coords="15,445,150,510" href="https://lmgm.cbi-toulouse.fr/en/home/" target="_blank">
+            <area shape="rect" coords="920,430,1000,520" href="http://www.cnrs.fr/index.php" target="_blank">
+        </map>
 
-            $sql_request = "SELECT `Validation_Date` FROM `submission` ORDER BY `Validation_Date` DESC";
+        <?php
+        include_once("include/function.inc.php");
 
-            if ($result = execute_sql_new($cnx, $sql_request)) {
-                $row = mysqli_fetch_row($result);
-                $date_sub = $row ? $row[0] : "";
-            } else {
-                $date_sub = "";
+        $cnx = connexion("localhost", "isfinder", "ISfinder", "mCjMPEJ_16");
+
+        $sql_request = "SELECT `Validation_Date` FROM `submission` ORDER BY `Validation_Date` DESC";
+
+        $date_sub = "";
+
+        if ($cnx && ($result = execute_sql_new($cnx, $sql_request))) {
+            $row = mysqli_fetch_row($result);
+            if ($row && isset($row[0])) {
+                $date_sub = $row[0];
             }
+        }
 
-            mysqli_close($cnx);
-            ?>
+        mysqli_close($cnx);
+        ?>
+
+        <p class="lastmaj">
+            Last Database Update :&nbsp;
+            <?php echo !empty($date_sub) ? $date_sub : ""; ?>
         </p>
-        <p class="lastmaj">Last Database Update :&nbsp;<?php if (!empty($date_sub)){ echo $date_sub; } ?></p>
     </article>
 
     <?php include_once('include/footer.inc.php'); ?>
