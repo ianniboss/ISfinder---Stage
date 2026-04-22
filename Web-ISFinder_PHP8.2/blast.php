@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ISfinder - BLAST</title>
+    <title>ISfinder</title>
     <meta charset="utf-8" /> 
     <meta name="author" content="Jo" />
-    <meta name="keywords" content="IS, Insertion Sequence, BLAST" />
+    <meta name="keywords" content="IS, Insertion Sequence" />
     <link type="text/css" rel="stylesheet" href="styles/styles.css" media="screen" />
     <link type="text/css" rel="stylesheet" href="styles/blast.css" media="screen" />
     <link type="text/css" rel="stylesheet" href="styles/menu.css" media="screen" />
@@ -16,18 +16,19 @@
     <header>
     </header>
 
-    <?php 
+    <?php
     $nav_en_cours = 'tools';
     include_once('include/menu.inc.php');
-    include_once('include/function.inc.php');
     ?>
 
     <article>
+        <!--<div class="ecran">contenu de mon &eacutecran</div> -->
         <div class="menuProg">
             <?php
+            // Menu with tabs
             $liste_program = ["blastp", "blastx", "tblastn", "tblastx"];
             $prog_choisi = htmlspecialchars($_GET["prog_blast"] ?? "blastn", ENT_QUOTES, "UTF-8");
-            $prog = (in_array($prog_choisi, $liste_program)) ? $prog_choisi : "blastn"; 
+            $prog = (in_array($prog_choisi, $liste_program)) ? $prog_choisi : "blastn";
 
             echo ($prog == "blastn") ? "<span class='onglet onglet-actif'>blastn</span>" : "<a class='onglet' href='blast.php?prog_blast=blastn'>blastn</a>";
             echo ($prog == "blastp") ? "<span class='onglet onglet-actif'>blastp</span>" : "<a class='onglet' href='blast.php?prog_blast=blastp'>blastp</a>";
@@ -39,47 +40,44 @@
         <section>
             <form enctype="multipart/form-data" action="blast/ncbiIS.php" method="POST">
                 <h3>Job Title: <input name="title" value="" size="60"></h3>
-                
-                <fieldset id="query_input">
+                <fieldset id="query">
                     <legend>Enter Query Sequence</legend>
                     <ul>
-                        <li>Paste your sequence:</li>
+                        <li>Paste your sequence :</li>
                         <li>
                             <textarea name="seq" class="seq" rows="8" cols="100"></textarea>
                             <input type="button" class="btn-droit" value="Clear" onclick="this.form.elements['seq'].value=''">
                         </li>
                         <li>
-                            Or, upload file (Fasta format):
+                            Or, upload file (Fasta format) :
                             <input type="file" name="seqfile" />
                         </li>
                     </ul>
                 </fieldset>
-
-                <fieldset id="query_options">
+                <fieldset id="query">
                     <legend>Choose ...</legend>
                     <ul>
                         <li>
-                            <label for="database">Database:</label>
-                            <select style="width:150px" name="database"> 
+                            <label for="database">Database :</label>
+                            <select style="width:150px" name="database">
                                 <option value="ISfindernt" selected>ISfinder</option>
-                            </select> 
+                            </select>
                         </li>
                         <?php
                         if ($prog == "blastn") {
-                            echo "<li><label for='prog' class='li-large'>Programme:</label>";
-                            echo "<input type='radio' id='prog' name='prog' value='blastn' checked/>&nbsp;blastn&nbsp;</li>";
+                            echo "<li><label for='prog' class='li-large'>Programme :</label>";
+                            echo "<input type='radio' id='prog' name='prog' value='blastn' checked/>&nbsp;blastn&nbsp;";
                         } else {
-                            echo "<input name='prog' type='hidden' value='" . htmlspecialchars($prog) . "' />";
+                            echo "<input name='prog' type='hidden' value='" . htmlspecialchars($prog, ENT_QUOTES, 'UTF-8') . "' />";
                         }
                         ?>
                     </ul>
                 </fieldset>
-
                 <div>
                     <input type="submit" title="Input" value="ok" class="boutonblast" name="blast" id="blast">
                 </div>
-                
-                <fieldset id="algo_params">
+
+            <fieldset id="query">
                     <legend>Algorithm parameters</legend>
                     <ul class="li-haut">
                         <li>
@@ -96,43 +94,44 @@
                                 <option value="10">Comma-separated values</option>
                             </select>
                         </li>
-                    </ul>    
+                    </ul>
                     <ul class="li-haut">
                         <li>
-                            <label for="wordsize">Word size:</label>
-                            <select name="wordsize"> 
+                            <label for="wordsize">Word size :</label>
+                            <select name="wordsize">
                                 <?php
-                                switch ($prog) {
-                                    case "blastn":
-                                        $tab_wordsize = [7, 11, 15];
-                                        $def = '11';
-                                        break;
-                                    case "megabl":
-                                        $tab_wordsize = [16, 20, 24, 28, 32, 48, 64, 128, 256];
-                                        break;
-                                    default:
-                                        $tab_wordsize = [2, 3];
-                                        $def = '3';
-                                }
-                                foreach ($tab_wordsize as $value) {
-                                    echo ($value == $def) ? "<option value='$value' selected> $value</option>" : "<option value='$value'> $value</option>";
-                                }
+                                    $def = null; // $def might be undefined, added null safer
+                                    switch ($prog) {
+                                        case "blastn":
+                                            $tab_wordsize = [7, 11, 15];
+                                            $def = '11';
+                                            break;
+                                        case "megabl":
+                                            $tab_wordsize = [16, 20, 24, 28, 32, 48, 64, 128, 256];
+                                            break;
+                                        default:
+                                            $tab_wordsize = [2, 3];
+                                            $def = '3';
+                                    }
+                                    foreach ($tab_wordsize as $value) {
+                                        echo ($value == $def) ? "<option value='{$value}' selected>{$value}</option>" : "<option value='{$value}'>{$value}</option>";
+                                    }
                                 ?>
                             </select>
                         </li>
                         <li>
-                            <label for="expect" class="li-large">Evalue: </label>
+                            <label for="evalue" class="li-large">Evalue : </label>
                             <input name="expect" value="10.0" size="9">
                         </li>
                     </ul>
                     <?php
                     if ($prog != "tblastx") {
                         echo "<ul class='li-haut'><li>";
-                        echo "<label for='gapcosts'>Gap open:</label>";
-                        
+                        echo "<label for='gapopen'>Gap open :</label>";
+
                         switch ($prog) {
                             case "blastn":
-                                echo '<select style="width:180px" id="gapcosts" name="gapcosts">';
+                                echo '<select style="width:180px" id="gapcosts" defval="5 2" name="gapcosts">';
                                 echo '<option value="5 2" selected>Existence: 5 &nbsp;&nbsp;Extension: 2</option>';
                                 echo '<option value="2 2">Existence: 2 &nbsp;&nbsp;Extension: 2</option>';
                                 echo '<option value="1 2">Existence: 1 &nbsp;&nbsp;Extension: 2</option>';
@@ -141,7 +140,7 @@
                                 echo '<option value="1 1">Existence: 1 &nbsp;&nbsp;Extension: 1</option>';
                                 break;
                             case "megabl":
-                                echo '<select style="width:180px" id="gapcosts" name="gapcosts">';
+                                echo '<select style="width:180px" id="gapcosts" defval="" name="gapcosts">';
                                 echo '<option value="0 0" selected>Linear</option>';
                                 echo '<option value="5 2">Existence: 5 &nbsp;&nbsp;Extension: 2</option>';
                                 echo '<option value="2 2">Existence: 2 &nbsp;&nbsp;Extension: 2</option>';
@@ -151,7 +150,7 @@
                                 echo '<option value="1 1">Existence: 1 &nbsp;&nbsp;Extension: 1</option>';
                                 break;
                             default:
-                                echo '<select style="width:185px" id="gapcosts" name="gapcosts">';
+                                echo '<select style="width:185px" id="gapcosts" defval="11 1" name="gapcosts">';
                                 echo '<option value="11 2">Existence: 11 &nbsp;&nbsp;Extension: 2</option>';
                                 echo '<option value="10 2">Existence: 10 &nbsp;&nbsp;Extension: 2</option>';
                                 echo '<option value="9 2">Existence: 9 &nbsp;&nbsp;Extension: 2</option>';
@@ -164,14 +163,14 @@
                                 echo '<option value="10 1">Existence: 10 &nbsp;&nbsp;Extension: 1</option>';
                                 echo '<option value="9 1">Existence: 9 &nbsp;&nbsp;Extension: 1</option>';
                         }
-                        echo '</select></li></ul>';
+                        echo '</select>';
+                        echo "</li></ul>";
                     }
                     echo "<ul class='li-haut'><li>";
-                    echo "<label style='width:160px' for='filtre'>Filter query sequence:</label>";
-                    echo "<input type='checkbox' name='filtre' value='filtre'>";
+                    echo "<label style='width:160px' for='filtre'>Filter query sequence : </label><input type='checkbox' name='filtre' value='filtre'>";
                     echo "</li></ul>";
                     ?>
-                </fieldset> 
+                </fieldset>
             </form>
         </section>
     </article>
