@@ -44,11 +44,11 @@ session_destroy();
                                 <option value="end">end_with</option> 
                                 <option value="egal">equal_to</option> 
                             </select> 
-                            <input name="name" value="">
+                            <input id="nom" name="name" value="">
                         </li>
                         <li>
                             <label for="MGEtype">MGE type :</label>
-                            <select name="MGEtype"> 
+                            <select id="MGEtype" name="MGEtype"> 
                                 <option value="IS">IS</option> 
                                 <option value="MITE">MITE</option> 
                                 <option value="MIC">MIC</option> 
@@ -65,7 +65,7 @@ session_destroy();
                                 <option value="end">end_with</option> 
                                 <option value="egal">equal_to</option> 
                             </select> 
-                            <input name="family" value="" size="20">
+                            <input id="family" name="family" value="" size="20">
                         </li>
                         <li>
                             <label for="group">Group :</label>
@@ -75,17 +75,17 @@ session_destroy();
                                 <option value="end">end_with</option> 
                                 <option value="egal">equal_to</option> 
                             </select> 
-                            <input name="grp" value="" size="20">
+                            <input id="group" name="grp" value="" size="20">
                         </li>
                         <li>
-                            <label for="host">Origin/Host :</label>
+                            <label for="group">Origin/Host :</label>
                             <select name="hostcond"> 
                                 <option value="begin">begin_with</option> 
                                 <option value="contains" selected>contains</option> 
                                 <option value="end">end_with</option> 
                                 <option value="egal">equal_to</option> 
                             </select> 
-                            <input name="host" value="" size="20">
+                            <input id="host" name="host" value="" size="20">
                         </li>
                         <li>
                             <label for="accesNumb">Accession Number :</label>
@@ -95,7 +95,7 @@ session_destroy();
                                 <option value="end">end_with</option> 
                                 <option value="egal">equal_to</option> 
                             </select> 
-                            <input name="accession" value=""><br>
+                            <input id="accesNumb" name="accession" value=""><br>
                         </li>
                     </ul>
                 </fieldset>        
@@ -104,24 +104,24 @@ session_destroy();
                     <legend>Additional fields</legend>
                     <ul>
                         <li>
-                            <label for="ir_l">Left End :</label>
+                            <label for="group">Left End :</label>
                             <select name="ir_lcond"> 
                                 <option value="begin">begin_with</option> 
                                 <option value="contains" selected>contains</option> 
                                 <option value="end">end_with</option> 
                                 <option value="egal">equal_to</option> 
                             </select> 
-                            <input name="ir_l" value="" size="20">
+                            <input id="ir_l" name="ir_l" value="" size="20">
                         </li>
                         <li>
-                            <label for="ir_r">Right End :</label>
+                            <label for="group">Right End :</label>
                             <select name="ir_rcond"> 
                                 <option value="begin">begin_with</option> 
                                 <option value="contains" selected>contains</option> 
                                 <option value="end">end_with</option> 
                                 <option value="egal">equal_to</option> 
                             </select> 
-                            <input name="ir_r" value="" size="20">
+                            <input id="ir_r" name="ir_r" value="" size="20">
                         </li>
                         <li>
                             <label for="ir">IR :</label>
@@ -130,7 +130,7 @@ session_destroy();
                                 <option value="inf">&lt;=</option> 
                                 <option value="egal" selected>equal_to</option> 
                             </select> 
-                            <input name="ir" value="" size="20">
+                            <input id="ir" name="ir" value="" size="20">
                         </li>
                         <li>
                             <label for="dr">DR :</label>
@@ -139,7 +139,7 @@ session_destroy();
                                 <option value="inf">&lt;=</option> 
                                 <option value="egal" selected>equal_to</option> 
                             </select> 
-                            <input name="dr" value="" size="20">
+                            <input id="dr" name="dr" value="" size="20">
                         </li>
                         <li>
                             <label for="orfSize">ORF size :</label>
@@ -148,7 +148,7 @@ session_destroy();
                                 <option value="inf">&lt;=</option> 
                                 <option value="egal" selected>equal_to</option> 
                             </select> 
-                            <input name="orfSize" value="" size="20">
+                            <input id="orfSize" name="orfSize" value="" size="20">
                         </li>
                         <li>
                             <label for="orfFunction">ORF function :</label>
@@ -158,16 +158,16 @@ session_destroy();
                                 <option value="end">end_with</option> 
                                 <option value="egal">equal_to</option> 
                             </select> 
-                            <input name="orfFunction" value="" size="20">
+                            <input id="orfFunction" name="orfFunction" value="" size="20">
                         </li>
                         <li>
-                            <label for="length">Length :</label>
+                            <label for="lenght">Length :</label>
                             <select name="lengthcond"> 
                                 <option value="sup">&gt;=</option> 
                                 <option value="inf">&lt;=</option> 
                                 <option value="egal" selected>equal_to</option> 
                             </select> 
-                            <input name="length" value="" size="20">
+                            <input id="lenght" name="length" value="" size="20">
                         </li>
                         <li>
                             <label for="frameshift">Frameshift :</label>
@@ -178,7 +178,7 @@ session_destroy();
                     </ul>
                 </fieldset> 
 
-                <fieldset id="search3">
+                <fieldset id="search1">
                     <legend>Output parameters</legend>
                     <ul>
                         <li>
