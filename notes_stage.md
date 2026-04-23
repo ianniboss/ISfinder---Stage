@@ -69,6 +69,11 @@ display pages remain :
   - [x] nomenclature.php
   - [x] search.php
   - [x] list_names_attributed.php
-  - [ ] under_construct.php
-  - [ ] erreur404.php
-  - [ ] blast.php
+  - [x] under_construct.php
+  - [x] erreur404.php
+  - [x] blast.php
+
+# rabu
+display pages done 
+conservé la structure HTML existante (IDs, labels, etc.) afin de garantir la compatibilité avec le CSS et les scripts existants. 
+Certaines incohérences (IDs dupliqués, labels non liés) semblent déjà présentes dans le code initial.

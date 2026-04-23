@@ -69,3 +69,11 @@
     - utilisation de WinSCP pour le transfert de fichiers
     - compréhension de l’organisation des répertoires sur le serveur
 - Préparation à la phase de développement (mise en place des outils nécessaires pour modifier et déployer les fichiers du projet ISfinder).
+
+### Jour 7 (21 Avril 2026)
+- Validation de la méthode de travail avec la tutrice (Mme Siguier), confirmant l'approche consistant à modifier les fichiers PHP existants directement sur le serveur de développement.
+- Obtention des autorisations nécessaires de la part de la développeuse pour modifier les fichiers du projet.
+- Début de la phase de migration des scripts d'affichage du site vers PHP 8.4, en se concentrant sur la correction des erreurs de compatibilité identifiées.
+
+### Jour 8 (22 Avril 2026)
+- Continuation de la migration des scripts d'affichage du site vers PHP 8.4, en se concentrant sur la correction des erreurs de compatibilité identifiées.
