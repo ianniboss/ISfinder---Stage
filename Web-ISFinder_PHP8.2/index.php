@@ -21,32 +21,37 @@
     ?>
 
     <article>
-        <img src="images/IS-garde.png" width="1024" height="531" border="0" usemap="#Map_logo" class="image">
+        <p>
+            <!--		<div class="ecran">contenu de mon &eacutecran</div> -->
+        </p>
+        <p>
+            <img src="images/IS-garde.png" width="1024" height="531" border="0" usemap="#Map_logo" class="image">
 
-        <map name="Map_logo">
-            <area shape="rect" coords="15,445,150,510" href="https://lmgm.cbi-toulouse.fr/en/home/" target="_blank">
-            <area shape="rect" coords="920,430,1000,520" href="http://www.cnrs.fr/index.php" target="_blank">
-        </map>
+            <map name="Map_logo">
+                <area shape="rect" coords="15,445,150,510" href="https://lmgm.cbi-toulouse.fr/en/home/" target="_blank">
+                <area shape="rect" coords="920,430,1000,520" href="http://www.cnrs.fr/index.php" target="_blank">
+            </map>
 
         <?php
-        include_once("include/function.inc.php");
+            include_once("include/function.inc.php");
 
-        $cnx = connexion("localhost", "isfinder", "ISfinder", "mCjMPEJ_16");
+            $cnx = connexion("localhost", "isfinder", "ISfinder", "mCjMPEJ_16");
 
-        $sql_request = "SELECT `Validation_Date` FROM `submission` ORDER BY `Validation_Date` DESC";
+            $sql_request = "SELECT `Validation_Date` FROM `submission` ORDER BY `Validation_Date` DESC";
 
-        $date_sub = "";
+            $date_sub = "";
 
-        if ($cnx && ($result = execute_sql_new($cnx, $sql_request))) {
-            $row = mysqli_fetch_row($result);
-            if ($row && isset($row[0])) {
-                $date_sub = $row[0];
+            if ($cnx && ($result = execute_sql_new($cnx, $sql_request))) {
+                $row = mysqli_fetch_row($result);
+                if ($row && isset($row[0])) {
+                    $date_sub = $row[0];
+                }
             }
-        }
 
-        mysqli_close($cnx);
+            mysqli_close($cnx);
         ?>
 
+        </p>
         <p class="lastmaj">
             Last Database Update :&nbsp;
             <?php echo !empty($date_sub) ? $date_sub : ""; ?>

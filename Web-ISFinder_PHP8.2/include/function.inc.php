@@ -12,6 +12,7 @@ function addressMail($prenomDest,$nomDest,$domaineDest){
 	return $adresse ;
 }
 //_______________________________connexion_________________________________
+/*
 function connexion($base)
 {
 	if ($base == "ISfinder"){
@@ -27,15 +28,15 @@ mysqli_select_db($connecte,$base) or die("connection error to the database".$bas
 mysqli_query($connecte,"SET NAMES 'utf8'");
 return $connecte;
 }
+*/
 
-/*
 function connexion($host,$user,$bdd,$mdp)
 {
 $connecte=mysqli_connect($host,$user,$mdp,$bdd) or die("Server connection error");
 mysqli_select_db($connecte,$bdd) or die("connection error to the database".$bdd);
 mysqli_query($connecte,"SET NAMES 'utf8'");
 return $connecte;
-} */
+}
 //___________________________________erreur_________________________________
 function erreur_sql($connect,$res,$requete)
 {

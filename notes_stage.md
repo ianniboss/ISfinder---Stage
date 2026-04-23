@@ -77,3 +77,24 @@ display pages remain :
 display pages done 
 conservé la structure HTML existante (IDs, labels, etc.) afin de garantir la compatibilité avec le CSS et les scripts existants. 
 Certaines incohérences (IDs dupliqués, labels non liés) semblent déjà présentes dans le code initial.
+
+questions :
+  - Pouvez-vous m’expliquer rapidement le fonctionnement global d’ISfinder et comment les différentes parties (ISfinder, ISsubmit, ISadmin) interagissent ?
+  - Comment se fait le flux des données entre la soumission (ISsubmit) et la validation dans ISadmin avant d’arriver dans ISfinder ?
+  - Y a-t-il des parties du code ou du système sur lesquelles il faut être particulièrement prudent pour éviter de casser quelque chose ?
+  - Pour la migration vers PHP 8.4, y a-t-il des points spécifiques auxquels je dois faire attention dans le projet ?
+
+migration made on the following pages :
+  - [x] index.php (works)
+  - [x] about.php (works)
+  - [x] credits.php (works)
+  - [x] general_information.php (works)
+  - [x] howto.php (works)
+  - [x] links.php (works)
+  - [x] list_names_attributed.php (works)
+  - [x] nomenclature.php (works)
+  - [x] reserved_blocks.php (works)
+  - [x] search.php (works)
+  - [x] blast.php (works)
+  - [x] erreur404.php
+  - [x] under_construct.php
