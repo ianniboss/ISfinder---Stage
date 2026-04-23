@@ -98,5 +98,5 @@ migration made on the following pages :
   - [x] reserved_blocks.php (works)
   - [x] search.php (works)
   - [x] blast.php (works)
-  - [x] erreur404.php
-  - [x] under_construct.php
+  - [x] erreur404.php (works)
+  - [x] under_construct.php (works)
