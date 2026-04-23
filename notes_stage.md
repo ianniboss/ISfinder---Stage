@@ -83,6 +83,8 @@ questions :
   - Comment se fait le flux des données entre la soumission (ISsubmit) et la validation dans ISadmin avant d’arriver dans ISfinder ?
   - Y a-t-il des parties du code ou du système sur lesquelles il faut être particulièrement prudent pour éviter de casser quelque chose ?
   - Pour la migration vers PHP 8.4, y a-t-il des points spécifiques auxquels je dois faire attention dans le projet ?
+  - Le site utilise des outils externes comme BLAST. Est-ce que ces scripts PHP font appel à des exécutables bash/système spécifiques sur le serveur ? Y a-t-il des dépendances serveur particulières dont je dois tenir compte lors de la migration PHP ?
+  - Pour les envois d'emails (comme dans feedback_mail.php ou les notifications de soumission), le code utilise-t-il la fonction mail() native de PHP ou une ancienne bibliothèque (comme PHPMailer) qui pourrait nécessiter une mise à jour pour PHP 8.4 ?
 
 migration made on the following pages :
   - [x] index.php (works)
