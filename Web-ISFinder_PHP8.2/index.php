@@ -35,20 +35,30 @@
         <?php
             include_once("include/function.inc.php");
 
-            $cnx = connexion("localhost", "isfinder", "ISfinder", "mCjMPEJ_16");
-
-            $sql_request = "SELECT `Validation_Date` FROM `submission` ORDER BY `Validation_Date` DESC";
-
             $date_sub = "";
 
-            if ($cnx && ($result = execute_sql_new($cnx, $sql_request))) {
-                $row = mysqli_fetch_row($result);
-                if ($row && isset($row[0])) {
-                    $date_sub = $row[0];
-                }
-            }
+            try {
+                // Attempt to connect and fetch the date, but catch any PHP 8 errors or exceptions
+                // so the homepage doesn't crash if the lab server DB is unreachable or credentials differ.
+                $cnx = connexion("localhost", "isfinder", "ISfinder", "mCjMPEJ_16");
 
-            mysqli_close($cnx);
+                $sql_request = "SELECT `Validation_Date` FROM `submission` ORDER BY `Validation_Date` DESC";
+
+                if ($cnx && ($result = @execute_sql_new($cnx, $sql_request))) {
+                    $row = @mysqli_fetch_row($result);
+                    if ($row && isset($row[0])) {
+                        $date_sub = $row[0];
+                    }
+                }
+
+                if ($cnx) {
+                    @mysqli_close($cnx);
+                }
+            } catch (Throwable $e) {
+                // If the connection or query fails, gracefully default to an empty date
+                // This prevents the Fatal Error from halting the script and hiding the footer
+                $date_sub = "";
+            }
         ?>
 
         </p>
