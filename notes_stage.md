@@ -79,12 +79,25 @@ conservé la structure HTML existante (IDs, labels, etc.) afin de garantir la co
 Certaines incohérences (IDs dupliqués, labels non liés) semblent déjà présentes dans le code initial.
 
 questions :
-  - Pouvez-vous m’expliquer rapidement le fonctionnement global d’ISfinder et comment les différentes parties (ISfinder, ISsubmit, ISadmin) interagissent ?
-  - Comment se fait le flux des données entre la soumission (ISsubmit) et la validation dans ISadmin avant d’arriver dans ISfinder ?
-  - Y a-t-il des parties du code ou du système sur lesquelles il faut être particulièrement prudent pour éviter de casser quelque chose ?
-  - Pour la migration vers PHP 8.4, y a-t-il des points spécifiques auxquels je dois faire attention dans le projet ?
-  - Le site utilise des outils externes comme BLAST. Est-ce que ces scripts PHP font appel à des exécutables bash/système spécifiques sur le serveur ? Y a-t-il des dépendances serveur particulières dont je dois tenir compte lors de la migration PHP ?
-  - Pour les envois d'emails (comme dans feedback_mail.php ou les notifications de soumission), le code utilise-t-il la fonction mail() native de PHP ou une ancienne bibliothèque (comme PHPMailer) qui pourrait nécessiter une mise à jour pour PHP 8.4 ?
+1. l'architecture
+Au niveau du code, comment sont organisées les interactions entre ISfinder, ISsubmit et ISadmin ? 
+Est-ce que ce sont des bases séparées avec des scripts de transfert, ou bien un système centralisé ?
+2. le flux de données 
+Quels scripts gèrent concrètement le passage des données de ISsubmit vers ISfinder ? 
+Est-ce que c’est déclenché automatiquement ou via ISadmin ?
+
+3. les parties critiques du code 
+Y a-t-il des fichiers ou des fonctions dans le code où il faut être particulièrement prudent, car ils sont critiques ou fortement couplés au reste du système ?
+
+4. migration vers php 8.4
+Dans ce projet, est-ce qu’il y a des parties du code qui risquent particulièrement de poser problème avec PHP 8.4 (fonctions dépréciées, comportements différents, etc.) ?
+
+5. scripts externes
+Les scripts comme blast.php font-ils appel à des commandes système (exec, shell, etc.) ? 
+y a-t-il des dépendances serveur spécifiques à prendre en compte pour éviter de casser ces fonctionnalités ?
+
+6. mails
+Pour les envois d’emails, est-ce que le projet utilise mail() directement ou une bibliothèque spécifique ?
 
 migration made on the following pages :
   - [x] index.php (works)
