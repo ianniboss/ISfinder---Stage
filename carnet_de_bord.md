@@ -77,3 +77,24 @@
 
 ### Jour 8 (22 Avril 2026)
 - Continuation de la migration des scripts d'affichage du site vers PHP 8.4, en se concentrant sur la correction des erreurs de compatibilité identifiées.
+
+### Jour 9 (23 Avril 2026)
+- Finalisation de la migration des pages d'affichage principales vers PHP 8.4 (recherche, blast, nomenclature).
+- Revue de code pour s'assurer du maintien de l'intégrité du frontend (IDs, classes CSS, structure HTML).
+- Synchronisation du projet avec le dépôt Git et mise à jour de la documentation technique.
+
+### Jour 10 (24 Avril 2026)
+- **Réunion majeure avec Patricia et Jocelyne** concernant l’architecture du système ISfinder.
+- **Clarification du flux** : Distinction nette entre ISfinder (consultation), ISsubmit (soumission) et ISadmin (validation).
+- **Analyse de l'infrastructure** : Compréhension de la duplication MariaDB entre serveurs internes et externes.
+- **Identification d'un risque de sécurité/architecture** : Les formulaires externes écrivent actuellement directement dans la base interne (Astune).
+- **Pivot de l'objectif du stage** : 
+    - Création d'une base `ISsubmit` sur le serveur externe pour isoler les écritures.
+    - Modification future des scripts de soumission pour pointer vers cette base.
+    - Nécessité de mettre à jour le système de Captcha (incompatible PHP 8).
+
+### Jour 11 (27 Avril 2026)
+- **Objectif du jour** : Configuration des accès phpMyAdmin sur les deux serveurs (interne et externe).
+- Préparation de l'environnement de test pour valider les modifications de scripts et les transferts de données entre bases.
+- Étude des prérequis pour la création de la nouvelle base de données externe.
+
