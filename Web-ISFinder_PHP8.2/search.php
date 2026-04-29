@@ -22,7 +22,7 @@ session_destroy();
 
     <?php 
     $nav_en_cours = 'tools';
-    include_once('include/menu.inc.php'); 
+    include_once('include/menu.inc.php');
     ?>
 
     <article>

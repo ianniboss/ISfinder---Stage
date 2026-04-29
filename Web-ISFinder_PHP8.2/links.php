@@ -18,7 +18,7 @@
 
     <?php 
     $nav_en_cours = 'infos';
-    include_once('include/menu.inc.php'); 
+    include_once('include/menu.inc.php');
     ?>
 
     <article>
