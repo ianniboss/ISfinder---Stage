@@ -113,3 +113,14 @@ migration made on the following pages :
   - [x] blast.php (works)
   - [x] erreur404.php (works)
   - [x] under_construct.php (works)
+
+# Selasa 28/04
+## Suggestions d'améliorations pour links.php
+### 🎨 Design & Expérience Utilisateur
+- **Structure en Grilles** : Remplacer le tableau HTML par une grille flexible (CSS Grid/Flexbox).
+- **Cartes Interactives** : Chaque lien est présenté dans une carte avec logo, titre et description.
+- **Micro-animations** : Effets de survol (hover) sur les cartes pour une navigation plus dynamique.
+- **Accessibilité** : Utilisation de balises sémantiques et amélioration du contraste.
+
+### 📁 Fichiers associés
+- `links_wireframe.png` : Maquette visuelle du nouveau design.

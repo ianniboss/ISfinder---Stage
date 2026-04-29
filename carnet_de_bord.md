@@ -98,3 +98,9 @@
 - Préparation de l'environnement de test pour valider les modifications de scripts et les transferts de données entre bases.
 - Étude des prérequis pour la création de la nouvelle base de données externe.
 
+### Jour 12 (28 Avril 2026)
+- **Objectif du jour** : Proposition d'améliorations esthétiques et fonctionnelles pour la page `links.php`.
+- Création d'un wireframe (maquette) pour la nouvelle structure de la page des liens favoris.
+- Modernisation de la présentation sous forme de cartes catégorisées (Sequencing Centers, Databases, Institutions, Tools).
+- Synchronisation de la maquette avec le dépôt Git (`links_wireframe.png`).
+
