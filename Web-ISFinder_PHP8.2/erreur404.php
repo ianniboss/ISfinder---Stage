@@ -10,7 +10,7 @@
         <h3>The page 
             <?php
             /* 
-             * Mise à jour pour PHP 8.4 : 
+             * Mise à jour pour PHP 8.5 : 
              * - Utilisation de $_SERVER au lieu de getenv pour une meilleure compatibilité.
              * - Utilisation de htmlspecialchars() pour prévenir les failles XSS (sécurité).
              */

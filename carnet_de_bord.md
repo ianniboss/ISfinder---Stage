@@ -104,3 +104,11 @@
 - Modernisation de la présentation sous forme de cartes catégorisées (Sequencing Centers, Databases, Institutions, Tools).
 - Synchronisation de la maquette avec le dépôt Git (`links_wireframe.png`).
 
+### Jour 13 (29 Avril 2026)
+- **Migration vers PHP 8.5** : Suite à une discussion avec Patricia et Pierre, passage de l'objectif de migration de PHP 8.4 à PHP 8.5 pour assurer une meilleure longévité du projet.
+- **Mise à jour des scripts d'affichage** : 
+    - Migration des 13 scripts d'affichage principaux vers les standards PHP 8.5.
+    - Standardisation des inclusions : utilisation de `include_once` pour les fichiers `.php` et `include` pour les fragments `.html`.
+    - Correction de la mise en forme et de la cohérence du code sur l'ensemble des pages migrées.
+- **Vérification** : Réalisation de tests de syntaxe et de cohérence sur les fichiers modifiés.
+

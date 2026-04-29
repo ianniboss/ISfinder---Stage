@@ -20,8 +20,8 @@
     <?php 
     $nav_en_cours = 'infos';
     include_once('include/menu.inc.php');
-    include_once ("include/function.inc.php");
-    include_once ("include/function_nomenclature.inc.php");
+    include_once('include/function.inc.php');
+    include_once('include/function_nomenclature.inc.php');
 
     // 1ere Lettre choisit (a par défaut) et type de bestiole choisit (IS par défaut)
     $lettre_choisi = (empty($_GET['lettre'])) ? 'a' : htmlspecialchars($_GET['lettre']);

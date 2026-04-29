@@ -33,7 +33,7 @@
             </map>
 
         <?php
-            include_once("include/function.inc.php");
+            include_once('include/function.inc.php');
 
             $date_sub = "";
 
