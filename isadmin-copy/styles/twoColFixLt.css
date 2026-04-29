@@ -1,0 +1,228 @@
+@charset "utf-8";
+body {
+	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+	background-color: #42413C;
+	margin: 0;
+	padding: 0;
+	color: #000;
+}
+
+/* ~~ Sélecteurs d'éléments/balises ~~ */
+ul, ol, dl { /* En raison des variations entre les navigateurs, il est conseillé d'attribuer une valeur de zéro aux marges intérieures et aux marges des listes. A des fins de cohérence, vous pouvez définir les valeurs désirées dans cette zone ou dans les éléments de liste (LI, DT, DD) qu'elle contient. N'oubliez pas que les paramètres que vous définissez ici se répercuteront sur la liste .nav, sauf si vous rédigez un sélecteur plus spécifique. */
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;	 /* la suppression de la marge supérieure résout un problème où les marges sortent de leur div conteneur. La marge inférieure restante l'éloignera de tout élément qui suit. */
+	padding-right: 15px;
+	padding-left: 15px; /* l'ajout de la marge intérieure aux côtés des éléments à l'intérieur des divs, et non aux divs proprement dit, évite le recours à des calculs de modèle de boîte. Une autre méthode consiste à employer une div imbriquée avec marge intérieure latérale. */
+}
+a img { /* ce sélecteur élimine la bordure bleue par défaut affichée dans certains navigateurs autour d'une image lorsque celle-ci est entourée d'un lien. */
+	border: none;
+}
+
+/* ~~ La définition du style des liens de votre site doit respecter cet ordre, y compris le groupe de sélecteurs qui créent l'effet de survol. ~~ */
+a:link {
+	color: #42413C;
+	text-decoration: underline; /* à moins que vous ne définissiez un style particulièrement exclusif pour vos liens, mieux vaut prévoir un soulignement, qui garantit une identification visuelle rapide. */
+}
+a:visited {
+	color: #6E6C64;
+	text-decoration: underline;
+}
+a:hover, a:active, a:focus { /* ce groupe de sélecteurs offrira à un navigateur au clavier la même expérience de survol que celle d'une personne employant la souris. */
+	text-decoration: none;
+}
+
+/* ~~ ce conteneur à largeur fixe entoure toutes les autres divs ~~ */
+.container {
+	width: 960px;
+	background-color: #FFF;
+	margin: 0 auto; /* la valeur automatique sur les côtés, associée à la largeur, permet de centrer la mise en page */
+	overflow: hidden; /* cette déclaration permet à .container de comprendre où les colonnes flottantes à l'intérieur se terminent et de les contenir */
+}
+
+/* ~~ Colonnes pour la mise en page. ~~ 
+
+1) La marge intérieure n'est placée qu'en haut et/ou en bas des divs. Les éléments à l'intérieur de ces divs posséderont une marge intérieure sur les côtés. Vous évitez ainsi de devoir recourir à des « calculs de modèle de boîte ». N'oubliez pas que si vous ajoutez une marge intérieure latérale ou une bordure à la div proprement dite, elle sera ajoutée à la largeur que vous définissez pour créer la largeur totale. Vous pouvez également supprimer la marge intérieure de l'élément dans la div et placer une seconde div à l'intérieur, sans largeur et possédant une marge intérieure appropriée pour votre concept.
+
+2) Toutes les colonnes étant flottantes, aucune marge ne leur a été attribuée. Si vous devez ajouter une marge, évitez de la placer du côté vers lequel vous effectuez le flottement (par exemple, une marge droite sur une div configurée pour flotter vers la droite). Dans de nombreux cas, vous pouvez plutôt employer une marge intérieure. Pour les divs où cette règle ne peut pas être respectée, ajoutez une déclaration « display:inline » à la règle de la div, afin de contourner un bogue qui amène certaines versions d'Internet Explorer à doubler la marge.
+
+3) Comme des classes peuvent être employées à plusieurs reprises dans un document (et que plusieurs classes peuvent aussi être attribuées à un élément), les colonnes ont reçu des noms de classes au lieu d'ID. Par exemple, deux divs de barre latérale peuvent être empilées si nécessaire. Elles peuvent être très facilement remplacées par des ID si vous le souhaitez, pour autant que vous ne les utilisiez qu'une fois par document.
+
+4) Si vous préférez que la navigation se trouve à droite et pas à gauche, faites flotter ces colonnes en sens opposé (toutes vers la droite au lieu de vers la gauche). Leur rendu s'effectuera dans l'ordre inverse. Il n'est pas nécessaire de déplacer les divs dans le code HTML source.
+
+*/
+.sidebar1 {
+	float: left;
+	width: 150px;
+	background-color: #EADCAE;
+	padding-bottom: 10px;
+}
+.sidebar1 img {
+	margin: auto;
+	text-align: center;
+}
+.sidebar1 h2 {
+	max-width: 150px;
+	text-align: center;
+	font-size: 14px;
+	padding-top: 15px;
+}
+.sidebar1 p {
+	font-size:10px;
+}
+.content {
+	margin-left:150px;
+	padding: 10px 0;
+	min-width: 700px;
+	max-width: 1000px;
+	float: left;
+	clear:both;
+	position:relative;
+	top:-400px;
+}
+
+/* ~~ Ce sélecteur groupé donne de l'espace aux listes dans la zone .content ~~ */
+.content ul, .content ol { 
+	padding: 0 15px 15px 40px; /* cette marge intérieure reflète la marge intérieure droite dans les en-têtes et la règle de paragraphe ci-dessus. Une marge intérieure a été placée en bas, afin d'assurer un espace entre les autres éléments des listes, et à gauche pour créer le retrait. Vous pouvez les régler comme bon vous semble. */
+}
+
+/* le nav */
+nav li{
+	float: left;
+	position: relative;
+}
+
+/* Sous-menu */
+nav {	width: 150px;
+		min-height: 400px;	}
+nav ul li a {
+    	text-transform: none;
+		text-decoration: none;	}
+nav a:visited {	color: #FFF;	background:#5D8BA2; }
+nav a:hover {	color: #5D8BA2;	background:#FFF; }
+nav a:link {	color: #FFF;	background:#5D8BA2; }
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+    z-index: 99999;
+    width:150px;
+	background:#5D8BA2;
+	color:#FFF;
+	border:#000 1px solid;
+}
+/* par défaut, les sous-menu ne sont pas affichés ! */
+nav ul li ul, nav ul li ul li ul {						display:none;
+														position: absolute;
+														left:150px;	
+														width:auto;
+														min-width: 150px;
+														background:#5D8BA2;
+														color:#FFF;	}
+/* on affiche les sous menu au survol de l'item, ET tant qu'on est au survol du sous menu */
+nav ul li:hover ul, nav ul li ul:hover {				display:block;	}
+/* on force le masquage du sous-sous menu */
+nav ul li:hover ul ul, nav ul li ul:hover ul {			display:none;	}
+/* on affiche les sous-sous menu au survol de l'item, ET tant qu'on est au survol du sous-sous menu */
+nav ul li ul li:hover ul, nav ul li ul li ul:hover {	display:block;	}
+nav ul li {
+    float: none;
+    margin: 0;
+    padding: 0;
+    height: auto;
+    line-height: 1;
+    display: block;
+	background:#5D8BA2;
+	color:#FFF;
+}
+nav ul li a,
+nav ul li p {
+    margin: 0;
+    padding: 5px;
+	display: block;
+    line-height: 1;
+}
+nav ul li:hover,
+nav ul li:hover a:hover,
+nav ul li a:hover {
+	display: block;
+	background:#FFF;
+	color:#5D8BA2;
+}
+
+
+
+
+div#bandeau_gauche {
+	width: 194px;
+	float: left;
+	text-align: left;
+	min-height: 1005px;
+	background-color:#0CF;
+}
+div#bandeau_gauche div#menu {
+	margin-top: 140px;
+	height: 796px;          
+}
+div#bandeau_gauche div#menu p {
+	height: 31px;
+	width: 150px;  
+	background-image: url(../img/bouton_menu.png);                        
+	margin: 5px 0 0 15px;
+	line-height: 30px;
+	vertical-align: middle;
+	display: block;
+}
+div#bandeau_gauche div#menu p a {
+	height: 31px;
+	width: 150px;                                 
+	color: #FFF;
+	text-decoration: none;
+	display: block;
+}
+div#bandeau_gauche div#menu p a:hover,
+div#bandeau_gauche div#menu p a:active,
+div#bandeau_gauche div#menu p a.selection {
+	background-image: url(../img/bouton_menu_actif.png);
+}
+
+div#bandeau_gauche div#menu p.sous_menu_0 {
+	margin: 0 0 0 20px;
+	width: 140px;
+	color: #000;
+	background-image: url(../img/item.png);
+	background-color: transparent;
+}
+div#bandeau_gauche div#menu p.sous_menu_0 a {
+	color: black;
+	background-image: none;
+	background-color: transparent;
+	border-color: #555;
+}
+div#bandeau_gauche div#menu p.sous_menu_0 a:hover,
+div#bandeau_gauche div#menu p.sous_menu_0 a:active,
+div#bandeau_gauche div#menu p.sous_menu_0 a:selection {
+	color: #E4021C;
+	background-image: none;
+	border-color: #555;
+}
+
+
+/* ~~ classes flottant/effacement diverses ~~ */
+.fltrt {  /* cette classe peut servir à faire flotter un élément depuis la droite sur votre page. L'élément flottant doit précéder l'élément à côté duquel il doit apparaître sur la page. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* cette classe peut servir à faire flotter un élément depuis la gauche sur votre page. L'élément flottant doit précéder l'élément à côté duquel il doit apparaître sur la page. */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* cette classe peut être placée sur une div <br /> ou vide, en tant qu'élément final suivant la dernière div flottante (dans le #container) si le paramètre overflow:hidden du .container est supprimé */
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}

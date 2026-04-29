@@ -1,0 +1,93 @@
+td {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+}
+th {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+		color: #ffffff;
+}
+a:visited {	color: #99ccff;}
+a:hover {	color: red;}
+a:link {	color: #FFFFFF}
+
+div.boite {
+	border: #666 inset;
+	border-radius: 15px;
+	margin: 10px;
+	padding: 20px;
+}
+.encadrement {
+	border: #666 solid 2px;
+	margin: 10px;
+	padding: 20px;
+}
+
+h1 {		font-size:14px;	font-stretch:extra-expanded;	}
+h2 {		font-size:14px;	font-stretch:expanded;	}
+h3 {		font-size:12px;	font-stretch: narrower;	}
+h4 {		font-size:12px;	font-style:italic;	}
+ul li, p {		font-size:12px;	}
+
+
+div.boite form table {						min-height: 300px;			}
+div.boite form table tr {												}
+div.boite form table tr:nth-child(odd) {	background-color:#CCC;		}
+div.boite form table tr:nth-child(even) {	background-color:#FFF;		}
+div.boite form table tr th {				font-stretch: expanded;
+											text-align:center;
+											alignment-adjust:middle;
+											background-color:#486194;	}
+div.boite form table tr td {				text-align:left;			}
+
+div.boite table {						min-height: 300px;			}
+div.boite table tr {												}
+div.boite table tr:nth-child(odd) {		background-color:#CCC;		}
+div.boite table tr:nth-child(even) {	background-color:#FFF;		}
+div.boite table tr th {					font-stretch: expanded;
+										text-align:center;
+										alignment-adjust:middle;
+										background-color:#486194;	}
+div.boite table tr td {					text-align:left;			}
+
+table.liste {								border: none;
+											margin: 0;
+											padding: 0;
+											color: #000;				}
+table.liste a, table.liste a:link, table.liste a:visited, table.liste a:hover, table.liste a:active {
+											text-decoration: underline;
+											font-stretch: narrower;
+											color: #000;				}
+table.liste img {							width: 15px;
+											height: 15px;				}
+table.liste tr {							margin: 0;
+											padding: 0;
+											border: none;				}
+table.liste tr:nth-child(2n) {				background-color:#0FC;		}
+table.liste tr:nth-child(2n+1) {			background-color:#FFF;		}
+table.liste tr th, table.liste tr td {		border: none;
+											border-left: thin #000 solid;
+											border-right: thin #000 solid;
+											}
+table.liste tr th {							background-color:#CCC;
+											text-align:center;
+											margin: 0;
+											padding: 2;
+											color: #000;				}
+table.liste tr td {							text-align:left;
+											margin: 0;
+											padding: 2;
+											color: #000;				}
+											
+div.rouge { background-color:#F00;	}
+div.bleu {	background-color:#0CF;	}
+div#notifications, div.notification {			display: none;}
+div#notifications:hover,
+div#notifications:active,
+div#notifications:focus,
+div#notifications:hover .notification,
+div#notifications:active .notification,
+div#notifications:focus .notification {	height:auto;
+							overflow:visible; }
+.impression {	visibility: visible;	}
+.ecran {	visibility: hidden;	display: none;  }

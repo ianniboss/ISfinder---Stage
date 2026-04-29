@@ -1,0 +1,171 @@
+/* initialisation des balises html */
+body, h1, h2, h3, p, ul, li, form, input {margin:0; padding:0}
+ul, li {list-style:none}     /* Pour enlever les points noirs des listes */
+
+a{text-decoration:none;			/* Pour les liens par defaut */
+	color:#f40}
+a:hover{color:#333;
+		text-decoration:underline}
+a:active{color:green}
+
+	/* les elements texte ou font sont hérités */
+	/* donc font par défaut défini à body est vrai pour tous les blocs */
+body {font-family:arial,calibri,verdana, arial, sans-serif;
+	font-size:0.8em;
+	color:#333 ;
+	background-color:#ccc;
+	margin:1px 0px 1px 0px
+	}
+h1,h2,h3{font-family: arial, cambria,"times new roman",serif;
+	font-weight:normal}				/* enleve le gras */
+
+#page{width:80%;
+	margin-left:15px;
+	margin-right:auto;
+	border:1px solid #aaa;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	-webkit-box-shadow: #666 5px 10px 10px;
+	-moz-box-shadow: #666 5px 10px 10px;
+	box-shadow: #666 5px 10px 10px;
+	background: #FFF;
+	behavior: url(PIE.htc);
+	}	
+	
+/* habillage des zones de ma page */
+
+/* pour le header */
+header{padding:0.9em 1em 1.1em 2em;        /* marge intérieure*/
+	color:#fff;
+	text-shadow:#999 2px 1px 1px;
+	background: url(../images/Bandeau-intranet.jpg);
+/*	background-repeat: no-repeat;*/
+	background-color: #9aafc4;
+	-webkit-border-radius: 8px 8px 0px 0px;
+	-moz-border-radius: 8px 8px 0px 0px;
+	border-radius: 8px 8px 0px 0px;
+	behavior: url(PIE.htc);
+	}	
+h1 {font-family:calibri,verdana, arial, sans-serif;}
+header h2{font-size:0.5em;}
+
+/* le nav */
+nav{	display:block;
+	height: 1.6em;
+	padding:0.8em 1em 1.4em 1em;
+	border-bottom:#0AA32D;
+	background: #C5F99F;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#C5F99F), to(#0AA32D));
+	background: -webkit-linear-gradient(#C5F99F, #0AA32D);
+	background: -moz-linear-gradient(#C5F99F, #0AA32D);
+	background: -ms-linear-gradient(#C5F99F, #0AA32D);
+	background: -o-linear-gradient(#C5F99F, #0AA32D);
+	background: linear-gradient(#C5F99F, #0AA32D);
+	-pie-background: linear-gradient(#C5F99F, #0AA32D);
+	behavior: url(PIE.htc);
+	}
+nav li{
+	display:inline;
+}
+nav a{padding:0.5em 0.5em;				/* 1er unite pour l'horizontale puis verticale */
+	border-right:1px solid #ccc;
+	font-weight:bold;
+	text-shadow:#999 1px 1px 1px;
+	color:#fff;
+	}
+nav a:hover{text-decoration:none;
+		color:#ddd
+		}
+nav a:active{color:#FB9233}
+
+/* le aside */
+aside{float:left;
+	padding:1em;
+	width:10em;
+	overflow:hidden;
+	font-size:0.8em;
+	background: #b8c8d5;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#b8c8d5), to(#E8FCF9));
+	background: -webkit-linear-gradient(#b8c8d5, #E8FCF9);
+	background: -moz-linear-gradient(#b8c8d5, #E8FCF9);
+	background: -ms-linear-gradient(#b8c8d5, #E8FCF9);
+	background: -o-linear-gradient(#b8c8d5, #E8FCF9);
+	background: linear-gradient(#b8c8d5, #E8FCF9);
+	-pie-background: linear-gradient(#b8c8d5, #E8FCF9);
+	behavior: url(PIE.htc);
+	overflow:hidden;
+	}
+aside image{float:center}
+
+/* le bloc article */
+article{margin:1em 12em 1em 10em;
+	padding:0.8em 1em 1em 1em;
+	background: #FFFFFF;
+
+	}	
+article h2{color:#1773BC}
+	
+article h3{border-top:1px solid #f40;
+	padding-left:0.5em;
+	margin-top:0.5em;
+	}
+article h3:first-letter{font-size:1.5em; font-weight:bold; color:#f40; text-transform:capitalize}
+
+article image{top:270 px}
+
+
+.cartouche{padding-bottom:1em}
+
+.texte_calque {
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #000000;
+	text-decoration: none;
+}
+.texte_desc {
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    font-size: 9px;
+    color: #000000;
+    text-decoration: none;
+}
+.texte_jour {
+	vertical-align: top;
+	text-align: center;
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #000000;
+}
+
+.piedSection li{display:inline;
+			font-size:0.8em; 
+			padding:0.5em 0.5em;
+			border-right:1px solid #ccc;
+			}
+
+/* pour le footer */
+footer{border-top:1px solid #b8c8d5;	
+	text-align:center;
+	clear:both;
+	height:3em;
+	background-color:#b8c8d5;
+	-webkit-border-radius: 0px 0px 8px 8px;
+	-moz-border-radius: 0px 0px 8px 8px;
+	border-radius: 0px 0px 8px 8px;
+	-webkit-box-shadow: #666 5px 10px 10px;
+	-moz-box-shadow: #666 5px 10px 10px;
+	box-shadow: #666 5px 10px 10px;
+	background: #b8c8d5;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#b8c8d5), to(#67839b));
+	background: -webkit-linear-gradient(#b8c8d5, #67839b);
+	background: -moz-linear-gradient(#b8c8d5, #67839b);
+	background: -ms-linear-gradient(#b8c8d5, #67839b);
+	background: -o-linear-gradient(#b8c8d5, #67839b);
+	background: linear-gradient(#b8c8d5, #67839b);
+	-pie-background: linear-gradient(#b8c8d5, #67839b);
+	behavior: url(PIE.htc);
+	}
+footer li{display:inline}					/* Liste du pied de page en ligne  */
+
+/* Accessibilite */
+.accessibility{display:none}

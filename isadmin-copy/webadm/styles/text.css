@@ -1,0 +1,116 @@
+body {
+	background-color: #ffffff;
+        font-family: Times, sans-serif;
+        font-size: 12px;
+        line-height: normal
+}
+td {
+        font-family: Times, sans-serif;
+        font-size: 12px;
+        line-height: normal;
+}
+a {
+	color: #3366CC;
+	text-decoration: none;
+}
+
+
+a:hover {
+	text-decoration: underline overline;
+}
+
+.titrelo {
+	font-family: Arial, Helvetica, sans-serif;
+	font-style: italic;
+	font-weight: normal;
+	color: #FFFFFF;
+	background-color: #A896FD;
+}
+.tdvlan1_8 {
+	font-family: Times, sans-serif;
+	font-size: 12px;
+	line-height: normal;
+	color: #000000;
+        background-color: #C1D1D7;
+}
+.tdvlan1_9 {
+	font-family: Times, sans-serif;
+	font-size: 12px;
+	line-height: normal;
+	color: #000000;
+        background-color: #FFF195;
+}
+.tdvlan1_10 {
+	font-family: Times, sans-serif;
+	font-size: 12px;
+	line-height: normal;
+	color: #000000;
+        background-color: #E8DECB;
+}
+.tdvlan1_11 {
+	font-family: Times, sans-serif;
+	font-size: 12px;
+	line-height: normal;
+	color: #000000;
+        background-color: #DFDEFF;
+}
+.tdvlan2_ {
+        font-family: Times, sans-serif;
+        font-size: 12px;
+        line-height: normal;
+        color: #000000;
+        background-color: #FFe0a5;
+}
+.tdvlan2 {
+        font-family: Times, sans-serif;
+        font-size: 12px;
+        line-height: normal;
+        color: #000000;
+        background-color: #FFe0a5;
+}
+
+.tddmz_ {
+        font-family: Times, sans-serif;
+        font-size: 12px;
+        line-height: normal;
+        color: #000000;
+        background-color: #e2e2e2;
+}
+.tddmz {
+        font-family: Times, sans-serif;
+        font-size: 12px;
+        line-height: normal;
+        color: #000000;
+        background-color: #e2e2e2;
+}
+
+.thvlan1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #A896FD;
+}
+.thvlan2 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        background-color: #E5A376
+}
+.thdmz {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        background-color: #a9adab;
+}
+
+.tdVLAN {
+	font-family: Times, sans-serif;
+	font-size: 12px;
+	line-height: normal;
+	color: #000000;
+}
+.thVLAN {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+}
