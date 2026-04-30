@@ -1,91 +1,111 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-<title>Comments and Suggession</title>
-<meta charset="utf-8" /> 
-<meta name="author" content="Jo" />
-<meta name="keywords" content="Feedback" />
-<link type="text/css" rel="stylesheet" href="../styles/styles_feedback.css" media="screen" />
-<link type="text/css" rel="stylesheet" href="../styles/styles.css" media="screen" />
-<link type="text/css" rel="stylesheet" href="../styles/menu.css" media="screen" />
-<link rel="icon" href="../favicon.ico" type="image/x-icon">
-<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <title>Comments and Suggestions</title>
+    <meta charset="utf-8" /> 
+    <meta name="author" content="Jo" />
+    <meta name="keywords" content="Feedback" />
+    <link type="text/css" rel="stylesheet" href="../styles/styles_feedback.css" media="screen" />
+    <link type="text/css" rel="stylesheet" href="../styles/styles.css" media="screen" />
+    <link type="text/css" rel="stylesheet" href="../styles/menu.css" media="screen" />
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
 </head>
 
 <body>
 <div id="page">
-<header>
-</header>
+    <header></header>
 
-<?php 
-$nav_en_cours='about';
-include('../include/menu.inc.php');
-?>
-<article>
-<section>
-<?php
-Include_once ("../include/function.inc.php");
+    <?php 
+    $nav_en_cours = 'about';
+    include('../include/menu.inc.php');
+    ?>
 
-$form_soumis = htmlentities($_POST['Onsubmit']);
-if($form_soumis == "Submit"){
+    <article>
+        <section>
+            <?php
+            include_once("../include/function.inc.php");
+            require_once("ptitcaptcha.php");
 
-/* Pour les register globals off - On récupère les champs soumis tout en supprimant les balises HTML*/
-	foreach($_POST as $champ=>$valeur){		// on remplit $_SESSION ET une variable portant le nom du champ 
-		$$champ = $_SESSION[$champ] = stripslashes(htmlentities($valeur)) ;		// pour ne pas écrire tt le tps $_SESSION[]
-		}
+            $form_soumis = htmlspecialchars($_POST['Onsubmit'] ?? '', ENT_QUOTES, 'UTF-8');
+            if ($form_soumis === "Submit") {
 
-/* Vérification des champs */
-	if(filter_var($courriel, FILTER_VALIDATE_EMAIL)===FALSE){
-		die(erreur_sub("email address",0));
-		}
-	if (!$courriel) {
-		die(erreur_sub("Email adress",1));
-	}
-	if (!$Lname) {
-		die(erreur_sub("Last name",1));
-	}
-	if (!$Fname) {
-		die(erreur_sub("first name",1));
-	}
-	if (!$institution) {
-		die(erreur_sub("institution",1));
-	}
-	if (!$country) {
-		die(erreur_sub("country",1));
-	}
+                // 1. Verify Captcha first
+                if (!PtitCaptchaHelper::checkCaptcha()) {
+                    if (session_status() === PHP_SESSION_NONE) session_start();
+                    $_SESSION["error"] = "The anti-spam code entered was incorrect. Please try again.";
+                    
+                    // Save form data to session to avoid re-typing
+                    foreach ($_POST as $key => $value) {
+                        $_SESSION[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+                    }
+                    
+                    header("Location: ../feedback.php");
+                    exit();
+                }
 
-/* Envoi du mail aux personnes concernées */
-	$cc = addressMail('','cbi.webadmin-isfinder','');
-	$cc .= ','.addressMail('',"mc2126","georgetown.edu").','.addressMail("Patricia","Siguier","").','.addressMail("Jacques","Mahillon","uclouvain.be");
-	$headers = "From: ".addressMail('','cbi.webadmin-isfinder','')."\r\n";
-	$headers .= "CC: ".$cc."\r\n";
-	$headers .= "Content-Type: text/html; charset=\"utf-8\"\r\n" ;	
-	$headers .= "X-Mailer: PHP/ISFinder\r\n";
-	$texte = "IS Feedback form<br><br>";
-	$texte .= "Name: ".$title." ".$Fname." ".$Lname."<br>";
-	$texte .= "Institution: ".$institution."<br>";
-	$texte .= "Department: ".$department."<br>";
-	$texte .= "Address: ".$address."<br>";
-	$texte .= "         ".$postCode."<br>";
-	$texte .= "Country: ".$country."<br>";
-	$texte .= "Email: ".$courriel."<br>";
-	$texte .= "Comments: ".nl2br($comments)."<br>";
+                // Nettoyage et assignation des champs POST
+                foreach ($_POST as $champ => $valeur) {
+                    $valeur = trim(htmlspecialchars($valeur, ENT_QUOTES, 'UTF-8'));
+                    $$champ = $_SESSION[$champ] = $valeur;
+                }
 
-	$res_mail=mail($courriel,"[ISfinder] Feedback IS",$texte,$headers);
-	if ($res_mail){
-	// Affichage quand tout c'est bien passé
-	echo "Your Comments and Suggestion on the IS Database has been sent,<br>" ;
-	echo "Thank you for your interest in our IS Database.<br><br><HR>";
-	echo "<a href='https://lmgm.cbi-toulouse.fr/en/home/' target='_top'><b>LMGM</b></a>&nbsp;&nbsp; | &nbsp;&nbsp;<a href='https://www-is.biotoul.fr/' target='_top'><b>IS HomePage</b></a>";
-	} else {
-		echo "<br>ERROR : contact the administrator<br>";
-	}
-}// Fin demande Submit
-?>
+                // Ensuring all optional variables are defined to avoid PHP 8 crashes
+                $title = $title ?? "";
+                $Fname = $Fname ?? "";
+                $Lname = $Lname ?? "";
+                $institution = $institution ?? "";
+                $department = $department ?? "";
+                $address = $address ?? "";
+                $postCode = $postCode ?? "";
+                $country = $country ?? "";
+                $courriel = $courriel ?? "";
+                $comments = $comments ?? "";
 
-</section>
-</article>
-<?php include('../include/footer.inc.php'); ?>
-</div> <!-- Fin du div page -->
+                // Verification des champs
+                if (empty($courriel) || !filter_var($courriel, FILTER_VALIDATE_EMAIL)) {
+                    die(erreur_sub("email address", 0));
+                }
+                if (empty($Lname)) { die(erreur_sub("Last name", 1)); }
+                if (empty($Fname)) { die(erreur_sub("first name", 1)); }
+                if (empty($institution)) { die(erreur_sub("institution", 1)); }
+                if (empty($country)) { die(erreur_sub("country", 1)); }
+
+                // Envoi du mail aux personnes concernées
+                $to = addressMail('', 'cbi.webadmin-isfinder', '');
+                $cc = addressMail('', "mc2126", "georgetown.edu") . ',' . addressMail("Patricia", "Siguier", "") . ',' . addressMail("Jacques", "Mahillon", "uclouvain.be");
+                
+                $headers = "From: " . addressMail('', 'cbi.webadmin-isfinder', '') . "\r\n";
+                $headers .= "CC: " . $cc . "\r\n";
+                $headers .= "Content-Type: text/html; charset=utf-8\r\n";	
+                $headers .= "X-Mailer: PHP/ISFinder\r\n";
+                
+                $texte = "<html><body>";
+                $texte .= "<h3>IS Feedback form</h3>";
+                $texte .= "<strong>Name:</strong> " . $title . " " . $Fname . " " . $Lname . "<br>";
+                $texte .= "<strong>Institution:</strong> " . $institution . "<br>";
+                $texte .= "<strong>Department:</strong> " . $department . "<br>";
+                $texte .= "<strong>Address:</strong> " . $address . " " . $postCode . "<br>";
+                $texte .= "<strong>Country:</strong> " . $country . "<br>";
+                $texte .= "<strong>Email:</strong> " . $courriel . "<br><br>";
+                $texte .= "<strong>Comments:</strong><br>" . nl2br($comments) . "<br>";
+                $texte .= "</body></html>";
+
+                @mail($to, "[ISfinder] Feedback form", $texte, $headers);
+
+                echo "<h2>Success!</h2>";
+                echo "<p>Thank you for your feedback. It has been sent to the ISfinder team.</p>";
+                echo "<hr/><p><a href='../feedback.php'>Back to form</a> | <a href='../index.php'>Back to Home</a></p>";
+            }
+            ?>
+        </section>
+    </article>
+    <?php include('../include/footer.inc.php'); ?>
+</div>
 </body>
 </html>

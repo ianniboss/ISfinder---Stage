@@ -112,3 +112,14 @@
     - Correction de la mise en forme et de la cohérence du code sur l'ensemble des pages migrées.
 - **Vérification** : Réalisation de tests de syntaxe et de cohérence sur les fichiers modifiés.
 
+### Jour 14 (30 Avril 2026)
+- **Migration des formulaires de soumission** : Migration complète des workflows `request_name_form.php` et `feedback.php` vers PHP 8.5.
+- **Sécurisation et Antispam** :
+    - Refonte du système de Captcha (`ptitcaptcha.php`) pour une compatibilité totale avec PHP 8 (passage en méthodes statiques).
+    - Intégration du Captcha dans les deux formulaires avec validation côté serveur et persistance des données saisies.
+- **Optimisation de l'UX/UI** :
+    - Uniformisation du design des formulaires avec des sections encadrées et des titres orange (`fieldset` et `legend`).
+    - Mise en place de messages d'erreur "natifs" via JavaScript (`setCustomValidity`) pour une intégration visuelle moderne et discrète.
+    - Correction de bugs de session (gestion du `raz` pour éviter l'écrasement des erreurs et correction du bug d'inversion des noms).
+- **Architecture Backend** : Mise à jour du script `request_name.php` pour pointer vers la base de données `ISsubmit` en utilisant des requêtes préparées (`mysqli`).
+

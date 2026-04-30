@@ -26,19 +26,35 @@ if (session_status() === PHP_SESSION_NONE) {
     <article>
         <section>
             <?php
-            // Configuration pour le débogage
-            ini_set('display_errors', 1);
-            ini_set('display_startup_errors', 1);
-            error_reporting(E_ALL);
-
-            // Inclusion des fichiers de fonctions
             include_once("../include/function.inc.php");
             include_once("../include/function_sub.inc.php");
+            require_once("ptitcaptcha.php");
 
-            // Vérification de la soumission du formulaire
             $form_soumis = htmlspecialchars($_POST['Onsubmit'] ?? '', ENT_QUOTES, 'UTF-8');
             if ($form_soumis === "Submit") {
-                // Initialisation des erreurs
+                
+                // 1. Verify Captcha first
+                if (!PtitCaptchaHelper::checkCaptcha()) {
+                    if (session_status() === PHP_SESSION_NONE) session_start();
+                    $_SESSION["error"] = "The anti-spam code entered was incorrect. Please try again.";
+                    
+                    // Save form data to session to avoid re-typing
+                    foreach ($_POST as $key => $value) {
+                        $_SESSION[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+                    }
+                    
+                    header("Location: ../request_name_form.php");
+                    exit();
+                }
+
+                // Connexion à la base de données
+                $cnx = connexion('localhost', 'ibinsyahrulazlan', 'ISsubmit', 'yNCNLvH9vwX^f~$i');
+ 
+                if (!$cnx) {
+                    die("<p class='erreur'>Server connection error. Please try again later.</p>");
+                }
+
+                // Initialisation des erreurs 
                 $_SESSION["error"] = "";
 
                 // Nettoyage et assignation des champs POST
@@ -48,128 +64,100 @@ if (session_status() === PHP_SESSION_NONE) {
                 }
 
                 // Validation des champs
-                $_SESSION["error"] .= empty($Fname) || preg_match("/[^a-zA-Z- \éèêç']/u", $Fname) ? "First name correct is required.<br>" : "";
-                $_SESSION["error"] .= empty($Lname) || preg_match("/[^a-zA-Z- \éèêç']/u", $Lname) ? "Last name correct is required.<br>" : "";
-                $_SESSION["error"] .= empty($institution) || strlen($institution) < 2 ? "Field institution is required.<br>" : "";
-                $_SESSION["error"] .= empty($country) || strlen($country) < 2 ? "Field country is required.<br>" : "";
-                $_SESSION["error"] .= empty($courriel) ? "E-mail address is required.<br>" : "";
-                $_SESSION["error"] .= empty($bact_host) || preg_match("/[^a-zA-Z0-9- _:.']/u", $bact_host) ? "Bacterial host is required.<br>" : "";
+                $_SESSION["error"] .= empty($Fname) ? "First name is required.<br>" : "";
+                $_SESSION["error"] .= empty($Lname) ? "Last name is required.<br>" : "";
+                $_SESSION["error"] .= empty($institution) ? "Institution is required.<br>" : "";
+                $_SESSION["error"] .= empty($courriel) || !filter_var($courriel, FILTER_VALIDATE_EMAIL) ? "Valid email is required.<br>" : "";
 
-                // Validation de l'email
-                if (filter_var($courriel, FILTER_VALIDATE_EMAIL) === false) {
-                    $_SESSION["error"] .= "E-mail address is not valid.<br>";
-                }
-
-                // Si aucune erreur, traitement de la base de données
                 if (empty($_SESSION["error"])) {
-                    // Connexion à la base de données
-                    $cnx = connexion("ISsubmit");
+                    // Ensuring all optional variables are defined to avoid PHP 8 crashes
+                    $Mname = $Mname ?? "";
+                    $department = $department ?? "";
+                    $address = $address ?? "";
+                    $postCode = $postCode ?? "";
+                    $tel = $tel ?? "";
+                    $bact_comments = $bact_comments ?? "";
 
-                    // Insertion des informations du soumissionnaire
-                    $sql_sub = "INSERT INTO submiters(Firstname, Middlename, Lastname, Institution, Department, Address, Code, Country, Mail, Phone) ";
-                    $sql_sub .= "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    // 1. First Insert (Submitters)
+                    $sql_sub = "INSERT INTO submiters(Firstname, Middlename, Lastname, Institution, Department, Address, Code, Country, Mail, Phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                     $stmt = $cnx->prepare($sql_sub);
-                    $stmt->bind_param(
-                        "ssssssisss",
-                        $Fname,
-                        $Mname,
-                        $Lname,
-                        $institution,
-                        $department,
-                        $address,
-                        $postCode,
-                        $country,
-                        $courriel,
-                        $tel
-                    );
+
+                    if (!$stmt) {
+                        die("<p class='erreur'>Prepare failed: " . htmlspecialchars($cnx->error) . "</p>");
+                    }
+
+                    $stmt->bind_param("ssssssssss", $Fname, $Mname, $Lname, $institution, $department, $address, $postCode, $country, $courriel, $tel);
                     $stmt->execute();
-                    $ID_Submiter = $stmt->insert_id;
+                    $ID_Submiter = $cnx->insert_id;
                     $stmt->close();
 
-                    // Insertion des informations concernant l'hôte bactérien
+                    // 2. Second Insert (Request Names)
                     $date_req_name = date("Y-m-d");
-                    $sql_sub = "INSERT INTO request_names(bact_origin, submiters_ID_Submiter, comments_author, nbr_names, MGE_type, date_demande) VALUES (?, ?, ?, ?, ?, ?)";
-                    $stmt = $cnx->prepare($sql_sub);
-                    $stmt->bind_param(
-                        "sisiss",
-                        $bact_host,
-                        $ID_Submiter,
-                        $bact_comments,
-                        $nb_name,
-                        $typeMGE,
-                        $date_req_name
-                    );
-                    $stmt->execute();
-                    $stmt->close();
+                    $sql_name = "INSERT INTO request_names(bact_origin, submiters_ID_Submiter, comments_author, nbr_names, MGE_type, date_demande) VALUES (?, ?, ?, ?, ?, ?)";
+                    $stmt2 = $cnx->prepare($sql_name);
 
-                    // Détermination du type de GE
-                    $type = match (intval($typeMGE)) {
-                        2 => "MITE",
-                        4 => "MIC",
-                        5 => "tIS",
-                        default => "IS",
-                    };
+                    if (!$stmt2) {
+                        die("<p class='erreur'>Second Prepare failed: " . htmlspecialchars($cnx->error) . "</p>");
+                    }
 
-                    // Envoi du mail de confirmation au soumissionnaire
-                    $headers = [
-                        "From: " . addressMail('', 'cbi.webadmin-isfinder', ''),
-                        "Content-Type: text/plain; charset=utf-8",
-                        "X-Mailer: PHP/ISFinder"
-                    ];
+                    $stmt2->bind_param("sisiss", $bact_host, $ID_Submiter, $bact_comments, $nb_name, $typeMGE, $date_req_name);
+                    $stmt2->execute();
+                    $stmt2->close();
+
+                    // 3. Determine MGE type
+                    $typeMGE_int = intval($typeMGE);
+                    switch ($typeMGE_int) {
+                        case 2: $type = "MITE"; break;
+                        case 4: $type = "MIC"; break;
+                        case 5: $type = "tIS"; break;
+                        default: $type = "IS"; break;
+                    }
+
+                    // 4. Emails
+                    // User confirmation
+                    $headers = "From: " . addressMail('', 'cbi.webadmin-isfinder', '') . "\r\n";
+                    $headers .= "Content-Type: text/plain; charset=utf-8\r\n";
+                    $headers .= "X-Mailer: PHP/ISFinder\r\n";
+                    
                     $texte = "IS Name Attribution Form\n\n";
                     $texte .= $Fname . " " . $Lname . ", ";
                     $texte .= "you will receive an email with the attributed " . $type . " name as soon as possible:\n";
                     $texte .= "For your request, Host : " . $bact_host . "\n";
                     $texte .= "Comments: " . $bact_comments . "\n\n";
                     $texte .= "Thank you for your interest in our IS Database.\n";
-                    mail($courriel, "[ISfinder] IS name attribution request", $texte, implode("\r\n", $headers));
+                    mail($courriel, "[ISfinder] IS name attribution request", $texte, $headers);
 
-                    // Envoi du mail à l'équipe ISfinder
-                    $to = addressMail('', 'cbi.webadmin-isfinder', '');
+                    // Team notification
                     $cc = addressMail('', "mc2126", "georgetown.edu") . ',' . addressMail("Patricia", "Siguier", "") . ',' . addressMail("Jacques", "Mahillon", "uclouvain.be");
-                    $headers = [
-                        "From: " . addressMail('', 'cbi.webadmin-isfinder', ''),
-                        "CC: " . $cc,
-                        "X-Mailer: PHP/ISFinder",
-                        "Content-Type: text/plain; charset=utf-8"
-                    ];
-                    $texte = "IS Name Attribution Form :\n";
-                    $texte .= "Name: " . $Fname . " " . $Mname . " " . $Lname . "\n";
-                    $texte .= "Institution: " . $institution . "\n";
-                    $texte .= "Department: " . $department . "\n";
-                    $texte .= "Address: " . $address . "\n";
-                    $texte .= "         " . $postCode . "\n";
-                    $texte .= "Country: " . $country . "\n";
-                    $texte .= "Email: " . $courriel . "\n";
-                    $texte .= "Telephone: " . $tel . "\n\n";
-                    $texte .= "Request: " . $nb_name . " " . $type . "\n";
-                    $texte .= "Host: " . $bact_host . "\n";
-                    $texte .= "Comments: " . $bact_comments . "\n";
-                    mail($to, "[ISfinder] IS name attribution request", $texte, implode("\r\n", $headers));
+                    $headers_team = "From: " . addressMail('', 'cbi.webadmin-isfinder', '') . "\r\n";
+                    $headers_team .= "CC: " . $cc . "\r\n";
+                    $headers_team .= "Content-Type: text/plain; charset=utf-8\r\n";
+                    $headers_team .= "X-Mailer: PHP/ISFinder\r\n";
+                    
+                    $texte_team = "IS Name Attribution Form :\n";
+                    $texte_team .= "Name: " . $Fname . " " . $Mname . " " . $Lname . "\n";
+                    $texte_team .= "Institution: " . $institution . "\n";
+                    $texte_team .= "Email: " . $courriel . "\n";
+                    $texte_team .= "Host: " . $bact_host . "\n";
+                    $texte_team .= "Comments: " . $bact_comments . "\n";
+                    
+                    mail(addressMail('', 'cbi.webadmin-isfinder', ''), "[ISfinder] New name request", $texte_team, $headers_team);
 
-                    // Affichage de confirmation
-                    echo "Your application form has been registered,<br>";
-                    echo "Thank you for your interest in our IS Database.<br><br><HR>";
-                    echo "<a href='https://lmgm.cbi-toulouse.fr/en/home/' target='_top'><b>LMGM</b></a>&nbsp;&nbsp; | &nbsp;&nbsp;<a href='https://www-is.biotoul.fr/' target='_top'><b>IS HomePage</b></a>";
-
-                    // Fermeture de la connexion et destruction de la session
-                    mysqli_close($cnx);
-                    session_destroy();
+                    // Final Success Message
+                    echo "<h2>Success!</h2>";
+                    echo "<p>Your request for a new $type name has been submitted successfully.</p>";
+                    echo "<p>A confirmation email has been sent to <strong>" . htmlspecialchars($courriel) . "</strong>.</p>";
+                    echo "<hr/><p><a href='../request_name_form.php'>Back to form</a> | <a href='../index.php'>Back to Home</a></p>";
                 } else {
-                    // Redirection en cas d'erreur
-                    header("Location: /request_name_form.php");
+                    // Redirect back if there are validation errors
+                    header("Location: ../request_name_form.php");
                     exit();
                 }
-            } else {
-                // Redirection si le formulaire n'a pas été soumis
-                header("Location: /request_name_form.php");
-                exit();
             }
             ?>
         </section>
     </article>
-
     <?php include('../include/footer.inc.php'); ?>
-</div> <!-- Fin du div page -->
+</div>
 </body>
 </html>
