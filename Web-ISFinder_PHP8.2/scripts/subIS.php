@@ -75,7 +75,7 @@ if($form_soumis == "Submit"){
 		}*/
 		
 // Connexion à la  base ISsubmit
-	    $cnx=connexion("ISsubmit");			// pour ISfinder-test
+	    $cnx=connexion('localhost', 'ibinsyahrulazlan', 'ISsubmit', 'yNCNLvH9vwX^f~$i');			// pour ISfinder-test
 		
 
 // Insertion des infos du Submiters et récupération du ID_Submiter

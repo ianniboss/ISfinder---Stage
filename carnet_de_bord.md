@@ -123,3 +123,10 @@
     - Correction de bugs de session (gestion du `raz` pour éviter l'écrasement des erreurs et correction du bug d'inversion des noms).
 - **Architecture Backend** : Mise à jour du script `request_name.php` pour pointer vers la base de données `ISsubmit` en utilisant des requêtes préparées (`mysqli`).
 
+### Jour 15 (04 Mai 2026)
+- **Objectif du jour (Lundi – Semaine 4)** :
+    - Prendre en main le script principal de soumission (`subIS.php`).
+    - Analyser le fonctionnement global du processus de soumission (formulaire → script → base de données).
+    - Identifier les parties du script à adapter pour la compatibilité PHP 8.5 (requêtes SQL, gestion des types, etc.).
+    - Vérifier la structure de la base de données liée à la soumission et les dépendances entre tables.
+
