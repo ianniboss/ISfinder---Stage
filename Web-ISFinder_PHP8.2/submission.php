@@ -341,6 +341,33 @@ $_SESSION['nb_site'] = $nb_site;
  
                 </fieldset> 
 
+                <fieldset id="captcha">
+                    <legend>Anti-Spam Verification</legend>
+                    <?php
+                    require_once('scripts/ptitcaptcha.php');
+                    ?>
+                    <ul>
+                        <li>
+                            <label>To validate your submission, please type the above text in the field below :</label>
+                            <?php 
+                            echo PtitCaptchaHelper::generateImgTags('');
+                            echo PtitCaptchaHelper::generateHiddenTags();
+                            echo PtitCaptchaHelper::generateInputTags();
+                            
+                            if (!empty($_SESSION['captcha_error'])) {
+                                echo "<script type='text/javascript'>
+                                        const captchaInput = document.getElementsByName('ptitcaptcha_entry')[0];
+                                        captchaInput.setCustomValidity('" . addslashes(strip_tags($_SESSION['captcha_error'])) . "');
+                                        captchaInput.reportValidity();
+                                        captchaInput.oninput = () => captchaInput.setCustomValidity('');
+                                      </script>";
+                                unset($_SESSION['captcha_error']);
+                            }
+                            ?>
+                        </li>
+                    </ul>
+                </fieldset>
+
                 <div class="piedSection">
                     <ul>
                         <li><input type="submit" name="Onsubmit" value="Submit"></li>
