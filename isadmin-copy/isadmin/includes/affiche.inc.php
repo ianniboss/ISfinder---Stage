@@ -32,7 +32,7 @@ function ncbi_origin_link($origin) {
 /*        for ($k=2;$k<count($oritab);$k++) {
                 $texteori=$texteori." ".$oritab[$k];
         }*/
-		$origin_link = "<a href=\"http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?name=".$oritab[0]."+".$oritab[1]."\" target=\"_blank\">".$oritab[0]." ".$oritab[1]."</a>";
+		$origin_link = "<a href=\"http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?name=".$oritab[0].(isset($oritab[1]) ? "+".$oritab[1] : "")."\" target=\"_blank\">".$oritab[0].(isset($oritab[1]) ? " ".$oritab[1] : "")."</a>";
 /*        $origin_link = "<a href=\"http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?name=";
         $origin_link .= $oritab[0]."+".$oritab[1]."\" target=\"_blank\">";
 		$origin_link.= $oritab[0]." ".$oritab[1]."</a>";
@@ -195,7 +195,7 @@ function affiche_resultSub($cnx,$result,$fond,$bdd) {
 						// Source et Date				
 			is_submiter($cnx,$IDET) ;
 //			$submiter = unserialize(is_submiter($IDET));
-			$source = $_SESSION['Lastname'];	
+			$source = $_SESSION['Lastname'] ?? "Unknown";	
 			print "<td>$source</td><td>$date</td>\n";			
 
 			print "</tr>\n";
@@ -233,7 +233,7 @@ function affiche_resultIS($cnx,$result,$fond,$bdd) {
 						// Source et Date				
 			is_submiter($cnx,$IDET) ;
 //			$submiter = unserialize(is_submiter($IDET));
-			$source = $_SESSION['Lastname'];	
+			$source = $_SESSION['Lastname'] ?? "Unknown";	
 			print "<td>$source</td><td>$date</td>\n";			
 
 			print "</tr>\n";

@@ -10,6 +10,9 @@ if (session_status() === PHP_SESSION_NONE) {
 	$_SESSION = array();			// On efface toutes les variables de session
 	$_SESSION['base'] = $choix;		// récupération de la variable contenant les bases sélectionnées
 //}
+$champrecherche = $_GET['champrecherche'] ?? "";
+$champ = $_GET['champ'] ?? "";
+$tri = $_GET['tri'] ?? "";
 require_once('includes/entete.inc.php');
 require_once('includes/aside.inc.php');
 require_once("includes/function.inc.php");
@@ -53,7 +56,7 @@ if (isset($_GET['base_submiter']) && $_GET['base_submiter'] == 1){			// Affichag
 		print "<h2> Submiters </h2> Nothing was found<BR/>";
 	}
 	
-// S'il ne s'agit pas de la table Submiters	
+// Si la base n'est pas encore choisie on redirige vers index.php
 }else{					
 	if (isset($_SESSION['base'])){
 		foreach( $_SESSION['base'] as $base_select ){
