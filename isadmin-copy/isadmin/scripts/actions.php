@@ -31,7 +31,7 @@ if ($action == "sub" || $action == "wait" || $action == "trash" ){
 				$res=execute_sql($cnx,$sql_maj);
 				break;
 		}
-	}elseif ($bdd == "ISfinder"){
+	}elseif ($bdd == "isfinder"){
 		$_SESSION['error'] = "En cours de dev" ;
 	}else{
 		$_SESSION['error'] = "Problème de base de données" ;
@@ -46,7 +46,7 @@ if ($action == "sub" || $action == "wait" || $action == "trash" ){
 	if ($recup){
 		echo $bdd;
 		echo "<br>" ;
-		$ecrit = ecrit_data ($ident,$_SESSION['ET_name'],"ISfinder") ;
+		$ecrit = ecrit_data ($ident,$_SESSION['ET_name'],"isfinder") ;
 		if ($ecrit){		
 			$suppr = suppression($ident,'',$bdd) ;
 		}else{

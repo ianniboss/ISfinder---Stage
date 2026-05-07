@@ -1,9 +1,9 @@
-<?php
-// _______________Récupération des données de la base ISsubmit dans des variables de SESSION_________________
+ï»¿<?php
+// _______________RÃ©cupÃ©ration des donnÃ©es de la base ISsubmit dans des variables de SESSION_________________
 function recup_data($ident,$name,$bdd){
   $retour = "1" ;
   $cnx = connexion($bdd) ;
-	// La recherche de la fiche MGE tient compte du parametre passé, soit le nom soit ID_ET de l'IS
+	// La recherche de la fiche MGE tient compte du parametre passÃ©, soit le nom soit ID_ET de l'IS
   $condition = ($ident == '') ? "`ET_name` like '".$name."'" : "`ID_ET` like '".$ident."'";
   
   if ($cnx){
@@ -32,7 +32,7 @@ function recup_data($ident,$name,$bdd){
 				ON `ID_ET` = SUB.`Element_transposable_ID_ET`
 				WHERE $condition LIMIT 1" ;	
 	
-		/* Execution de la requette et si résultat, alors on continue */
+		/* Execution de la requette et si rÃ©sultat, alors on continue */
 		$result = execute_sql($cnx,$reqIS);
 		If (mysqli_num_rows($result) != 1) {
 		  	mysqli_close($cnx);
@@ -64,8 +64,8 @@ function recup_data($ident,$name,$bdd){
 
 		$site = unserialize(is_champX($cnx,'*','et_insertion_site','Element_transposable_ID_ET',$_SESSION['ID_ET'],''));
 		$_SESSION['nb_site'] = ($site == '') ? 0 : count($site) ;
-		for ($i = 0 ; $i <= $_SESSION['nb_site'] && $site ; $i++){			// Création des variables de session  
-			foreach($site[$i] as $champ=>$valeur){							// avec l'indentation du iéme site d'insertion + le nom du champ Mysql
+		for ($i = 0 ; $i <= $_SESSION['nb_site'] && $site ; $i++){			// CrÃ©ation des variables de session  
+			foreach($site[$i] as $champ=>$valeur){							// avec l'indentation du iÃ©me site d'insertion + le nom du champ Mysql
 			$_SESSION[$champ.$i] = $site[$i][$champ];
 			}
 		}
@@ -73,8 +73,8 @@ function recup_data($ident,$name,$bdd){
 		$ORF = unserialize(is_champX($cnx,'*','orf','Element_transposable_ID_ET',$_SESSION['ID_ET'],''));
 		$_SESSION['nb_orf'] = ($ORF == '') ? 0 : count($ORF) ;
 		$nb_orf = $_SESSION['nb_orf'];
-		for ($i = 1 ; $i <= $_SESSION['nb_orf'] && $ORF ; $i++){			// Création des variables de session  
-			foreach($ORF[$i-1] as $champ=>$valeur){							// avec l'indentation du iéme ORF + le nom du champ Mysql
+		for ($i = 1 ; $i <= $_SESSION['nb_orf'] && $ORF ; $i++){			// CrÃ©ation des variables de session  
+			foreach($ORF[$i-1] as $champ=>$valeur){							// avec l'indentation du iÃ©me ORF + le nom du champ Mysql
 			$_SESSION[$champ.$i] = $ORF[$i-1][$champ];
 			}
 		}	
@@ -86,7 +86,7 @@ function recup_data($ident,$name,$bdd){
   return($retour);
 }
 
-// ________________Ecriture des données dans la base ISfinder__________________________________________________
+// ________________Ecriture des donnÃ©es dans la base ISfinder__________________________________________________
 function ecrit_data($ident,$name,$base_ecriture){
 	$retour = "1" ;
 	$_SESSION['error'] = "" ;	
@@ -95,18 +95,18 @@ function ecrit_data($ident,$name,$base_ecriture){
 	$cnx = connexion($base_ecriture) ;
 	
 	if ($cnx){
-			// D'abord on vérifie qu'ET_name n'existe pas déjà dans la base
+			// D'abord on vÃ©rifie qu'ET_name n'existe pas dÃ©jÃ  dans la base
 		$reqIS = "SELECT ID_ET FROM `element_transposable` WHERE `ET_name` like '".mysqli_real_escape_string($cnx,$name)."' LIMIT 1" ;	
 		$result = execute_sql($cnx,$reqIS);
 		if (mysqli_num_rows($result) == 0){
-	// Vérification des données
+	// VÃ©rification des donnÃ©es
 			foreach ($_SESSION as $elt_session => $var_session){	// on remplit une variable portant le nom du champ 		
-			$$elt_session = strip_tags($var_session) ;			// pour ne pas écrire tt le tps $_SESSION[]
+			$$elt_session = strip_tags($var_session) ;			// pour ne pas Ã©crire tt le tps $_SESSION[]
 				}
 		
-		/* On teste les champs entrés et s'il y a des erreurs on remplit $_SESSION["error"]  */
-			$_SESSION["error"] .= (empty($Firstname )||(preg_match("/^[^a-zA-Z- \éèêç']/",$Firstname))) ? "First name correct is required.</br>" : "";
-			$_SESSION["error"] .= (empty($Lastname )|| preg_match("/^[^a-zA-Z- \éèêç']/",$Lastname )) ? "Last name correct is required.</br>" : "";
+		/* On teste les champs entrÃ©s et s'il y a des erreurs on remplit $_SESSION["error"]  */
+			$_SESSION["error"] .= (empty($Firstname )||(preg_match("/^[^a-zA-Z- \Ã©Ã¨ÃªÃ§']/",$Firstname))) ? "First name correct is required.</br>" : "";
+			$_SESSION["error"] .= (empty($Lastname )|| preg_match("/^[^a-zA-Z- \Ã©Ã¨ÃªÃ§']/",$Lastname )) ? "Last name correct is required.</br>" : "";
 //			$_SESSION["error"] .= (empty($Institution)||strlen($Institution)<2) ? "Field institution is required.</br>" : "";
 //			$_SESSION["error"] .= (empty($Country)||strlen($Country)<2) ? "Field country is required.</br>" : "";
 			$_SESSION["error"] .= (empty($Mail)) ? "e-mail address is required.</br>" : "";
@@ -118,7 +118,7 @@ function ecrit_data($ident,$name,$base_ecriture){
 				$_SESSION["error"] .= "l'adresse e-mail saisie n'est pas valide.</br>";
 				}
 				
-		/* Pour les séquences DNA et Prot élimination des blancs et retour charriots */		
+		/* Pour les sÃ©quences DNA et Prot Ã©limination des blancs et retour charriots */		
 			$car_elim = array("\n", "\r", " ");
 			$ET_DNA_Sequence = str_replace($car_elim,"",$ET_DNA_Sequence);			
 			$_SESSION["error"] .= (empty($ET_DNA_Sequence)) ? "DNA sequence is required.</br>" : "";
@@ -137,7 +137,7 @@ function ecrit_data($ident,$name,$base_ecriture){
 					echo $elt_session." = ".$var_session."<br>" ;	
 				}
 */
-		// Insertion des infos du Submiter s'il n'existe pas dans ISfinder et récupération du ID_Submiter
+		// Insertion des infos du Submiter s'il n'existe pas dans ISfinder et rÃ©cupÃ©ration du ID_Submiter
 				$sql_submiter = "SELECT ID_Submiter FROM `submiters` WHERE `Lastname` LIKE '".mysqli_real_escape_string($cnx,$Lastname)."' AND `Mail` LIKE '$Mail' LIMIT 1";
 				$result = execute_sql($cnx,$sql_submiter);
 				if ($submiter=mysqli_fetch_assoc($result)){
@@ -149,7 +149,7 @@ function ecrit_data($ident,$name,$base_ecriture){
 				$result = execute_sql($cnx,$sql_sub);
 				$ID_Submiter = mysqli_insert_id($cnx);
 				}
-		// Insertion des infos concernant l'IS et récupération du ID_ET
+		// Insertion des infos concernant l'IS et rÃ©cupÃ©ration du ID_ET
 				// Table element_transposable
 				$sql_group = "SELECT ID_Groups FROM `groups` WHERE `Group_Name` LIKE '$Groups_ID_Groups' LIMIT 1";
 				$res = execute_sql($cnx,$sql_group);
@@ -165,7 +165,7 @@ function ecrit_data($ident,$name,$base_ecriture){
 				$res = execute_sql($cnx,$sql_iso);
 				$res_iso = mysqli_fetch_assoc($res);
 				$iso = ($res_iso) ? "'".$res_iso['ID_ET']."'" : "NULL";
-				if ($iso == "NULL" && $ID_iso != ""){ $_SESSION["error"] = "Attention séquence versé dans ISfinder mais iso=NULL car non trouvé dans la base";}
+				if ($iso == "NULL" && $ID_iso != ""){ $_SESSION["error"] = "Attention sÃ©quence versÃ© dans ISfinder mais iso=NULL car non trouvÃ© dans la base";}
 
 				$ET_Blast_Result = ($ET_Blast_Result == "") ? NULL : $ET_Blast_Result;
 				$ET_Private_comments = ($ET_Private_comments == "") ? NULL : $ET_Private_comments;
@@ -199,7 +199,7 @@ function ecrit_data($ident,$name,$base_ecriture){
 				
 				// Table et_insertion_site
 				for ($i = 0 ; $i < $nb_site ; $i++){
-								// Utilisation des variables dynamiques pour générer le nom des variables en fonctin de $i
+								// Utilisation des variables dynamiques pour gÃ©nÃ©rer le nom des variables en fonctin de $i
 					$var_dyn_Direct_Repeat = 'Direct_Repeat'.$i ;	$Direct_Repeat = $$var_dyn_Direct_Repeat ;
 					$var_dyn_Direct_Repeat_Length = 'Direct_Repeat_Length'.$i ;	$Direct_Repeat_Length = $$var_dyn_Direct_Repeat_Length ;
 					$var_dyn_DR_Left_Flank = 'DR_Left_Flank'.$i ;	$DR_Left_Flank = $$var_dyn_DR_Left_Flank ;
@@ -217,13 +217,13 @@ function ecrit_data($ident,$name,$base_ecriture){
 				// Table parent_link
 				$parents = explode(",",$Element_transposable_parent_ID_ET);
 				foreach ($parents as $parent) {
-					if (preg_match('/^[a-zA-Z]/',trim($parent))){		// On supprime espaces en début et fin de chainee et on ne traite pas les lignes vides ou commençant par un nombre
+					if (preg_match('/^[a-zA-Z]/',trim($parent))){		// On supprime espaces en dÃ©but et fin de chainee et on ne traite pas les lignes vides ou commenÃ§ant par un nombre
 						$reqIS = "SELECT ID_ET FROM `element_transposable` WHERE `ET_name` like '".trim($parent)."' LIMIT 1" ;	
 						$result = execute_sql($cnx,$reqIS);
 						$res_parent = mysqli_fetch_assoc($result);
 						$element = ($res_parent) ? "'".$res_parent['ID_ET']."'" : "";
 						if ($element == ""){
-							$_SESSION["error"] = "Attention séquence versé dans ISfinder mais parent non trouvé dans la base";
+							$_SESSION["error"] = "Attention sÃ©quence versÃ© dans ISfinder mais parent non trouvÃ© dans la base";
 						}else{
 							$sql_sub="INSERT INTO parent_link(Element_transposable_ID_ET, Element_transposable_parent_ID_ET)" ;
 							$sql_sub.=" VALUES ('".$ID_ET."',$element)";
@@ -236,8 +236,8 @@ function ecrit_data($ident,$name,$base_ecriture){
 				$liste_hosts = explode("\n",$Hosts);
 				$origin = 1;
 				foreach ($liste_hosts as $Host) {
-					if (preg_match('/^[a-zA-Z]/',trim($Host))){		// ne pas traiter les lignes vides ou commençant par un nombre
-						// On cherche si cet Host existe déjà dans la base ISfinder
+					if (preg_match('/^[a-zA-Z]/',trim($Host))){		// ne pas traiter les lignes vides ou commenÃ§ant par un nombre
+						// On cherche si cet Host existe dÃ©jÃ  dans la base ISfinder
 						$reqHost = "SELECT ID_host FROM `host` WHERE `Host` like '".trim($Host)."' LIMIT 1" ;	
 						$resultHost = execute_sql($cnx,$reqHost);
 						$res_host = mysqli_fetch_assoc($resultHost);
@@ -256,7 +256,7 @@ function ecrit_data($ident,$name,$base_ecriture){
 		
 				// Table orf
 				for($i=1 ; $i<= $nb_orf ; $i++){
-								// Utilisation des variables dynamiques pour générer le nom des variables en fonctin de $i
+								// Utilisation des variables dynamiques pour gÃ©nÃ©rer le nom des variables en fonctin de $i
 					$var_dyn_chem = 'Tnp_chemestry_ID_Tnp_chemestry'.$i ;
 					$var_dyn_TnpPart = 'Tnp_description_ID_Tnp_description'.$i ; 
 					$var_dyn_chemAG = 'AG_description_ID_AG_description'.$i ;
@@ -275,13 +275,13 @@ function ecrit_data($ident,$name,$base_ecriture){
 					$var_dyn_function = 'ORF_function'.$i ;
 					$var_dyn_functionDescr = 'Function_Description'.$i ;
 					$var_dyn_annotation = 'PG_annotation'.$i ;
-								// Ces 3 champs doivent être valide ou bien null car table orf avec contrainte
+								// Ces 3 champs doivent Ãªtre valide ou bien null car table orf avec contrainte
 					$chem = ($$var_dyn_chem < 1 || $$var_dyn_chem > 6) ? 'NULL' : $$var_dyn_chem;
 					$TnpPart = ($$var_dyn_TnpPart < 1 || $$var_dyn_TnpPart > 2) ? 'NULL' : $$var_dyn_TnpPart;
 					$chemAG = ($$var_dyn_chemAG < 1 || $$var_dyn_chemAG > 7) ? 'NULL' : $$var_dyn_chemAG;
 					$chemPG = ($$var_dyn_chemPG < 1 || $$var_dyn_chemPG > 2) ? 'NULL' : $$var_dyn_chemPG;
 
-// Valeurs rajoutées suite au passage à MariaDB 10 qui ne gère pas le NULL (ne remplit pas le champ à NULL qd le champ est vide
+// Valeurs rajoutÃ©es suite au passage Ã  MariaDB 10 qui ne gÃ¨re pas le NULL (ne remplit pas le champ Ã  NULL qd le champ est vide
 					$begin = ($$var_dyn_begin == "") ? 'NULL' : "'".$$var_dyn_begin."'";
 					$end = ($$var_dyn_end == "") ? 'NULL' : "'".$$var_dyn_end."'";
 					
@@ -310,24 +310,24 @@ function ecrit_data($ident,$name,$base_ecriture){
 			}
 		}else{
 			$retour = "0";
-			$_SESSION['error'] = "Ce nom d'IS existe déjà dans la base ISfinder<br>" ;			
+			$_SESSION['error'] = "Ce nom d'IS existe dÃ©jÃ  dans la base ISfinder<br>" ;			
 		}
 		mysqli_close($cnx);
 	}else{
 		$retour = "0";
-		$_SESSION['error'] = "Problème de connexion à la base<br>" ;			
+		$_SESSION['error'] = "ProblÃ¨me de connexion Ã  la base<br>" ;			
 	}
 	return($retour);
 }
-// _______________Suppression d'un élément de la base ISsubmit___________________________________________________
+// _______________Suppression d'un Ã©lÃ©ment de la base ISsubmit___________________________________________________
 function suppression($ident,$name,$bdd){
   $retour = "1" ;
   $cnx = connexion($bdd) ;
-	// La recherche de la fiche MGE tient compte du parametre passé, soit le nom soit ID_ET de l'IS
+	// La recherche de la fiche MGE tient compte du parametre passÃ©, soit le nom soit ID_ET de l'IS
   $condition = ($ident == '') ? "`ET_name` like '".$name."'" : "`ID_ET` like '".$ident."'";
   
   if ($cnx){
-	  	// Récupération de l'ident du submiter et Suppression du submiter
+	  	// RÃ©cupÃ©ration de l'ident du submiter et Suppression du submiter
 	  $reqIS = "SELECT `Submiters_ID_Submiter` FROM `submission` WHERE `Element_transposable_ID_ET`= $ident LIMIT 1" ;		
 	  $result = execute_sql($cnx,$reqIS);
 	  $submiter = mysqli_fetch_row($result);
@@ -336,7 +336,7 @@ function suppression($ident,$name,$bdd){
 	  $reqIS = "DELETE FROM `submiters` WHERE `ID_Submiter` = $submiter[0] LIMIT 1" ;		
 	  $result = execute_sql($cnx,$reqIS);
 	
-	  	// Récupération des ident des hosts et Suppression des hosts dans la table host
+	  	// RÃ©cupÃ©ration des ident des hosts et Suppression des hosts dans la table host
 	  $reqHost = "SELECT `Host_ID_host` FROM `element_transposable_has_host` WHERE `Element_transposable_ID_ET`= $ident" ;		
 	  $result = execute_sql($cnx,$reqHost);
 	  while ($hote = mysqli_fetch_row($result)){
@@ -344,14 +344,14 @@ function suppression($ident,$name,$bdd){
 		  $result_supprHote = execute_sql($cnx,$reqHost);		
 	  }
 
-			// Suppression de l'élément dans la table element_transposable
+			// Suppression de l'Ã©lÃ©ment dans la table element_transposable
 	  $reqIS = "DELETE FROM `element_transposable` WHERE `ID_ET`= $ident LIMIT 1" ;		
 	  $result = execute_sql($cnx,$reqIS);
 	  
 	  mysqli_close($cnx);
   }else{
 		$retour = "0";
-		$_SESSION['error'] = "Problème de connexion à la base" ;			
+		$_SESSION['error'] = "ProblÃ¨me de connexion Ã  la base" ;			
 	}
 	
 	return($retour);

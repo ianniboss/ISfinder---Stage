@@ -95,11 +95,11 @@ function familleValide($famille){
 /*        global $cnx;
 	if (!$cnx){
 //		connect("astun","isadmin","ISfinder");
-		connexion("ISfinder");
+		connexion("isfinder");
 		
 	}
 */
-	$cnx = connexion("ISfinder");
+	$cnx = connexion("isfinder");
 	if (is_int($famille)){
 		$req_famille = "SELECT `ID_Family` FROM `family`";
 		$res_famille=execute_sql($cnx,$req_famille) ;

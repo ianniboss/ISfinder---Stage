@@ -11,7 +11,7 @@ if (isset($_GET['error']) && $_GET['error']){
 	echo "<p class='erreur'>".$_GET['error']."</p><hr/>";
 }
 $error = "";
-$bdd = (isset($_GET['bdd']) && $_GET['bdd'] == "ISfinder") ? "ISfinder" : "ISsubmit";			
+$bdd = (isset($_GET['bdd']) && $_GET['bdd'] == "isfinder") ? "isfinder" : "ISsubmit";			
 $champrecherche = $_GET['champ'] ?? "";
 
 // Ecriture de la requête
@@ -67,14 +67,14 @@ if ($cnx=connexion($bdd)){
 			print "<h3>Nombre de demande: ".$nombre."</h3>";
 			
 			print "<table><tr class='request'><th>N°</th><th colspan=\"2\">Actions</th><th>Nom</th>><th>Prenom</th><th>bact_origin</th><th>nbr</th><th>MGE_type</th><th>date</th></tr>";				
-			affiche_attrib_nom($result);
+			affiche_attrib_nom($result, $bdd);
 			print "</table>";
 		}else{
 			echo "<h2>Nom déjà attribué : </h2>";							
 			print "<h3>Nombre de réponse: ".$nombre."</h3>";
 			
 			print "<table><tr class='request'><th>N°</th><th>ET_name</th><th>bact_origin</th><th>Nom</th>><th>Prenom</th><th>date</th></tr>";				
-			affiche_nom_attribue($result);
+			affiche_nom_attribue($result, $bdd);
 			print "</table>";
 		}
 		

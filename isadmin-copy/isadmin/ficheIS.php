@@ -32,7 +32,7 @@ if (intval($_GET['val_session'] ?? 0) != 1) {			// val_session = 1 On garde les 
 		// traitement de l'erreur ;
 		echo "Problème de connexion à la base de données" ;
 	}else{
-		if ($bdd == "ISfinder"){
+		if ($bdd == "isfinder"){
 			$reqIS = "SELECT * FROM `element_transposable` ET
 					  LEFT JOIN `family` FAM
 					  ON `Family_ID_Family` = `ID_Family`
@@ -129,7 +129,7 @@ if (intval($_GET['val_session'] ?? 0) != 1) {			// val_session = 1 On garde les 
 			}
 		}
 		
-		if ($bdd == "ISfinder"){			// Dans ISfinder il peut y avoir plusieurs enregistrement de parents et synonyme pour 1 IS
+		if ($bdd == "isfinder"){			// Dans isfinder il peut y avoir plusieurs enregistrement de parents et synonyme pour 1 IS
 											// Dans ISfinder l'iso est un integer et non un varchar 
 											// la structure de la BDD ISfinder est différente d'ISsubmit aussi pour groupe et famille
 			$parent = unserialize(is_champX($cnx,'Element_transposable_parent_ID_ET','parent_link','Element_transposable_ID_ET',$_SESSION['ID_ET'],''));
@@ -155,7 +155,7 @@ if (intval($_GET['val_session'] ?? 0) != 1) {			// val_session = 1 On garde les 
 }	// Fin du else il y a connexion
 }	// fin du val_session != 1
 
-$base_name = ($bdd == "ISfinder") ? "IS" : (isset($_SESSION['Base_Name']) ? $_SESSION['Base_Name'] : "");
+$base_name = ($bdd == "isfinder") ? "IS" : (isset($_SESSION['Base_Name']) ? $_SESSION['Base_Name'] : "");
 $background = base_color($base_name) ;	
 $fond_base = 'class="base_'.$base_name.'"';		 // couleur de background des <TH> en fonction de la base
 
@@ -217,10 +217,10 @@ $fond_base = 'class="base_'.$base_name.'"';		 // couleur de background des <TH> 
 		<INPUT TYPE="text" NAME="ET_name" VALUE="<?php  echo isset($_SESSION['ET_name']) ?  $_SESSION['ET_name'] : ""; ?>" SIZE=15 required MAXLENGTH=20>
   		</li><li>
         <label for=family>Family :</label>
-		<INPUT TYPE="text" NAME="Family_ID_Family" VALUE="<?php  if ($bdd == "ISfinder"){ echo isset($_SESSION['Family_Name']) ?  $_SESSION['Family_Name'] : ""; }else{ echo isset($_SESSION['Family_ID_Family']) ?  $_SESSION['Family_ID_Family'] : "";} ?>" SIZE=15 MAXLENGTH=20>
+		<INPUT TYPE="text" NAME="Family_ID_Family" VALUE="<?php  if ($bdd == "isfinder"){ echo isset($_SESSION['Family_Name']) ?  $_SESSION['Family_Name'] : ""; }else{ echo isset($_SESSION['Family_ID_Family']) ?  $_SESSION['Family_ID_Family'] : "";} ?>" SIZE=15 MAXLENGTH=20>
   		</li><li>
         <label for=group>Group :</label>
-		<INPUT TYPE="text" NAME="Groups_ID_Groups" VALUE="<?php if ($bdd == "ISfinder"){  echo isset($_SESSION['Group_Name']) ?  $_SESSION['Group_Name'] : ""; }else{ echo isset($_SESSION['Groups_ID_Groups']) ?  $_SESSION['Groups_ID_Groups'] : "";} ?>" SIZE=15 MAXLENGTH=20>
+		<INPUT TYPE="text" NAME="Groups_ID_Groups" VALUE="<?php if ($bdd == "isfinder"){  echo isset($_SESSION['Group_Name']) ?  $_SESSION['Group_Name'] : ""; }else{ echo isset($_SESSION['Groups_ID_Groups']) ?  $_SESSION['Groups_ID_Groups'] : "";} ?>" SIZE=15 MAXLENGTH=20>
   		</li></ul>
     	<ul><li>
         <label for=MGEtype>MGE type :</label>
@@ -239,7 +239,7 @@ $fond_base = 'class="base_'.$base_name.'"';		 // couleur de background des <TH> 
   		</li></ul>
   		<ul><li>
         <label for=isoform>Isoform :</label>
-		<INPUT TYPE="text" NAME="ID_iso" VALUE="<?php  echo ($bdd == "ISfinder") ? $iso :  $_SESSION['ID_iso']; ?>" SIZE=15 MAXLENGTH=20>
+		<INPUT TYPE="text" NAME="ID_iso" VALUE="<?php  echo ($bdd == "isfinder") ? $iso :  $_SESSION['ID_iso']; ?>" SIZE=15 MAXLENGTH=20>
   		</li><li>
         <label for=synonym>Synonym(s) separated by a comma :</label>
 		<INPUT TYPE="text" NAME="Synonyme" VALUE="<?php  echo isset($_SESSION['Synonyme']) ?  $_SESSION['Synonyme'] : ""; ?>" SIZE=50 MAXLENGTH=100>

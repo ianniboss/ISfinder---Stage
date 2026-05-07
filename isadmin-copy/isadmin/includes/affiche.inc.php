@@ -37,11 +37,11 @@ function ncbi_origin_link($origin) {
         $origin_link .= $oritab[0]."+".$oritab[1]."\" target=\"_blank\">";
 		$origin_link.= $oritab[0]." ".$oritab[1]."</a>";
 		*/
-//   DÈcommenter pour avoir le nom d'hote complet  
+//   D√©commenter pour avoir le nom d'hote complet  
 //        $origin_link .= $texteori;
         return $origin_link;
 }
-// ___________Requete pour rÈcupÈrer Origin d'un IS $IDET___________________
+// ___________Requete pour r√©cup√©rer Origin d'un IS $IDET___________________
 function is_origin($cnx,$IDET) {
 	$req = "SELECT `Host` FROM `element_transposable_has_host` ETHH 
 					LEFT JOIN `element_transposable` ON `ID_ET` = ETHH.`Element_transposable_ID_ET` 
@@ -53,7 +53,7 @@ function is_origin($cnx,$IDET) {
 //	$originvar = (mysqli_num_rows($result_origin)==0) ? "" : mysqli_result($result_origin,0);	
 	return $originvar;
 }
-// ___________Requete pour rÈcupÈrer le nom de l'iso ‡ partir de ID_iso___________________
+// ___________Requete pour r√©cup√©rer le nom de l'iso √† partir de ID_iso___________________
 function is_iso($cnx,$iso) {
 	$req = "SELECT `ET_name` FROM `element_transposable` WHERE `ID_ET` like '$iso'";
 	$result_iso = execute_sql($cnx,$req);
@@ -61,20 +61,20 @@ function is_iso($cnx,$iso) {
 	$name_iso = (mysqli_num_rows($result_iso)==0) ? "" : mysqli_result($result_iso);
 	return $name_iso;
 }
-// ___________Requete pour rÈcupÈrer le ou les synonymes ‡ partir de IDET___________________
+// ___________Requete pour r√©cup√©rer le ou les synonymes √† partir de IDET___________________
 function is_syn($cnx,$ID_ET) {
 	$req_syn = "SELECT `Synonyme` FROM `synonyme` WHERE synonyme.`Element_transposable_ID_ET` like '$ID_ET'";
 	$result = execute_sql($cnx,$req_syn);
 	return $result;
 }
-// ___________Requete gÈnÈrique - renvoie une valeur ___________________
+// ___________Requete g√©n√©rique - renvoie une valeur ___________________
 function is_champ($cnx,$champ_select,$table,$champ_ID,$like) {
 	$req_syn = "SELECT `$champ_select` FROM `$table` WHERE `$table`.`$champ_ID` like '$like' LIMIT 1";
 	$result = execute_sql($cnx,$req_syn);
 	$champ_result = (mysqli_num_rows($result)==0) ? '' : mysqli_result($result,0);
 	return $champ_result;
 }
-// ___________Requete gÈnÈrique - Renvoie un tableau ___________________
+// ___________Requete g√©n√©rique - Renvoie un tableau ___________________
 function is_champX($cnx,$champ_select,$table,$champ_ID,$like,$ordre) {
 	$champ_selectionne = ($champ_select=="*") ? "*": "`$champ_select`" ;
 	if ($ordre){
@@ -90,9 +90,9 @@ function is_champX($cnx,$champ_select,$table,$champ_ID,$like,$ordre) {
 			$champ_result[$i] = mysqli_fetch_array($result, MYSQLI_ASSOC);
 		}
 	}
-	return serialize($champ_result);		// serialize puis unserialize pour passer un tableau d'un script ‡ l'autre
+	return serialize($champ_result);		// serialize puis unserialize pour passer un tableau d'un script √† l'autre
 }
-// ___________Requete pour rÈcupÈrer le ou les parents ‡ partir de IDET dans base IS pas pour ISsubmit___________________
+// ___________Requete pour r√©cup√©rer le ou les parents √† partir de IDET dans base IS pas pour ISsubmit___________________
 function is_parent($cnx,$ID_ET) {
 	$reqParent = "SELECT `ET_name` FROM `element_transposable`  
 				LEFT JOIN `parent_link` ON parent_link.`Element_transposable_ID_ET` =$ID_ET
@@ -100,7 +100,7 @@ function is_parent($cnx,$ID_ET) {
 	$result = execute_sql($cnx,$reqParent);	
 	return $result;
 }
-// ___________Requete pour rÈcupÈrer le ou les hosts ‡ partir de IDET___________________
+// ___________Requete pour r√©cup√©rer le ou les hosts √† partir de IDET___________________
 function is_hosts($cnx,$ID_ET) {
 	$req_hosts = "SELECT `ID_host`,`Host` FROM `element_transposable_has_host` ETHH 
 				LEFT JOIN `element_transposable` ON `ID_ET` = ETHH.`Element_transposable_ID_ET` 
@@ -109,7 +109,7 @@ function is_hosts($cnx,$ID_ET) {
 	$result = execute_sql($cnx,$req_hosts);
 	return $result;
 }
-// ___________Requete pour rÈcupÈrer le submiter ‡ partir de IDET___________________
+// ___________Requete pour r√©cup√©rer le submiter √† partir de IDET___________________
 function is_submiter($cnx,$ID_ET) {
 	$req_submiter = "SELECT * FROM `submission` SUB
 					LEFT JOIN `element_transposable` ON `ID_ET` = SUB.`Element_transposable_ID_ET` 
@@ -123,7 +123,7 @@ function is_submiter($cnx,$ID_ET) {
 	}
 
 	// $champ_result = ($nb_result = mysql_num_rows($result)==0) ? '' : mysqli_fetch_array($result,MYSQL_BOTH) ;
-	// return serialize($champ_result);		// serialize puis unserialize pour passer un tableau d'un script ‡ l'autre
+	// return serialize($champ_result);		// serialize puis unserialize pour passer un tableau d'un script √† l'autre
 }
 //______________Recherche du nombre d'ORF dans un IS _______________
 function calcul_nbr_orf($ID_ET) {
@@ -153,7 +153,7 @@ function base_color($base_en_cours){
 	}	
 return $background ;
 }
-// __________Affichage du rÈsultat ________________________________
+// __________Affichage du r√©sultat ________________________________
 function affiche_resultSub($cnx,$result,$fond,$bdd) {
 		$i = 1;
 		while ($table = mysqli_fetch_array($result)) {
@@ -202,7 +202,7 @@ function affiche_resultSub($cnx,$result,$fond,$bdd) {
 			$i++;
 			}
 }
-// __________Affichage du rÈsultat pour ISfinder________________________________
+// __________Affichage du r√©sultat pour ISfinder________________________________
 function affiche_resultIS($cnx,$result,$fond,$bdd) {
 		$i = 1;
 		while ($table = mysqli_fetch_array($result)) {
@@ -240,7 +240,7 @@ function affiche_resultIS($cnx,$result,$fond,$bdd) {
 			$i++;
 			}
 }
-// __________Affichage du rÈsultat pour la table Submiters________________________________
+// __________Affichage du r√©sultat pour la table Submiters________________________________
 function affiche_submiters($result,$fond) {
 		$i = 1;
 		while ($table = mysqli_fetch_array($result)) {
@@ -257,8 +257,8 @@ function affiche_submiters($result,$fond) {
 			$i++;
 			}
 }
-// __________Affichage de la liste des noms demandÈs ________________________________
-function affiche_attrib_nom($result) {
+// __________Affichage de la liste des noms demand√©s ________________________________
+function affiche_attrib_nom($result, $bdd) {
 		$i = 1;
 		while ($table = mysqli_fetch_array($result)) {
 			$ident = $table["ID_Request_names"];
@@ -273,13 +273,13 @@ function affiche_attrib_nom($result) {
 			print "<td><a href=\"scripts/suppr_request_name.php?bdd=$bdd&ID_Request=".$ident."\" title=\"Suppression !!!\"";
 			echo " onclick=\"return validsuppr()\"><img src=\"images/suppr.png\" border=\"0\"></td>\n";	
 			print "<td></td>";			
-						// Nom et PrÈnom				
+						// Nom et Pr√©nom				
 			print "<td>$nom</td><td>$prenom</td>\n";			
 
 						// Origine de la bestiole
 			print "<td>$bact_origin</td>\n";
 
-						// Nbr nom demandÈ
+						// Nbr nom demand√©
 			print "<td>$nbr_names</td>\n";
 
 						// MGE_type et Date					
@@ -289,8 +289,8 @@ function affiche_attrib_nom($result) {
 			$i++;
 			}
 }
-// __________Affichage de la liste des noms dÈj‡ attribuÈs ________________________________
-function affiche_nom_attribue($result) {
+// __________Affichage de la liste des noms d√©j√† attribu√©s ________________________________
+function affiche_nom_attribue($result, $bdd) {
 		$i = 1;
 		while ($table = mysqli_fetch_array($result)) {
 			$ident = $table["ID_Current_names"];
@@ -311,7 +311,7 @@ function affiche_nom_attribue($result) {
 						// Origine de la bestiole
 			print "<td>$bact_origin</td>\n";
 
-						// Nom et PrÈnom				
+						// Nom et Pr√©nom				
 			print "<td>$nom</td><td>$prenom</td>\n";			
 
 						//  Date					

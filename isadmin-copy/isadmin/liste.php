@@ -37,7 +37,7 @@ if (isset($_GET['base_submiter']) && $_GET['base_submiter'] == 1){			// Affichag
 	$requete = "SELECT $champs FROM `submiters` WHERE $condition ORDER BY `Lastname`" ;
 
 	// Connexion à la  base 
-	$cnx=connexion("ISfinder");
+	$cnx=connexion("isfinder");
 //	mysqli_query($cnx,"SET NAMES UTF8"); 
 
 	// Execution de la requette et si r�sultat, alors on continue 
@@ -58,15 +58,15 @@ if (isset($_GET['base_submiter']) && $_GET['base_submiter'] == 1){			// Affichag
 	if (isset($_SESSION['base'])){
 		foreach( $_SESSION['base'] as $base_select ){
 			switch ($base_select) {
-				case "IS": $bdd = "ISfinder" ; break ;
+				case "IS": $bdd = "isfinder" ; break ;
 				case "ISSub": $bdd = "ISsubmit" ; $base = 1 ; break ;
 				case "ISWait": $bdd = "ISsubmit" ; $base = 2 ; break ;
 				case "ISTrash": $bdd = "ISsubmit" ; $base = 3 ; break ;
 			}
 			$fond_base = "class='base_".$base_select."'";  // couleur de background en fonction de la base
-			$famille = ($bdd == "ISfinder") ? "Family_Name" : "Family_ID_Family" ;
-			$groupe = ($bdd == "ISfinder") ? "Group_Name" : "Groups_ID_Groups" ;
-			$jointure =	($bdd == "ISfinder") ? "LEFT JOIN `family` FAM ON `Family_ID_Family` = FAM.`ID_Family` LEFT JOIN `groups` GRP ON `Groups_ID_Groups` = `ID_Groups`" : "";
+			$famille = ($bdd == "isfinder") ? "Family_Name" : "Family_ID_Family" ;
+			$groupe = ($bdd == "isfinder") ? "Group_Name" : "Groups_ID_Groups" ;
+			$jointure =	($bdd == "isfinder") ? "LEFT JOIN `family` FAM ON `Family_ID_Family` = FAM.`ID_Family` LEFT JOIN `groups` GRP ON `Groups_ID_Groups` = `ID_Groups`" : "";
 			
 //	Ecriture de la condition de recherche dans la BDD	
 		if (isset($_GET['champrecherche'])){
@@ -77,9 +77,9 @@ if (isset($_GET['base_submiter']) && $_GET['base_submiter'] == 1){			// Affichag
 				case "Famille": $colonne = $famille ; break ;
 				case "Groupe": $colonne = $groupe ; break ;
 			}
-			$condition = ($bdd == "ISfinder") ?  "$colonne LIKE '%$champrecherche%'" : "base_ID_Base = $base AND $colonne LIKE '%$champrecherche%'" ;
+			$condition = ($bdd == "isfinder") ?  "$colonne LIKE '%$champrecherche%'" : "base_ID_Base = $base AND $colonne LIKE '%$champrecherche%'" ;
 		}else{
-			$condition = ($bdd == "ISfinder") ?  "1" : "base_ID_Base = $base" ;
+			$condition = ($bdd == "isfinder") ?  "1" : "base_ID_Base = $base" ;
 		}
 // Ecriture de la requête
 		$champs="`ET_name`,`ID_ET`, `ET_Accession_number`,`$groupe`, `$famille`,`Submission_date` ";
@@ -118,7 +118,7 @@ if (isset($_GET['base_submiter']) && $_GET['base_submiter'] == 1){			// Affichag
 			$group=sort_link('Group',$groupe,$champrecherche,$champ);
 			$date=sort_link('Date','Submission_date',$champrecherche,$champ);
 			
-			if ($bdd == "ISfinder"){
+			if ($bdd == "isfinder"){
 				print "<table><tr $fond_base><th>N°</th><th colspan=\"2\">Action</th><th>$nom</th>><th>Num. Acc.</th><th>$family</th><th>$group</th><th>Origin</th><th>Source</th><th>$date</th></tr>";
 				affiche_resultIS($cnx,$result,$fond_base,$bdd);
 			}else{

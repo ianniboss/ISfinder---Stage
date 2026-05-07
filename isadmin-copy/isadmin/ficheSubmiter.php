@@ -19,7 +19,7 @@ $_SESSION['ID_Submiter'] =	(isset($_GET['ID_Submiter']) && $_GET['ID_Submiter'])
 $ID_Submiter = $_SESSION['ID_Submiter'] ;
 $condition = "`ID_Submiter` like '".$ID_Submiter."'" ;
 
-$_SESSION['bdd'] = $bdd = "ISfinder";
+$_SESSION['bdd'] = $bdd = "isfinder";
 	
 		/* Connexion à la base de données */
 $cnx = connexion($bdd) ;	

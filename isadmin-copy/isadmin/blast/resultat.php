@@ -13,7 +13,7 @@ echo "<article>" ;
 
 $id_fichier=strip_tags($_GET['id']);
 $fichier = "/var/www/uploads/blast/tmp/".$id_fichier.".res";
-$database = (strip_tags($_GET['database'])== "ISfinder") ? "ISfinder" : "ISsubmit";
+$database = (strip_tags($_GET['database'])== "isfinder") ? "isfinder" : "ISsubmit";
 
 		//  On ne veut pas de cochoncet�s dans la param�tre id!!!
 if ((strlen($id_fichier) == 9) and (!preg_match('[^A-Za-z0-9]',$id_fichier)) and (file_exists($fichier))) {
@@ -22,7 +22,7 @@ if ((strlen($id_fichier) == 9) and (!preg_match('[^A-Za-z0-9]',$id_fichier)) and
 
 	if ($cnx){
 // On charge une partie des infos de la base dans des tableaux
-		if ($database == "ISfinder"){
+		if ($database == "isfinder"){
 			$req = "SELECT `ET_name`, `Family_Name`, `Group_Name`, `ID_ET` FROM `element_transposable` ET
 				  JOIN `family` FAM ON `Family_ID_Family` = `ID_Family`
 				  LEFT JOIN `groups` GRP ON `Groups_ID_Groups` = `ID_Groups`" ;

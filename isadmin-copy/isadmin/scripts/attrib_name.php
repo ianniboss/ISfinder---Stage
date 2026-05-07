@@ -32,7 +32,7 @@ if(isset($_POST['OnsubAttribName'])){
 	if($_SESSION["error"]===""){
 				
 	/* Connexion à la base de données */
-		$cnx = connexion("ISfinder") ;
+		$cnx = connexion("isfinder") ;
 		if (!$cnx){
 			$_SESSION["error"] .= "Problème de connexion à la base de données ISfinder" ;
 		}else{

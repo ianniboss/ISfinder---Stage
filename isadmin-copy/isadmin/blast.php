@@ -39,7 +39,7 @@ echo ($prog == "tblastx") ? "<span class='onglet onglet-actif'>tblastx</span>" :
 		<li>
         <label for="database">Database :</label>
 		<SELECT style='width:150px' NAME="database"> 
-		<OPTION value="ISfinder" selected>ISfinder
+		<OPTION value="isfinder" selected>ISfinder
 		<OPTION value="ISsub" >ISsubmit
 		<OPTION value="ISwait" >ISwait
 		</SELECT> 

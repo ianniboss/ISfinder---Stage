@@ -41,7 +41,7 @@ if (!$cnx){
 	mysqli_close($cnx);
 
 	/* Teste si bact_origin existe déjà dans table nom_type  */	
-	$cnx = connexion("ISfinder") ;	
+	$cnx = connexion("isfinder") ;	
 	if (!$cnx){
 		echo "Problème de connexion à la base de données" ;
 	}else{
@@ -115,7 +115,7 @@ if (!$cnx){
 		<SELECT NAME="Qui"> 
 		<OPTION value="a">auto-attribué</option>
 		<OPTION value="r">renommé </option>
-        <OPTION value="x" selected>ISfinder </option>
+        <OPTION value="x" selected>isfinder </option>
         </SELECT>         
         </div>
         <ul><li>
@@ -156,7 +156,7 @@ for ($i = 1 ; $i <= $nbr_names ; $i++){
 		<SELECT NAME="Qui"> 
 		<OPTION value="a">auto-attribué</option>
 		<OPTION value="r">renommé </option>
-        <OPTION value="x" selected>ISfinder </option>
+        <OPTION value="x" selected>isfinder </option>
         </SELECT>         
         </div>
     	<ul><li>

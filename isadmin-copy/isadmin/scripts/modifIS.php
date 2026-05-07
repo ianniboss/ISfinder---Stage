@@ -107,7 +107,7 @@ if(isset($_POST['Onsubmit'])){
 					}	// Fin du Foreach
 
 	
-			}elseif ($bdd == "ISfinder"){
+			}elseif ($bdd == "isfinder"){
 										// Insertion des infos concernant l'IS			
 					// Table parent_link
 /*				if (existe_ID_ET($ID_ET,"parent_link")){
@@ -144,13 +144,13 @@ if(isset($_POST['Onsubmit'])){
 					}	// Fin du Foreach
 
 
-			}	// Fin du if bdd = ISfinder
+			}	// Fin du if bdd = isfinder
 
-			if ($bdd == "ISfinder" || $bdd == "ISsubmit"){
+			if ($bdd == "isfinder" || $bdd == "ISsubmit"){
 					// Table element_transposable
-// Traitement spécifique pour gérer la différence de type de champ entre ISsubmit (chaine de caractères) et ISfinder (entier)
+// Traitement spécifique pour gérer la différence de type de champ entre ISsubmit (chaine de caractères) et isfinder (entier)
 // et gestion de la valeur NULL non prise en charge dans MariaDB (version 10)
-				if ($bdd == "ISfinder"){
+				if ($bdd == "isfinder"){
 					$nom_iso = (!empty($ID_iso)) ? is_champ($cnx,'ID_ET', 'element_transposable', 'ET_name', trim($ID_iso)) : 'NULL';
 					$famille = (!empty($Family_ID_Family))? is_champ($cnx,"ID_Family","family","Family_Name",$Family_ID_Family) : 'NULL' ;
 					$groupe = (!empty($Groups_ID_Groups)) ? is_champ($cnx,"ID_Groups","groups","Group_Name",$Groups_ID_Groups) : 'NULL' ;

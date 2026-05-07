@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 define('DB_server', 'localhost');
 define('DB_user', 'ibinsyahrulazlan');
 define('DB_password', 'yNCNLvH9vwX^f~$i');
-define('DB_bdd', 'ISfinder');
+define('DB_bdd', 'isfinder');
 
 
 
