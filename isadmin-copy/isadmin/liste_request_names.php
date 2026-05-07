@@ -7,12 +7,12 @@ echo '<link type="text/css" rel="stylesheet" href="styles/styles.css" media="scr
 echo '<script type="text/javascript" src="scripts/function.js"></script>';
 
 echo "<article> ";
-if ($_GET['error']){
+if (isset($_GET['error']) && $_GET['error']){
 	echo "<p class='erreur'>".$_GET['error']."</p><hr/>";
 }
 $error = "";
-$bdd = ($_GET['bdd'] == "ISfinder") ? "ISfinder" : "ISsubmit";			
-$champrecherche = $_GET['champ'];
+$bdd = (isset($_GET['bdd']) && $_GET['bdd'] == "ISfinder") ? "ISfinder" : "ISsubmit";			
+$champrecherche = $_GET['champ'] ?? "";
 
 // Ecriture de la requête
 if ($bdd == "ISsubmit"){		// Requête pour lister les demandes de nom
@@ -79,7 +79,7 @@ if ($cnx=connexion($bdd)){
 		}
 		
 	}else{									/* Pas de r�sultat */
-		print "<h2> $base_select </h2> Nothing was found<BR/>";
+		print "<h2> Requests </h2> Nothing was found<BR/>";
 	}
 }else{
 	$error = "Problème de connexion";

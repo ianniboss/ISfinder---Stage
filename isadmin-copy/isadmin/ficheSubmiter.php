@@ -1,11 +1,13 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once('includes/entete.inc.php');
 require_once('includes/aside.inc.php');
 require_once("includes/function.inc.php");
 require_once("includes/affiche.inc.php");
 
-if ($_SESSION['error']){
+if (!empty($_SESSION['error'])){
 	echo "<p class='erreur'>".$_SESSION['error']."</p><hr/>";
 }
 /* $_SESSION['Lastname'] =	($_GET['Lastname']) ? strip_tags($_GET['Lastname']) : $_SESSION['Lastname'];
@@ -13,7 +15,7 @@ $name = $_SESSION['Lastname'] ;
 $condition = "`Lastname` like '".$name."'" ;
 */
 		// ID_Submiter
-$_SESSION['ID_Submiter'] =	($_GET['ID_Submiter']) ? strip_tags($_GET['ID_Submiter']) : $_SESSION['ID_Submiter'];
+$_SESSION['ID_Submiter'] =	(isset($_GET['ID_Submiter']) && $_GET['ID_Submiter']) ? strip_tags($_GET['ID_Submiter']) : (isset($_SESSION['ID_Submiter']) ? $_SESSION['ID_Submiter'] : "");
 $ID_Submiter = $_SESSION['ID_Submiter'] ;
 $condition = "`ID_Submiter` like '".$ID_Submiter."'" ;
 

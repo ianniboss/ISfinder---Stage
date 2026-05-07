@@ -10,7 +10,7 @@ require_once('includes/aside.inc.php');
 <div class="menuProg">
 <?php                       // Menu avec onglet
 $liste_program = array("blastp","blastx","tblastn","tblastx");
-$prog = (in_array($_GET['prog_blast'],$liste_program)) ? $_GET['prog_blast'] : "blastn"; 
+$prog = (isset($_GET['prog_blast']) && in_array($_GET['prog_blast'], $liste_program)) ? $_GET['prog_blast'] : "blastn"; 
 echo ($prog == "blastn") ? "<span class='onglet onglet-actif'>blastn</span>" : "<a class='onglet' href='blast.php?prog_blast=blastn'>blastn</a>";
 echo ($prog == "blastp") ? "<span class='onglet onglet-actif'>blastp</span>" : "<a class='onglet' href='blast.php?prog_blast=blastp'>blastp</a>";
 echo ($prog == "blastx") ? "<span class='onglet onglet-actif'>blastx</span>" : "<a class='onglet' href='blast.php?prog_blast=blastx'>blastx</a>";

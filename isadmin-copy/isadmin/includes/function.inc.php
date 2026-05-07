@@ -2,11 +2,11 @@
 //______________________________connexions________________________________________
 function connexion($bdd)
 {
-		$host = "astun.ibcg.biotoul.fr";
+//		$host = "astun.ibcg.biotoul.fr";
 //		$host = "192.168.12.42";		
-//		$host = "localhost" ;			
-        $user = "isadmin";
-        $password = "PtG8adm2is";
+		$host = "localhost" ;
+        $user = 'ibinsyahrulazlan';
+        $password = 'yNCNLvH9vwX^f~$i';
 		
 		$connecte=mysqli_connect($host,$user,$password,$bdd) or die(mysqli_connect_error());
 
@@ -26,27 +26,26 @@ return $connecte;
 function connect($user,$bdd)		//il faudrait remplacer toutes les utilisations de connexion() par connect() plus souple
 {
 //        $host = $host.".ibcg.biotoul.fr";
-		$host = "astun.ibcg.biotoul.fr";
+		$host = "localhost";
 
 //		$password = ($user == "isadmin") ? "P&G_adm2is" : "isfinder";
-		$password = ($user == "isadmin") ? "PtG8adm2is" : "isfinder";	
+		$password = ($user == 'ibinsyahrulazlan') ? 'yNCNLvH9vwX^f~$i' : 'isfinder';	
         $connexion = mysqli_connect($host,$user,$password,$bdd) or die("Server connection error");
 		
 		mysqli_query($connexion,"SET NAMES 'utf8'");
 return $connexion;
 }
 //___________________________________erreur_________________________________
-function erreur_sql($res,$requete)
+function erreur_sql($res, $requete, $cnx)
 {
-        if (!$res)
-        {
+    if (!$res) {
         $erreur_no = mysqli_errno($cnx);
         $erreur_txt = mysqli_error($cnx);
-        echo "erreur sql :".$requete."<br>\n";
-        echo "erreur :".mysqli_errno($cnx).":".mysqli_error($cnx)."<br>\n";
-		mysqli_close($cnx);
+        echo "erreur sql :" . $requete . "<br>\n";
+        echo "erreur :" . $erreur_no . ":" . $erreur_txt . "<br>\n";
+        mysqli_close($cnx);
         exit;
-        }
+    }
 }
 //______________________erreur formulaire soumission (champ vide) ____________________________________
 function erreur_sub($chaine,$mess) {
@@ -72,14 +71,14 @@ function mysqli_result($res,$row=0,$col=0){
 }
 //________________________executer requete____________________________________
 
-function execute_sql($connect,$req){
-	$res=mysqli_query($connect,$req);
-	if($res===false){
-		erreur_sql($res,$req);
-		exit;
-	}
-   return $res;		
-		
+function execute_sql($connect, $req)
+{
+    $res = mysqli_query($connect, $req);
+    if ($res === false) {
+        erreur_sql($res, $req, $connect);
+        exit;
+    }
+    return $res;
 }
 //_______________________________La variable est une s�quence nucl�otidique _______________
 function estdna($chaine){

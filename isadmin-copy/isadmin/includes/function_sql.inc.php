@@ -16,16 +16,16 @@ function sqlRequete($requeteSQL) {
 	// récupération des résultats SI possible...
 	$lien = mysqli_connect(DB_server,DB_user,DB_password);
 	if (!$lien) {
-		echo('ERREUR '.mysqli_error($cnx).' : Accès Impossible au serveur SQL.');
+		echo('ERREUR : Accès Impossible au serveur SQL.');
 		$retour = FALSE;
 	} else {
-		if (!mysqli_select_db(DB_bdd,$lien)) {
-			echo('ERREUR '.mysqli_error($cnx).' : Accès impossible à la base de données.');
+		if (!mysqli_select_db($lien, DB_bdd)) {
+			echo('ERREUR '.mysqli_error($lien).' : Accès impossible à la base de données.');
 			$retour = FALSE;
 		} else {
 			$resultat = mysqli_query($lien,$requeteSQL);
 			if (!$resultat) {
-				echo('ERREUR '.mysqli_error($cnx).' : Impossible d\'exécuter la requète ('.$requeteSQL.').');
+				echo('ERREUR '.mysqli_error($lien).' : Impossible d\'exécuter la requète ('.$requeteSQL.').');
 				$retour = FALSE;
 			} else {
 				if (stristr($requeteSQL,"SELECT")!==FALSE) {	// SELECT

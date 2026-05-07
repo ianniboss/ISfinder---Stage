@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once('includes/entete.inc.php');
 require_once('includes/aside.inc.php');
 require_once("includes/function.inc.php");
@@ -7,18 +9,18 @@ require_once("includes/affiche.inc.php");
 
 $nb_orf = (isset($_SESSION['nb_orf'])&&($_SESSION['nb_orf']<16)&& ($_SESSION['nb_orf']>=0)) ? intval($_SESSION['nb_orf']) : 0 ;	
 
-if ($_SESSION['error']){
+if (!empty($_SESSION['error'])){
 	echo "<p class='erreur'>".$_SESSION['error']."</p><hr/>";
 }
 // $_SESSION['ET_name'] =	($_GET['name']) ? strip_tags($_GET['name']) : $_SESSION['ET_name'];
-$_SESSION['bdd'] =	($_GET['bdd']) ? strip_tags($_GET['bdd']) : $_SESSION['bdd'];
-$_SESSION['ID_ET'] = (ctype_digit($_GET['ident'])) ? $_GET['ident'] : $_SESSION['ID_ET'];
+$_SESSION['bdd'] =	(isset($_GET['bdd']) && $_GET['bdd']) ? strip_tags($_GET['bdd']) : (isset($_SESSION['bdd']) ? $_SESSION['bdd'] : "");
+$_SESSION['ID_ET'] = (isset($_GET['ident']) && ctype_digit($_GET['ident'])) ? $_GET['ident'] : (isset($_SESSION['ID_ET']) ? $_SESSION['ID_ET'] : "");
 
 // $name = $_SESSION['ET_name'];
 $bdd = $_SESSION['bdd'];
 $ident = $_SESSION['ID_ET'];
 
-if (intval($_GET['val_session']) != 1) {			// val_session = 1 On garde les valeurs de $_SESSION sinon on lit les données dans la base 
+if (intval($_GET['val_session'] ?? 0) != 1) {			// val_session = 1 On garde les valeurs de $_SESSION sinon on lit les données dans la base 
 	
 	// La recherche de la fiche MGE tient compte du parametre passé, soit le nom soit ID_ET de l'IS
 //	$condition = ($_GET('ident') == '') ? "`ET_name` like '".$name."'" : "`ID_ET` like '".$ident."'";
@@ -97,9 +99,8 @@ if (intval($_GET['val_session']) != 1) {			// val_session = 1 On garde les valeu
 		$_SESSION['Origin']	= $origintab[0]." ".$origintab[1] ;
 					
 		$hosts = is_hosts($cnx,$_SESSION['ID_ET']);
-		$i = 1;
+		$i = 0;
 		$_SESSION['Hosts'] = $origin;
-		$_SESSION['ID_host'][$i] = $host['ID_host'];
 		while ($host = mysqli_fetch_array($hosts)){
 			if ($host['Host'] != $origin){
 				$_SESSION['Hosts'] .= "\n";
@@ -137,11 +138,13 @@ if (intval($_GET['val_session']) != 1) {			// val_session = 1 On garde les valeu
 				$_SESSION['parents'] = $_SESSION['parents'].$parent[$i]['Element_transposable_parent_ID_ET']." ";
 			}
 
-			$result_syn= ($is['Synonyme']!= NULL) ? is_syn($cnx,$_SESSION['ID_ET']) : '';	
-			$syn = mysqli_fetch_array($result_syn) ;
-			$_SESSION['Synonyme'] = $syn['Synonyme'];		
-			while ($syn = mysqli_fetch_array($result_syn)){
-				$_SESSION['Synonyme'] = $_SESSION['Synonyme'].", " .$syn['Synonyme'];
+			$result_syn= (!empty($is['Synonyme'])) ? is_syn($cnx,$_SESSION['ID_ET']) : null;	
+			if ($result_syn) {
+				$syn = mysqli_fetch_array($result_syn) ;
+				$_SESSION['Synonyme'] = $syn['Synonyme'];		
+				while ($syn = mysqli_fetch_array($result_syn)){
+					$_SESSION['Synonyme'] = $_SESSION['Synonyme'].", " .$syn['Synonyme'];
+				}
 			}
 
 			$iso = (isset($_SESSION['ID_iso'])) ? is_champ($cnx,'ET_Name', 'element_transposable', 'ID_ET', trim($_SESSION['ID_iso'])) : "NULL";
@@ -152,7 +155,7 @@ if (intval($_GET['val_session']) != 1) {			// val_session = 1 On garde les valeu
 }	// Fin du else il y a connexion
 }	// fin du val_session != 1
 
-$base_name = ($bdd == ISfinder) ? "IS" : $_SESSION['Base_Name'] ;
+$base_name = ($bdd == "ISfinder") ? "IS" : (isset($_SESSION['Base_Name']) ? $_SESSION['Base_Name'] : "");
 $background = base_color($base_name) ;	
 $fond_base = 'class="base_'.$base_name.'"';		 // couleur de background des <TH> en fonction de la base
 

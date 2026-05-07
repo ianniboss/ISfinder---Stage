@@ -1,10 +1,12 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 //if ($_GET['list'] == 1){
 //	$choix = (isset($_GET['choix'])) ? $_GET['choix'] : $_SESSION['base'];		// Pour conserver la sélection des bases
 	$problem = (isset($_GET['problem'])) ? $_GET['problem'] : "";
-	$choix = $_SESSION['base'];		// Pour conserver la sélection des bases
-	$error = $_SESSION['error'];	// On conserve aussi les erreurs
+	$choix = $_SESSION['base'] ?? array();		// Pour conserver la sélection des bases
+	$error = $_SESSION['error'] ?? "";	// On conserve aussi les erreurs
 	$_SESSION = array();			// On efface toutes les variables de session
 	$_SESSION['base'] = $choix;		// récupération de la variable contenant les bases sélectionnées
 //}
@@ -22,7 +24,7 @@ if ($problem){
 	echo "<p class='erreur'>".$problem."</p><hr/>";
 }
 
-if ($_GET['base_submiter'] && $_GET['base_submiter'] == 1){			// Affichage de la table Submiters
+if (isset($_GET['base_submiter']) && $_GET['base_submiter'] == 1){			// Affichage de la table Submiters
 	if (isset($_GET['champ'])){
 		$champrecherche = $_GET['champ'] ;
 		$colonne = "Lastname";
@@ -42,13 +44,13 @@ if ($_GET['base_submiter'] && $_GET['base_submiter'] == 1){			// Affichage de la
 	$result = execute_sql($cnx,$requete);
 	$nombre = mysqli_num_rows($result);
 	if ($nombre > 0) {
-		echo "<h2> $base_select </h2>";							
+		echo "<h2> Submiters </h2>";							
 		print "<h3>Result of your query: ".$nombre."</h3>";	
 		print "<table><tr $fond_base><th>N°</th><th>Lastname</th>><th>Firstname</th><th>Institution</th><th>Country</th><th>Mail</th></tr>";
 		affiche_submiters($result,$fond_base);							
 		print "</table>";
 	}else{
-		print "<h2> $base_select </h2> Nothing was found<BR/>";
+		print "<h2> Submiters </h2> Nothing was found<BR/>";
 	}
 	
 // S'il ne s'agit pas de la table Submiters	

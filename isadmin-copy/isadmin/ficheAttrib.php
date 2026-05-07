@@ -1,6 +1,8 @@
 <?php
-session_start();
-$error = ($_SESSION['error']) ? $_SESSION['error'] : "";
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+$error = ($_SESSION['error'] ?? "");
 session_destroy();
 require_once('includes/entete.inc.php');
 require_once('includes/aside.inc.php');
@@ -9,7 +11,7 @@ require_once("includes/affiche.inc.php");
 if ($error){
 	echo "<p class='erreur'>".$error."</p><hr/>";
 }
-$ident_attrib = intval($_GET['ident']);
+$ident_attrib = intval($_GET['ident'] ?? 0);
 
 		/* Connexion à la base de données */
 $cnx = connexion("ISsubmit") ;	
