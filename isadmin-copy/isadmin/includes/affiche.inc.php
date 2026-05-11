@@ -118,7 +118,10 @@ function is_submiter($cnx,$ID_ET) {
 	$result = execute_sql($cnx,$req_submiter);
 	if ($submiter = mysqli_fetch_array($result,MYSQLI_ASSOC)){
 		foreach($submiter as $index=>$valeur){
-			$_SESSION[$index] = $valeur ;
+			// PHP 8.5 Fix: Session keys must be strings at root level. Skip numeric indices.
+			if (!is_numeric($index)) {
+				$_SESSION[$index] = $valeur ;
+			}
 		}	
 	}
 

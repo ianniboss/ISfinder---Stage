@@ -43,8 +43,11 @@ function recup_data($ident,$name,$bdd){
 			}else{
 				$is = mysqli_fetch_assoc($result);
 				foreach($is as $index=>$valeur){
+					// PHP 8.5 Fix: Session keys must be strings at root level. Skip numeric indices.
+					if (!is_numeric($index)) {
 						// PHP 8.5 Fix: strip_tags only accepts strings
 						$_SESSION[$index] = is_string($valeur) ? strip_tags($valeur) : $valeur ;
+					}
 				}
 			}
 		is_submiter($cnx,$_SESSION['ID_ET']);
