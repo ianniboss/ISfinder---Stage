@@ -329,7 +329,8 @@ function ecrit_data($ident,$name,$base_ecriture){
 										$seq_sql = ($$var_dyn_seq == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $$var_dyn_seq)."'";
 					$partial_sql = ($$var_dyn_partial == "") ? "'0'" : "'".mysqli_real_escape_string($cnx, $$var_dyn_partial)."'";
 					$blast_sql = ($$var_dyn_blastRE == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $$var_dyn_blastRE)."'";
-					$function_sql = ($$var_dyn_function == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $$var_dyn_function)."'";
+					// PHP 8.5 Fix: Column is NOT NULL, use default 'transposase' if empty
+					$function_sql = ($$var_dyn_function == "") ? "'transposase'" : "'".mysqli_real_escape_string($cnx, $$var_dyn_function)."'";
 					$func_descr_sql = ($$var_dyn_functionDescr == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $$var_dyn_functionDescr)."'";
 					$annot_sql = ($$var_dyn_annotation == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $$var_dyn_annotation)."'";
 					$comment_sql = ($$var_dyn_comment == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $$var_dyn_comment)."'";

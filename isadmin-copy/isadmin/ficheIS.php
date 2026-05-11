@@ -113,19 +113,27 @@ if (intval($_GET['val_session'] ?? 0) != 1) {			// val_session = 1 On garde les 
 	    $_SESSION['ID_iso'] = (isset($_SESSION['ID_iso'])) ?  $_SESSION['ID_iso'] : ""; 
 
 		$site = unserialize(is_champX($cnx,'*','et_insertion_site','Element_transposable_ID_ET',$_SESSION['ID_ET'],''));
-		$_SESSION['nb_site'] = ($site == '') ? 0 : count($site) ;
-		for ($i = 0 ; $i <= $_SESSION['nb_site'] && $site ; $i++){			// Création des variables de session  
-			foreach($site[$i] as $champ=>$valeur){							// avec l'indentation du iéme site d'insertion + le nom du champ Mysql
-			$_SESSION[$i.$champ] = $site[$i][$champ];
+		$_SESSION['nb_site'] = (empty($site) || !is_array($site)) ? 0 : count($site) ;
+		// PHP 8.5 Fix: Correct loop boundary and add array guards
+		for ($i = 0 ; $i < $_SESSION['nb_site'] && is_array($site) ; $i++){			
+			if (isset($site[$i]) && is_array($site[$i])) {
+				foreach($site[$i] as $champ=>$valeur){
+					// PHP 8.5 Fix: Root session keys must be strings
+					$key = "site_".$i.$champ;
+					$_SESSION[$key] = $valeur;
+				}
 			}
 		}
 		
 		$ORF = unserialize(is_champX($cnx,'*','orf','Element_transposable_ID_ET',$_SESSION['ID_ET'],'ORF_rank'));
-		$_SESSION['nb_orf'] = ($ORF == '') ? 0 : count($ORF) ;
+		$_SESSION['nb_orf'] = (empty($ORF) || !is_array($ORF)) ? 0 : count($ORF) ;
 		$nb_orf = $_SESSION['nb_orf'];
-		for ($i = 1 ; $i <= $_SESSION['nb_orf'] && $ORF ; $i++){			// Création des variables de session  
-			foreach($ORF[$i-1] as $champ=>$valeur){							// avec l'indentation du iéme ORF + le nom du champ Mysql
-			$_SESSION[$champ.$i] = $ORF[$i-1][$champ];
+		// PHP 8.5 Fix: Correct loop and add guards
+		for ($i = 1 ; $i <= $_SESSION['nb_orf'] && is_array($ORF) ; $i++){			
+			if (isset($ORF[$i-1]) && is_array($ORF[$i-1])) {
+				foreach($ORF[$i-1] as $champ=>$valeur){
+					$_SESSION[$champ.$i] = $valeur;
+				}
 			}
 		}
 		
@@ -400,7 +408,7 @@ for($j=0 ; $j < $_SESSION['nb_site'] ; $j++){
 	<?php echo $_SESSION['recoding_image'] ?>;
 	<INPUT TYPE="file" NAME="recoding_image" SIZE=20 MAXLENGTH=30 />    
 	<input type="button" name="rec_image" value="Upload" onclick="document.getElementById('DynModif').value='3' ; document.forms['ficheIS'].submit();"/>
-    <?php if ($_SESSION['recoding_image_error']) { echo "<p class='erreur'>".$_SESSION['recoding_image_error'] ;} ?>    
+    <?php if (!empty($_SESSION['recoding_image_error'])) { echo "<p class='erreur'>".$_SESSION['recoding_image_error'] ;} ?>    
 
 <?php 
 if ($_SESSION['recoding_image']!=NULL){
@@ -555,7 +563,7 @@ if ($nb_orf !=0){
                     <?php echo $_SESSION['recoding_image'] ?>;
                     <INPUT TYPE="file" NAME="recoding_image" SIZE=20 MAXLENGTH=30 />    
                     <input type="submit" name="rec_image" value="Upload" />
-                    <?php if ($_SESSION['recoding_image_error']) { echo "<p class='erreur'>".$_SESSION['recoding_image_error'] ;} ?>
+                    <?php if (!empty($_SESSION['recoding_image_error'])) { echo "<p class='erreur'>".$_SESSION['recoding_image_error'] ;} ?>
                     </fieldset>
                 </form> 
                                         -->
