@@ -65,19 +65,25 @@ function recup_data($ident,$name,$bdd){
 		}
 
 		$site = unserialize(is_champX($cnx,'*','et_insertion_site','Element_transposable_ID_ET',$_SESSION['ID_ET'],''));
-		$_SESSION['nb_site'] = ($site == '') ? 0 : count($site) ;
-		for ($i = 0 ; $i <= $_SESSION['nb_site'] && $site ; $i++){			// Création des variables de session  
-			foreach($site[$i] as $champ=>$valeur){							// avec l'indentation du iéme site d'insertion + le nom du champ Mysql
-			$_SESSION[$champ.$i] = $site[$i][$champ];
+		$_SESSION['nb_site'] = (empty($site) || !is_array($site)) ? 0 : count($site) ;
+		// PHP 8.5 Fix: Correct loop condition ( < instead of <= ) and add array guard
+		for ($i = 0 ; $i < $_SESSION['nb_site'] && is_array($site) ; $i++){			
+			if (isset($site[$i]) && is_array($site[$i])) {
+				foreach($site[$i] as $champ=>$valeur){
+					$_SESSION[$champ.$i] = $valeur;
+				}
 			}
 		}
 		
 		$ORF = unserialize(is_champX($cnx,'*','orf','Element_transposable_ID_ET',$_SESSION['ID_ET'],''));
-		$_SESSION['nb_orf'] = ($ORF == '') ? 0 : count($ORF) ;
+		$_SESSION['nb_orf'] = (empty($ORF) || !is_array($ORF)) ? 0 : count($ORF) ;
 		$nb_orf = $_SESSION['nb_orf'];
-		for ($i = 1 ; $i <= $_SESSION['nb_orf'] && $ORF ; $i++){			// Création des variables de session  
-			foreach($ORF[$i-1] as $champ=>$valeur){							// avec l'indentation du iéme ORF + le nom du champ Mysql
-			$_SESSION[$champ.$i] = $ORF[$i-1][$champ];
+		// PHP 8.5 Fix: Added array guards for ORF loop
+		for ($i = 1 ; $i <= $_SESSION['nb_orf'] && is_array($ORF) ; $i++){			
+			if (isset($ORF[$i-1]) && is_array($ORF[$i-1])) {
+				foreach($ORF[$i-1] as $champ=>$valeur){
+					$_SESSION[$champ.$i] = $valeur;
+				}
 			}
 		}	
   		mysqli_close($cnx);
@@ -191,6 +197,9 @@ function ecrit_data($ident,$name,$base_ecriture){
 				$length_sql = ($ET_Length == "") ? "NULL" : intval($ET_Length);
 				$type_id_sql = ($type_element_transposable_ID_Type_ET == "") ? "NULL" : intval($type_element_transposable_ID_Type_ET);
 				$partial_sql = intval($ET_partial); // tinyint(1), default 0
+				
+				// PHP 8.5 Fix: Ensure Submission_date is a valid date string or NULL
+				$submission_date_sql = (empty($Submission_date) || $Submission_date == "0000-00-00") ? "NULL" : "'".mysqli_real_escape_string($cnx, $Submission_date)."'";
 				
 				$sql_sub="INSERT INTO element_transposable(Groups_ID_Groups, Family_ID_Family, type_element_transposable_ID_Type_ET, ET_Accession_number, ET_name, ET_Length, ET_partial, ET_DNA_Sequence, Transposition, ET_Blast_Result, ET_Comments, ET_Private_comments, ET_Reference, ID_iso, recode, frame, type, recoding_seq, recoding_annot, SD,structure, exp_demontred, recoding_image )" ;
 				$sql_sub.=" VALUES ($group,'".$family."', $type_id_sql,'".$ET_Accession_number."','".$ET_name."', $length_sql, $partial_sql,'".$ET_DNA_Sequence."', $transposition_sql, $blast_result_sql, $comments_sql, $private_comments_sql, $reference_sql, $iso, $recode_sql, $frame_sql, $type_sql, $recoding_seq_sql, $recoding_annot_sql, $SD_sql, $structure_sql, $exp_demontred_sql, $recoding_image_sql)";
@@ -330,7 +339,7 @@ function ecrit_data($ident,$name,$base_ecriture){
 				
 				// Table submission
 				$date_val = date("Y-m-d");
-				$sql_sub="INSERT INTO submission(Submiters_ID_Submiter, Element_transposable_ID_ET, Submission_date, Validation_Date) VALUES ('".$ID_Submiter."','".$ID_ET."','".$Submission_date."','".$date_val."')";
+				$sql_sub="INSERT INTO submission(Submiters_ID_Submiter, Element_transposable_ID_ET, Submission_date, Validation_Date) VALUES ('".$ID_Submiter."','".$ID_ET."', $submission_date_sql,'".$date_val."')";
 				$result = execute_sql($cnx,$sql_sub);
 
 			}else{
