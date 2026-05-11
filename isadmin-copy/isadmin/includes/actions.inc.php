@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // _______________Récupération des données de la base ISsubmit dans des variables de SESSION_________________
 function recup_data($ident,$name,$bdd){
   $retour = "1" ;
@@ -43,14 +43,16 @@ function recup_data($ident,$name,$bdd){
 			}else{
 				$is = mysqli_fetch_assoc($result);
 				foreach($is as $index=>$valeur){
-						$_SESSION[$index] = strip_tags($valeur) ;
+						// PHP 8.5 Fix: strip_tags only accepts strings
+						$_SESSION[$index] = is_string($valeur) ? strip_tags($valeur) : $valeur ;
 				}
 			}
 		is_submiter($cnx,$_SESSION['ID_ET']);
 			
 		$origin = is_origin($cnx,$_SESSION['ID_ET']);
 		$origintab = explode(" ", $origin);
-		$_SESSION['Origin']	= $origintab[0]." ".$origintab[1] ;
+		// PHP 8.5 Fix: Check if second part of origin exists
+		$_SESSION['Origin']	= $origintab[0].(isset($origintab[1]) ? " ".$origintab[1] : "") ;
 			
 		
 		$hosts = is_hosts($cnx,$_SESSION['ID_ET']);
@@ -101,7 +103,8 @@ function ecrit_data($ident,$name,$base_ecriture){
 		if (mysqli_num_rows($result) == 0){
 	// Vérification des données
 			foreach ($_SESSION as $elt_session => $var_session){	// on remplit une variable portant le nom du champ 		
-			$$elt_session = strip_tags($var_session) ;			// pour ne pas écrire tt le tps $_SESSION[]
+				// PHP 8.5 Fix: strip_tags only accepts strings, preserve arrays for legacy logic
+				$$elt_session = is_string($var_session) ? strip_tags($var_session) : $var_session ;			// pour ne pas écrire tt le tps $_SESSION[]
 				}
 		
 		/* On teste les champs entrés et s'il y a des erreurs on remplit $_SESSION["error"]  */
@@ -167,11 +170,30 @@ function ecrit_data($ident,$name,$base_ecriture){
 				$iso = ($res_iso) ? "'".$res_iso['ID_ET']."'" : "NULL";
 				if ($iso == "NULL" && $ID_iso != ""){ $_SESSION["error"] = "Attention séquence versé dans ISfinder mais iso=NULL car non trouvé dans la base";}
 
-				$ET_Blast_Result = ($ET_Blast_Result == "") ? NULL : $ET_Blast_Result;
-				$ET_Private_comments = ($ET_Private_comments == "") ? NULL : $ET_Private_comments;
+				// PHP 8.5 Fix: Normalize ENUM and nullable fields for SQL insertion
+				// We create SQL-ready strings (either 'value' or NULL)
+				$recode_sql = ($recode == "NULL" || $recode == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $recode)."'";
+				$frame_sql = ($frame == "NULL" || $frame == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $frame)."'";
+				$type_sql = ($type == "NULL" || $type == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $type)."'";
+				$SD_sql = ($SD == "NULL" || $SD == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $SD)."'";
+				$structure_sql = ($structure == "NULL" || $structure == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $structure)."'";
+				$exp_demontred_sql = ($exp_demontred == "NULL" || $exp_demontred == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $exp_demontred)."'";
+				$transposition_sql = ($Transposition == "NULL" || $Transposition == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $Transposition)."'";
+				
+				$blast_result_sql = ($ET_Blast_Result == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $ET_Blast_Result)."'";
+				$comments_sql = ($ET_Comments == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $ET_Comments)."'";
+				$private_comments_sql = ($ET_Private_comments == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $ET_Private_comments)."'";
+				$reference_sql = ($ET_Reference == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $ET_Reference)."'";
+				$recoding_seq_sql = ($recoding_seq == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $recoding_seq)."'";
+				$recoding_annot_sql = ($recoding_annot == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $recoding_annot)."'";
+				$recoding_image_sql = ($recoding_image == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $recoding_image)."'";
+				
+				$length_sql = ($ET_Length == "") ? "NULL" : intval($ET_Length);
+				$type_id_sql = ($type_element_transposable_ID_Type_ET == "") ? "NULL" : intval($type_element_transposable_ID_Type_ET);
+				$partial_sql = intval($ET_partial); // tinyint(1), default 0
 				
 				$sql_sub="INSERT INTO element_transposable(Groups_ID_Groups, Family_ID_Family, type_element_transposable_ID_Type_ET, ET_Accession_number, ET_name, ET_Length, ET_partial, ET_DNA_Sequence, Transposition, ET_Blast_Result, ET_Comments, ET_Private_comments, ET_Reference, ID_iso, recode, frame, type, recoding_seq, recoding_annot, SD,structure, exp_demontred, recoding_image )" ;
-				$sql_sub.=" VALUES ($group,'".$family."', '".$type_element_transposable_ID_Type_ET."','".$ET_Accession_number."','".$ET_name."','".$ET_Length."','".$ET_partial."','".$ET_DNA_Sequence."','".$Transposition."','".$ET_Blast_Result."', '".mysqli_real_escape_string($cnx,$ET_Comments)."', '".mysqli_real_escape_string($cnx,$ET_Private_comments)."', '".mysqli_real_escape_string($cnx,$ET_Reference)."', $iso, '".$recode."', '".$frame."', '".$type."', '".mysqli_real_escape_string($cnx,$recoding_seq)."', '".mysqli_real_escape_string($cnx,$recoding_annot)."', '".$SD."', '".$structure."', '".$exp_demontred."', '".$recoding_image."')";
+				$sql_sub.=" VALUES ($group,'".$family."', $type_id_sql,'".$ET_Accession_number."','".$ET_name."', $length_sql, $partial_sql,'".$ET_DNA_Sequence."', $transposition_sql, $blast_result_sql, $comments_sql, $private_comments_sql, $reference_sql, $iso, $recode_sql, $frame_sql, $type_sql, $recoding_seq_sql, $recoding_annot_sql, $SD_sql, $structure_sql, $exp_demontred_sql, $recoding_image_sql)";
 
 				$result = execute_sql($cnx,$sql_sub);
 				$ID_ET = mysqli_insert_id($cnx);
@@ -292,9 +314,16 @@ function ecrit_data($ident,$name,$base_ecriture){
 					$frameshift = ($$var_dyn_frameshift == "") ? 'NULL' : "'".$$var_dyn_frameshift."'";
 					$frameshiftPos = ($$var_dyn_frameshiftPos == "") ? 'NULL' : "'".$$var_dyn_frameshiftPos."'";
 
-										
+										$seq_sql = ($$var_dyn_seq == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $$var_dyn_seq)."'";
+					$partial_sql = ($$var_dyn_partial == "") ? "'0'" : "'".mysqli_real_escape_string($cnx, $$var_dyn_partial)."'";
+					$blast_sql = ($$var_dyn_blastRE == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $$var_dyn_blastRE)."'";
+					$function_sql = ($$var_dyn_function == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $$var_dyn_function)."'";
+					$func_descr_sql = ($$var_dyn_functionDescr == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $$var_dyn_functionDescr)."'";
+					$annot_sql = ($$var_dyn_annotation == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $$var_dyn_annotation)."'";
+					$comment_sql = ($$var_dyn_comment == "") ? "NULL" : "'".mysqli_real_escape_string($cnx, $$var_dyn_comment)."'";
+
 					$sql_sub="INSERT INTO orf(Element_transposable_ID_ET, Tnp_chemestry_ID_Tnp_chemestry, Tnp_description_ID_Tnp_description, AG_description_ID_AG_description, PG_function_ID_PG_function, ORF_Begin, ORF_End, ORF_Sequence, ORF_rank, ORF_Strand, ORF_Comment, ORF_Length_DNA, ORF_Length_AA, ORF_partial, ORF_Blast_Result, ORF_Frameshift, ORF_Frameshift_Position, ORF_function, Function_Description, PG_annotation)" ;
-					$sql_sub.=" VALUES ('".$ID_ET."', $chem, $TnpPart, $chemAG, $chemPG,$begin,$end,'".$$var_dyn_seq."','".$i."', $strand, '".mysqli_real_escape_string($cnx,$$var_dyn_comment)."', $lengthbp, $lengthaa, '".$$var_dyn_partial."', '".$$var_dyn_blastRE."', $frameshift, $frameshiftPos, '".$$var_dyn_function."', '".$$var_dyn_functionDescr."', '".$$var_dyn_annotation."')";
+					$sql_sub.=" VALUES ('".$ID_ET."', $chem, $TnpPart, $chemAG, $chemPG,$begin,$end, $seq_sql, '".$i."', $strand, $comment_sql, $lengthbp, $lengthaa, $partial_sql, $blast_sql, $frameshift, $frameshiftPos, $function_sql, $func_descr_sql, $annot_sql)";
 
 					$result = execute_sql($cnx,$sql_sub);
 				}	// Fin du FOR
