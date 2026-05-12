@@ -370,12 +370,13 @@ function suppression($ident,$name,$bdd){
   
   if ($cnx){
 	  	// Récupération de l'ident du submiter et Suppression du submiter
+	  // PHP 8.5 Fix: Ensure $ident is not empty to avoid malformed SQL queries
 	  if (!empty($ident)) {
 		  $reqIS = "SELECT `Submiters_ID_Submiter` FROM `submission` WHERE `Element_transposable_ID_ET`= $ident LIMIT 1" ;		
 		  $result = execute_sql($cnx,$reqIS);
 		  $submiter = mysqli_fetch_row($result);
 
-		  // Suppression du submiter dans la table submiters (uniquement s'il existe)
+		  // PHP 8.5 Fix: Check if a submiter exists before deletion to prevent "array offset on null" error
 		  if ($submiter && isset($submiter[0])) {
 			  $reqIS = "DELETE FROM `submiters` WHERE `ID_Submiter` = $submiter[0] LIMIT 1" ;		
 			  $result = execute_sql($cnx,$reqIS);
@@ -385,6 +386,7 @@ function suppression($ident,$name,$bdd){
 		  $reqHost = "SELECT `Host_ID_host` FROM `element_transposable_has_host` WHERE `Element_transposable_ID_ET`= $ident" ;		
 		  $result = execute_sql($cnx,$reqHost);
 		  while ($hote = mysqli_fetch_row($result)){
+			  // PHP 8.5 Fix: Ensure host ID is present
 			  if (isset($hote[0])) {
 				  $reqDelHost = "DELETE FROM `host` WHERE `ID_host` = $hote[0]" ;
 				  execute_sql($cnx,$reqDelHost);
@@ -392,6 +394,7 @@ function suppression($ident,$name,$bdd){
 		  }
 
 				// Suppression de l'élément dans la table element_transposable
+		  // PHP 8.5 Fix: Final deletion with guard
 		  $reqDelET = "DELETE FROM `element_transposable` WHERE `ID_ET`= $ident LIMIT 1" ;		
 		  execute_sql($cnx,$reqDelET);
 	  }
