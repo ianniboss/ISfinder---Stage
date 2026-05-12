@@ -185,49 +185,49 @@ $fond_base = 'class="base_' . $base_name . '"';         // couleur de background
                 <ul>
                     <li>
                         <label for="nom">First Name :</label>
-                        <INPUT TYPE="text" NAME="Firstname" VALUE="<?php echo isset($_SESSION['Firstname']) ? $_SESSION['Firstname'] : ""; ?>" SIZE="25" MAXLENGTH=60>
+                        <input type="text" name="Firstname" value="<?php echo isset($_SESSION['Firstname']) ? $_SESSION['Firstname'] : ""; ?>" size="25" maxlength=60>
                     </li>
                     <li>
                         <label for="mname">Middle Name :</label>
-                        <INPUT TYPE="text" NAME="Middlename" VALUE="<?php echo isset($_SESSION['Middlename']) ? $_SESSION['Middlename'] : ""; ?>" SIZE="20" MAXLENGTH=60>
+                        <input type="text" name="Middlename" value="<?php echo isset($_SESSION['Middlename']) ? $_SESSION['Middlename'] : ""; ?>" size="20" maxlength=60>
                     </li>
                     <li>
                         <label for="lname">Last Name :</label>
-                        <INPUT TYPE="text" NAME="Lastname" VALUE="<?php echo isset($_SESSION['Lastname']) ? $_SESSION['Lastname'] : ""; ?>" SIZE="25" required MAXLENGTH=60>
+                        <input type="text" name="Lastname" value="<?php echo isset($_SESSION['Lastname']) ? $_SESSION['Lastname'] : ""; ?>" size="25" required maxlength=60>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <label for="institut">Institution :</label>
-                        <INPUT TYPE="text" NAME="Institution" VALUE="<?php echo isset($_SESSION['Institution']) ? $_SESSION['Institution'] : ""; ?>" SIZE=80 MAXLENGTH=100>
+                        <input type="text" name="Institution" value="<?php echo isset($_SESSION['Institution']) ? $_SESSION['Institution'] : ""; ?>" size=80 maxlength=100>
                     </li>
                     <li>
                         <label for="depart">Department :</label>
-                        <INPUT TYPE="text" NAME="Department" VALUE="<?php echo isset($_SESSION['Department']) ? $_SESSION['Department'] : ""; ?>" SIZE=80 MAXLENGTH=100>
+                        <input type="text" name="Department" value="<?php echo isset($_SESSION['Department']) ? $_SESSION['Department'] : ""; ?>" size=80 maxlength=100>
                     </li>
                     <li>
                         <label for="address">Postal address :</label>
-                        <INPUT TYPE="text" NAME="Address" VALUE="<?php echo isset($_SESSION['Address']) ? $_SESSION['Address'] : ""; ?>" SIZE=80 MAXLENGTH=100>
+                        <input type="text" name="Address" value="<?php echo isset($_SESSION['Address']) ? $_SESSION['Address'] : ""; ?>" size=80 maxlength=100>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <label for="postCode">Postal/ZIP code :</label>
-                        <INPUT TYPE="text" NAME="Code" VALUE="<?php echo isset($_SESSION['Code']) ? $_SESSION['Code'] : ""; ?>" SIZE="25" MAXLENGTH=60>
+                        <input type="text" name="Code" value="<?php echo isset($_SESSION['Code']) ? $_SESSION['Code'] : ""; ?>" size="25" maxlength=60>
                     </li>
                     <li>
                         <label for="country">Country :</label>
-                        <INPUT TYPE="text" NAME="Country" VALUE="<?php echo isset($_SESSION['Country']) ? $_SESSION['Country'] : ""; ?>" SIZE="27" MAXLENGTH=60>
+                        <input type="text" name="Country" value="<?php echo isset($_SESSION['Country']) ? $_SESSION['Country'] : ""; ?>" size="27" maxlength=60>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <label for="courriel">e-mail address :</label>
-                        <INPUT TYPE="email" NAME="Mail" VALUE="<?php echo isset($_SESSION['Mail']) ? $_SESSION['Mail'] : ""; ?>" SIZE="40" MAXLENGTH=80>
+                        <input type="email" name="Mail" value="<?php echo isset($_SESSION['Mail']) ? $_SESSION['Mail'] : ""; ?>" size="40" maxlength=80>
                     </li>
                     <li>
                         <label for="tel">Telephone :</label>
-                        <INPUT TYPE="text" NAME="Phone" VALUE="<?php echo isset($_SESSION['Phone']) ? $_SESSION['Phone'] : ""; ?>" SIZE="20" MAXLENGTH=60>
+                        <input type="text" name="Phone" value="<?php echo isset($_SESSION['Phone']) ? $_SESSION['Phone'] : ""; ?>" size="20" maxlength=60>
                     </li>
                 </ul>
             </fieldset>
@@ -237,55 +237,55 @@ $fond_base = 'class="base_' . $base_name . '"';         // couleur de background
                 <ul>
                     <li>
                         <label for="isname">IS name :</label>
-                        <INPUT TYPE="text" NAME="ET_name" VALUE="<?php echo isset($_SESSION['ET_name']) ? $_SESSION['ET_name'] : ""; ?>" SIZE=15 required MAXLENGTH=20>
+                        <input type="text" name="ET_name" value="<?php echo isset($_SESSION['ET_name']) ? $_SESSION['ET_name'] : ""; ?>" size=15 required maxlength=20>
                     </li>
                     <li>
                         <label for="family">Family :</label>
-                        <INPUT TYPE="text" NAME="Family_ID_Family" VALUE="<?php if ($bdd == "isfinder") { echo isset($_SESSION['Family_Name']) ?  $_SESSION['Family_Name'] : ""; } else { echo isset($_SESSION['Family_ID_Family']) ?  $_SESSION['Family_ID_Family'] : ""; } ?>" SIZE=15 MAXLENGTH=20>
+                        <input type="text" name="Family_ID_Family" value="<?php if ($bdd == "isfinder") { echo isset($_SESSION['Family_Name']) ?  $_SESSION['Family_Name'] : ""; } else { echo isset($_SESSION['Family_ID_Family']) ?  $_SESSION['Family_ID_Family'] : ""; } ?>" size=15 maxlength=20>
                     </li>
                     <li>
                         <label for="group">Group :</label>
-                        <INPUT TYPE="text" NAME="Groups_ID_Groups" VALUE="<?php if ($bdd == "isfinder") { echo isset($_SESSION['Group_Name']) ?  $_SESSION['Group_Name'] : ""; } else { echo isset($_SESSION['Groups_ID_Groups']) ?  $_SESSION['Groups_ID_Groups'] : ""; } ?>" SIZE=15 MAXLENGTH=20>
+                        <input type="text" name="Groups_ID_Groups" value="<?php if ($bdd == "isfinder") { echo isset($_SESSION['Group_Name']) ?  $_SESSION['Group_Name'] : ""; } else { echo isset($_SESSION['Groups_ID_Groups']) ?  $_SESSION['Groups_ID_Groups'] : ""; } ?>" size=15 maxlength=20>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <label for="MGEtype">MGE type :</label>
-                        <SELECT NAME="type_element_transposable_ID_Type_ET">
-                            <OPTION value="1" selected <?php if (isset($_SESSION['type_element_transposable_ID_Type_ET']) && $_SESSION['type_element_transposable_ID_Type_ET'] == "1") echo 'selected="selected"'; ?>>IS </option>
-                            <OPTION value="2" <?php if (isset($_SESSION['type_element_transposable_ID_Type_ET']) && $_SESSION['type_element_transposable_ID_Type_ET'] == "2") echo 'selected="selected"'; ?>>MITE </option>
-                            <OPTION value="4" <?php if (isset($_SESSION['type_element_transposable_ID_Type_ET']) && $_SESSION['type_element_transposable_ID_Type_ET'] == "4") echo 'selected="selected"'; ?>>MIC </option>
-                            <OPTION value="5" <?php if (isset($_SESSION['type_element_transposable_ID_Type_ET']) && $_SESSION['type_element_transposable_ID_Type_ET'] == "5") echo 'selected="selected"'; ?>>tIS </option>
-                            <OPTION value="3" <?php if (isset($_SESSION['type_element_transposable_ID_Type_ET']) && $_SESSION['type_element_transposable_ID_Type_ET'] == "3") echo 'selected="selected"'; ?>>Transposon</option>
-                        </SELECT>
+                        <select name="type_element_transposable_ID_Type_ET">
+                            <option value="1" selected <?php if (isset($_SESSION['type_element_transposable_ID_Type_ET']) && $_SESSION['type_element_transposable_ID_Type_ET'] == "1") echo 'selected="selected"'; ?>>IS </option>
+                            <option value="2" <?php if (isset($_SESSION['type_element_transposable_ID_Type_ET']) && $_SESSION['type_element_transposable_ID_Type_ET'] == "2") echo 'selected="selected"'; ?>>MITE </option>
+                            <option value="4" <?php if (isset($_SESSION['type_element_transposable_ID_Type_ET']) && $_SESSION['type_element_transposable_ID_Type_ET'] == "4") echo 'selected="selected"'; ?>>MIC </option>
+                            <option value="5" <?php if (isset($_SESSION['type_element_transposable_ID_Type_ET']) && $_SESSION['type_element_transposable_ID_Type_ET'] == "5") echo 'selected="selected"'; ?>>tIS </option>
+                            <option value="3" <?php if (isset($_SESSION['type_element_transposable_ID_Type_ET']) && $_SESSION['type_element_transposable_ID_Type_ET'] == "3") echo 'selected="selected"'; ?>>Transposon</option>
+                        </select>
                     </li>
                     <li>
                         <label for="related_elt">Related element(s) separated by a comma :</label>
-                        <INPUT TYPE="text" NAME="Element_transposable_parent_ID_ET" VALUE="<?php echo isset($_SESSION['Element_transposable_parent_ID_ET']) ? $_SESSION['Element_transposable_parent_ID_ET'] : ""; ?>" SIZE=50 MAXLENGTH=100>
+                        <input type="text" name="Element_transposable_parent_ID_ET" value="<?php echo isset($_SESSION['Element_transposable_parent_ID_ET']) ? $_SESSION['Element_transposable_parent_ID_ET'] : ""; ?>" size=50 maxlength=100>
                         <!-- Base IS : for ($i = 0 ; $i < $nbr_parent ; $i++){ echo isset($_SESSION['Element_transposable_parent_ID_ET'][$i][0]) ? $_SESSION['Element_transposable_parent_ID_ET'][$i][0]."  " : "";} -->
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <label for="isoform">Isoform :</label>
-                        <INPUT TYPE="text" NAME="ID_iso" VALUE="<?php echo ($bdd == "isfinder") ? $iso : $_SESSION['ID_iso']; ?>" SIZE=15 MAXLENGTH=20>
+                        <input type="text" name="ID_iso" value="<?php echo ($bdd == "isfinder") ? $iso : $_SESSION['ID_iso']; ?>" size=15 maxlength=20>
                     </li>
                     <li>
                         <label for="synonym">Synonym(s) separated by a comma :</label>
-                        <INPUT TYPE="text" NAME="Synonyme" VALUE="<?php echo isset($_SESSION['Synonyme']) ? $_SESSION['Synonyme'] : ""; ?>" SIZE=50 MAXLENGTH=100>
+                        <input type="text" name="Synonyme" value="<?php echo isset($_SESSION['Synonyme']) ? $_SESSION['Synonyme'] : ""; ?>" size=50 maxlength=100>
                     </li>
                 </ul>
 
                 <table>
                     <tr><th <?php echo $fond_base; ?>>Accession number</th><th <?php echo $fond_base; ?>>Transposition</th><th <?php echo $fond_base; ?>>Origin</th><th <?php echo $fond_base; ?>>Hosts (separated by a return - First=Origin)</th></tr>
                     <tr>
-                        <td><INPUT TYPE="text" NAME="ET_Accession_number" VALUE="<?php echo isset($_SESSION['ET_Accession_number']) ? $_SESSION['ET_Accession_number'] : ""; ?>" SIZE=17 MAXLENGTH=25></td>
-                        <td><SELECT NAME="Transposition">
-                                <OPTION value="ND" <?php if (isset($_SESSION['Transposition']) && $_SESSION['Transposition'] == "ND") echo 'selected="selected"'; ?>>ND </option>
-                                <OPTION value="Y" <?php if (isset($_SESSION['Transposition']) && $_SESSION['Transposition'] == "Y") echo 'selected="selected"'; ?>>Yes </option>
-                                <OPTION value="N" <?php if (isset($_SESSION['Transposition']) && $_SESSION['Transposition'] == "N") echo 'selected="selected"'; ?>>No </option>
-                            </SELECT> </td>
-                        <td><INPUT TYPE="text" NAME="Origin" VALUE="<?php echo isset($_SESSION['Origin']) ? $_SESSION['Origin'] : ""; ?>" disabled="disabled" SIZE=45 MAXLENGTH=100></td>
+                        <td><input type="text" name="ET_Accession_number" value="<?php echo isset($_SESSION['ET_Accession_number']) ? $_SESSION['ET_Accession_number'] : ""; ?>" size=17 maxlength=25></td>
+                        <td><select name="Transposition">
+                                <option value="ND" <?php if (isset($_SESSION['Transposition']) && $_SESSION['Transposition'] == "ND") echo 'selected="selected"'; ?>>ND </option>
+                                <option value="Y" <?php if (isset($_SESSION['Transposition']) && $_SESSION['Transposition'] == "Y") echo 'selected="selected"'; ?>>Yes </option>
+                                <option value="N" <?php if (isset($_SESSION['Transposition']) && $_SESSION['Transposition'] == "N") echo 'selected="selected"'; ?>>No </option>
+                            </select> </td>
+                        <td><input type="text" name="Origin" value="<?php echo isset($_SESSION['Origin']) ? $_SESSION['Origin'] : ""; ?>" disabled="disabled" size=45 maxlength=100></td>
                         <td><textarea cols=45 rows=2 name="Hosts"><?php echo isset($_SESSION['Hosts']) ? $_SESSION['Hosts'] : ""; ?></textarea></td>
                     </tr>
                 </table>
@@ -295,28 +295,28 @@ $fond_base = 'class="base_' . $base_name . '"';         // couleur de background
                         <span class='entete_propriete'>DNA section</span>
                     </div>
                     <label for="islength">IS Length :</label>
-                    <INPUT TYPE="text" NAME="ET_Length" VALUE="<?php echo isset($_SESSION['ET_Length']) ? $_SESSION['ET_Length'] : ""; ?>" SIZE=15 MAXLENGTH=20>
+                    <input type="text" name="ET_Length" value="<?php echo isset($_SESSION['ET_Length']) ? $_SESSION['ET_Length'] : ""; ?>" size=15 maxlength=20>
                     <div class="entete_propriete">Ends</div>
                     <div class="entete_propriete_decal">General case</div>
                     <ul>
                         <li>
                             <label for="irlength">IR Length :</label>
-                            <INPUT TYPE="text" NAME="IR_Length" VALUE="<?php echo isset($_SESSION['IR_Length']) ? $_SESSION['IR_Length'] : ""; ?>" SIZE=15 MAXLENGTH=20>
+                            <input type="text" name="IR_Length" value="<?php echo isset($_SESSION['IR_Length']) ? $_SESSION['IR_Length'] : ""; ?>" size=15 maxlength=20>
                         </li>
                         <li>
                             <label for="calcul_ends">Calcul ends :</label>
-                            <INPUT TYPE="radio" name="calcul_ends" value="Oui" />Oui&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <INPUT TYPE="radio" name="calcul_ends" value="Non" checked="checked" />Non&nbsp;
+                            <input type="radio" name="calcul_ends" value="Oui" />Oui&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="calcul_ends" value="Non" checked="checked" />Non&nbsp;
                         </li>
                     </ul>
                     <ul>
                         <li>
                             <label for="irl" class="label_court">IRL :</label>
-                            <INPUT TYPE="text" class="seq" NAME="Left_End" VALUE="<?php echo isset($_SESSION['Left_End']) ? $_SESSION['Left_End'] : ""; ?>" SIZE=60 MAXLENGTH=100>
+                            <input type="text" class="seq" name="Left_End" value="<?php echo isset($_SESSION['Left_End']) ? $_SESSION['Left_End'] : ""; ?>" size=60 maxlength=100>
                         </li>
                         <li>
                             <label for="irr" class="label_court">IRR :</label>
-                            <INPUT TYPE="text" class="seq" NAME="Rigth_End" VALUE="<?php echo isset($_SESSION['Rigth_End']) ? $_SESSION['Rigth_End'] : ""; ?>" SIZE=60 MAXLENGTH=100>
+                            <input type="text" class="seq" name="Rigth_End" value="<?php echo isset($_SESSION['Rigth_End']) ? $_SESSION['Rigth_End'] : ""; ?>" size=60 maxlength=100>
                         </li>
                     </ul>
                     <hr />
@@ -325,25 +325,25 @@ $fond_base = 'class="base_' . $base_name . '"';         // couleur de background
                     <ul>
                         <li>
                             <label for="le" class="label_large">Left end / oriIS :</label>
-                            <INPUT TYPE="text" class="seq" NAME="LE" VALUE="<?php echo isset($_SESSION['LE']) ? $_SESSION['LE'] : ""; ?>" SIZE=102 MAXLENGTH=150>
+                            <input type="text" class="seq" name="LE" value="<?php echo isset($_SESSION['LE']) ? $_SESSION['LE'] : ""; ?>" size=102 maxlength=150>
                         </li>
                         <li>
                             <label for="LEstII">Struct. II :</label>
-                            <SELECT NAME="LE_Structure_II">
-                                <OPTION value="1" <?php if (isset($_SESSION['LE_Structure_II']) && $_SESSION['LE_Structure_II'] == "1") echo 'selected="selected"'; ?>>Yes </option>
-                                <OPTION value="0" <?php if (isset($_SESSION['LE_Structure_II']) && $_SESSION['LE_Structure_II'] == "0") echo 'selected="selected"'; ?>>No </option>
-                            </SELECT>
+                            <select name="LE_Structure_II">
+                                <option value="1" <?php if (isset($_SESSION['LE_Structure_II']) && $_SESSION['LE_Structure_II'] == "1") echo 'selected="selected"'; ?>>Yes </option>
+                                <option value="0" <?php if (isset($_SESSION['LE_Structure_II']) && $_SESSION['LE_Structure_II'] == "0") echo 'selected="selected"'; ?>>No </option>
+                            </select>
                         </li>
                         <li>
                             <label for="re" class="label_large">Right end /terIS :</label>
-                            <INPUT TYPE="text" class="seq" NAME="RE" VALUE="<?php echo isset($_SESSION['RE']) ? $_SESSION['RE'] : ""; ?>" SIZE=102 MAXLENGTH=150>
+                            <input type="text" class="seq" name="RE" value="<?php echo isset($_SESSION['RE']) ? $_SESSION['RE'] : ""; ?>" size=102 maxlength=150>
                         </li>
                         <li>
                             <label for="LEstII">Struct. II :</label>
-                            <SELECT NAME="RE_Structure_II">
-                                <OPTION value="1" <?php if (isset($_SESSION['RE_Structure_II']) && $_SESSION['RE_Structure_II'] == "1") echo 'selected="selected"'; ?>>Yes </option>
-                                <OPTION value="0" <?php if (isset($_SESSION['RE_Structure_II']) && $_SESSION['RE_Structure_II'] == "0") echo 'selected="selected"'; ?>>No </option>
-                            </SELECT>
+                            <select name="RE_Structure_II">
+                                <option value="1" <?php if (isset($_SESSION['RE_Structure_II']) && $_SESSION['RE_Structure_II'] == "1") echo 'selected="selected"'; ?>>Yes </option>
+                                <option value="0" <?php if (isset($_SESSION['RE_Structure_II']) && $_SESSION['RE_Structure_II'] == "0") echo 'selected="selected"'; ?>>No </option>
+                            </select>
                         </li>
                     </ul>
                     <ul>
@@ -361,10 +361,10 @@ $fond_base = 'class="base_' . $base_name . '"';         // couleur de background
                         <?php           // Boucle pour afficher le nombre de sites voulus
                         for ($j = 0; $j < $_SESSION['nb_site']; $j++) { ?>
                             <tr>
-                                <td><INPUT TYPE="text" class="seq" NAME="<?php echo $j; ?>DR_Left_Flank" VALUE="<?php echo isset($_SESSION[$j . 'DR_Left_Flank']) ? $_SESSION[$j . 'DR_Left_Flank'] : ""; ?>" SIZE=40 MAXLENGTH=50></td>
-                                <td><INPUT TYPE="text" class="seq" NAME="<?php echo $j; ?>Direct_Repeat" VALUE="<?php echo isset($_SESSION[$j . 'Direct_Repeat']) ? $_SESSION[$j . 'Direct_Repeat'] : ""; ?>" SIZE=40 MAXLENGTH=120></td>
-                                <td><INPUT TYPE="text" class="seq" NAME="<?php echo $j; ?>DR_Rigth_Flank" VALUE="<?php echo isset($_SESSION[$j . 'DR_Rigth_Flank']) ? $_SESSION[$j . 'DR_Rigth_Flank'] : ""; ?>" SIZE=40 MAXLENGTH=50></td>
-                                <td><INPUT TYPE="text" NAME="<?php echo $j; ?>Direct_Repeat_Length" VALUE="<?php echo isset($_SESSION[$j . 'Direct_Repeat_Length']) ? $_SESSION[$j . 'Direct_Repeat_Length'] : ""; ?>" SIZE=5 MAXLENGTH=10></td>
+                                <td><input type="text" class="seq" name="<?php echo $j; ?>DR_Left_Flank" value="<?php echo isset($_SESSION[$j . 'DR_Left_Flank']) ? $_SESSION[$j . 'DR_Left_Flank'] : ""; ?>" size=40 maxlength=50></td>
+                                <td><input type="text" class="seq" name="<?php echo $j; ?>Direct_Repeat" value="<?php echo isset($_SESSION[$j . 'Direct_Repeat']) ? $_SESSION[$j . 'Direct_Repeat'] : ""; ?>" size=40 maxlength=120></td>
+                                <td><input type="text" class="seq" name="<?php echo $j; ?>DR_Rigth_Flank" value="<?php echo isset($_SESSION[$j . 'DR_Rigth_Flank']) ? $_SESSION[$j . 'DR_Rigth_Flank'] : ""; ?>" size=40 maxlength=50></td>
+                                <td><input type="text" name="<?php echo $j; ?>Direct_Repeat_Length" value="<?php echo isset($_SESSION[$j . 'Direct_Repeat_Length']) ? $_SESSION[$j . 'Direct_Repeat_Length'] : ""; ?>" size=5 maxlength=10></td>
                             </tr>
                         <?php }                // Fin de la boucle for qui affiche les sites d'insertions : general case
                         ?>
@@ -376,10 +376,10 @@ $fond_base = 'class="base_' . $base_name . '"';         // couleur de background
                         <?php           // Boucle pour afficher le nombre de sites voulus
                         for ($j = 0; $j < $_SESSION['nb_site']; $j++) { ?>
                             <tr>
-                                <td><INPUT TYPE="text" class="seq" NAME="<?php echo $j; ?>LE_CS_Left_Flank" VALUE="<?php echo isset($_SESSION[$j . 'LE_CS_Left_Flank']) ? $_SESSION[$j . 'LE_CS_Left_Flank'] : ""; ?>" SIZE=40 MAXLENGTH=50 /></td>
-                                <td><INPUT TYPE="text" class="seq" NAME="<?php echo $j; ?>LE_CS" VALUE="<?php echo isset($_SESSION[$j . 'LE_CS']) ? $_SESSION[$j . 'LE_CS'] : ""; ?>" SIZE=23 MAXLENGTH=20 /></td>
-                                <td><INPUT TYPE="text" class="seq" NAME="<?php echo $j; ?>RE_CS_Rigth_Flank" VALUE="<?php echo isset($_SESSION[$j . 'RE_CS_Rigth_Flank']) ? $_SESSION[$j . 'RE_CS_Rigth_Flank'] : ""; ?>" SIZE=40 MAXLENGTH=50 /></td>
-                                <td><INPUT TYPE="text" class="seq" NAME="<?php echo $j; ?>RE_CS" VALUE="<?php echo isset($_SESSION[$j . 'RE_CS']) ? $_SESSION[$j . 'RE_CS'] : ""; ?>" SIZE=23 MAXLENGTH=20 /></td>
+                                <td><input type="text" class="seq" name="<?php echo $j; ?>LE_CS_Left_Flank" value="<?php echo isset($_SESSION[$j . 'LE_CS_Left_Flank']) ? $_SESSION[$j . 'LE_CS_Left_Flank'] : ""; ?>" size=40 maxlength=50 /></td>
+                                <td><input type="text" class="seq" name="<?php echo $j; ?>LE_CS" value="<?php echo isset($_SESSION[$j . 'LE_CS']) ? $_SESSION[$j . 'LE_CS'] : ""; ?>" size=23 maxlength=20 /></td>
+                                <td><input type="text" class="seq" name="<?php echo $j; ?>RE_CS_Rigth_Flank" value="<?php echo isset($_SESSION[$j . 'RE_CS_Rigth_Flank']) ? $_SESSION[$j . 'RE_CS_Rigth_Flank'] : ""; ?>" size=40 maxlength=50 /></td>
+                                <td><input type="text" class="seq" name="<?php echo $j; ?>RE_CS" value="<?php echo isset($_SESSION[$j . 'RE_CS']) ? $_SESSION[$j . 'RE_CS'] : ""; ?>" size=23 maxlength=20 /></td>
                             </tr>
                         <?php }                // Fin de la boucle for qui affiche les sites d'insertions : single strand case
                         ?>
@@ -396,46 +396,46 @@ $fond_base = 'class="base_' . $base_name . '"';         // couleur de background
                 <a name="Recoding"></a>
                 <div class="entete_propriete">Recoding section</div>
                 <label for="Recodingby" class="entete_propriete_decal">Recoding by :</label>
-                <SELECT NAME="recode">
-                    <OPTION value="NULL" selected <?php if (isset($_SESSION['recode']) && ($_SESSION['recode'] == "NULL" || $_SESSION['recode'] == "")) echo 'selected="selected"'; ?>> </option>
-                    <OPTION value="frameshift" <?php if (isset($_SESSION['recode']) && $_SESSION['recode'] == "frameshift") echo 'selected="selected"'; ?>>frameshift </option>
-                    <OPTION value="selenocysteine" <?php if (isset($_SESSION['recode']) && $_SESSION['recode'] == "selenocysteine") echo 'selected="selected"'; ?>>selenocysteine </option>
-                    <OPTION value="pyrrolysine" <?php if (isset($_SESSION['recode']) && $_SESSION['recode'] == "pyrrolysine") echo 'selected="selected"'; ?>>pyrrolysine </option>
-                </SELECT>
+                <select name="recode">
+                    <option value="NULL" selected <?php if (isset($_SESSION['recode']) && ($_SESSION['recode'] == "NULL" || $_SESSION['recode'] == "")) echo 'selected="selected"'; ?>> </option>
+                    <option value="frameshift" <?php if (isset($_SESSION['recode']) && $_SESSION['recode'] == "frameshift") echo 'selected="selected"'; ?>>frameshift </option>
+                    <option value="selenocysteine" <?php if (isset($_SESSION['recode']) && $_SESSION['recode'] == "selenocysteine") echo 'selected="selected"'; ?>>selenocysteine </option>
+                    <option value="pyrrolysine" <?php if (isset($_SESSION['recode']) && $_SESSION['recode'] == "pyrrolysine") echo 'selected="selected"'; ?>>pyrrolysine </option>
+                </select>
                 <label for="frame" class="entete_propriete_decal">Frame :</label>
-                <SELECT NAME="frame">
-                    <OPTION value="NULL" selected <?php if (isset($_SESSION['frame']) && ($_SESSION['frame'] == "NULL" || $_SESSION['frame'] == "")) echo 'selected="selected"'; ?>> </option>
-                    <OPTION value="-1" <?php if (isset($_SESSION['frame']) && $_SESSION['frame'] == "-1") echo 'selected="selected"'; ?>>-1 </option>
-                    <OPTION value="+1" <?php if (isset($_SESSION['frame']) && $_SESSION['frame'] == "+1") echo 'selected="selected"'; ?>>+1 </option>
-                </SELECT>
+                <select name="frame">
+                    <option value="NULL" selected <?php if (isset($_SESSION['frame']) && ($_SESSION['frame'] == "NULL" || $_SESSION['frame'] == "")) echo 'selected="selected"'; ?>> </option>
+                    <option value="-1" <?php if (isset($_SESSION['frame']) && $_SESSION['frame'] == "-1") echo 'selected="selected"'; ?>>-1 </option>
+                    <option value="+1" <?php if (isset($_SESSION['frame']) && $_SESSION['frame'] == "+1") echo 'selected="selected"'; ?>>+1 </option>
+                </select>
                 <label for="type" class="entete_propriete_decal">Type :</label>
-                <SELECT NAME="type">
-                    <OPTION value="NULL" selected <?php if (isset($_SESSION['type']) && ($_SESSION['type'] == "NULL" || $_SESSION['type'] == "")) echo 'selected="selected"'; ?>> </option>
-                    <OPTION value="translational" <?php if (isset($_SESSION['type']) && $_SESSION['type'] == "translational") echo 'selected="selected"'; ?>>translational</option>
-                    <OPTION value="transcriptional" <?php if (isset($_SESSION['type']) && $_SESSION['type'] == "transcriptional") echo 'selected="selected"'; ?>>transcriptional</option>
-                    <OPTION value="unknow" <?php if (isset($_SESSION['type']) && $_SESSION['type'] == "unknow") echo 'selected="selected"'; ?>>unknow</option>
-                </SELECT>
+                <select name="type">
+                    <option value="NULL" selected <?php if (isset($_SESSION['type']) && ($_SESSION['type'] == "NULL" || $_SESSION['type'] == "")) echo 'selected="selected"'; ?>> </option>
+                    <option value="translational" <?php if (isset($_SESSION['type']) && $_SESSION['type'] == "translational") echo 'selected="selected"'; ?>>translational</option>
+                    <option value="transcriptional" <?php if (isset($_SESSION['type']) && $_SESSION['type'] == "transcriptional") echo 'selected="selected"'; ?>>transcriptional</option>
+                    <option value="unknow" <?php if (isset($_SESSION['type']) && $_SESSION['type'] == "unknow") echo 'selected="selected"'; ?>>unknow</option>
+                </select>
                 <label for="exp_demontred" class="entete_propriete_decal">Experimentally demonstrated :</label>
-                <SELECT NAME="exp_demontred">
-                    <OPTION value="NULL" selected <?php if (isset($_SESSION['exp_demontred']) && ($_SESSION['exp_demontred'] == "NULL" || $_SESSION['exp_demontred'] == "")) echo 'selected="selected"'; ?>> </option>
-                    <OPTION value="Yes" <?php if (isset($_SESSION['exp_demontred']) && $_SESSION['exp_demontred'] == "Yes") echo 'selected="selected"'; ?>>Yes</option>
-                    <OPTION value="No" <?php if (isset($_SESSION['exp_demontred']) && $_SESSION['exp_demontred'] == "No") echo 'selected="selected"'; ?>>No</option>
-                </SELECT>
+                <select name="exp_demontred">
+                    <option value="NULL" selected <?php if (isset($_SESSION['exp_demontred']) && ($_SESSION['exp_demontred'] == "NULL" || $_SESSION['exp_demontred'] == "")) echo 'selected="selected"'; ?>> </option>
+                    <option value="Yes" <?php if (isset($_SESSION['exp_demontred']) && $_SESSION['exp_demontred'] == "Yes") echo 'selected="selected"'; ?>>Yes</option>
+                    <option value="No" <?php if (isset($_SESSION['exp_demontred']) && $_SESSION['exp_demontred'] == "No") echo 'selected="selected"'; ?>>No</option>
+                </select>
 
                 <div class="entete_propriete_decal">Stimulators : </div>
                 <label for="Shine" class='entete_propriete_decal'>Shine-Dalgarno sequence : </label>
-                <SELECT NAME="SD">
-                    <OPTION value="NULL" selected <?php if (isset($_SESSION['SD']) && ($_SESSION['SD'] == "NULL" || $_SESSION['SD'] == "")) echo 'selected="selected"'; ?>> </option>
-                    <OPTION value="Yes" <?php if (isset($_SESSION['SD']) && $_SESSION['SD'] == "Yes") echo 'selected="selected"'; ?>>Yes</option>
-                    <OPTION value="No" <?php if (isset($_SESSION['SD']) && $_SESSION['SD'] == "No") echo 'selected="selected"'; ?>>No</option>
-                </SELECT>
+                <select name="SD">
+                    <option value="NULL" selected <?php if (isset($_SESSION['SD']) && ($_SESSION['SD'] == "NULL" || $_SESSION['SD'] == "")) echo 'selected="selected"'; ?>> </option>
+                    <option value="Yes" <?php if (isset($_SESSION['SD']) && $_SESSION['SD'] == "Yes") echo 'selected="selected"'; ?>>Yes</option>
+                    <option value="No" <?php if (isset($_SESSION['SD']) && $_SESSION['SD'] == "No") echo 'selected="selected"'; ?>>No</option>
+                </select>
                 <label for="structure" class='entete_propriete_decal'>Secondary structure : </label>
-                <SELECT NAME="structure">
-                    <OPTION value="NULL" selected <?php if (isset($_SESSION['structure']) && ($_SESSION['structure'] == "NULL" || $_SESSION['structure'] == "")) echo 'selected="selected"'; ?>> </option>
-                    <OPTION value="No-structure" <?php if (isset($_SESSION['structure']) && $_SESSION['structure'] == "No-structure") echo 'selected="selected"'; ?>>No-structure</option>
-                    <OPTION value="stem-loop" <?php if (isset($_SESSION['structure']) && $_SESSION['structure'] == "stem-loop") echo 'selected="selected"'; ?>>stem-loop</option>
-                    <OPTION value="pseudoknot" <?php if (isset($_SESSION['structure']) && $_SESSION['structure'] == "pseudoknot") echo 'selected="selected"'; ?>>pseudoknot</option>
-                </SELECT>
+                <select name="structure">
+                    <option value="NULL" selected <?php if (isset($_SESSION['structure']) && ($_SESSION['structure'] == "NULL" || $_SESSION['structure'] == "")) echo 'selected="selected"'; ?>> </option>
+                    <option value="No-structure" <?php if (isset($_SESSION['structure']) && $_SESSION['structure'] == "No-structure") echo 'selected="selected"'; ?>>No-structure</option>
+                    <option value="stem-loop" <?php if (isset($_SESSION['structure']) && $_SESSION['structure'] == "stem-loop") echo 'selected="selected"'; ?>>stem-loop</option>
+                    <option value="pseudoknot" <?php if (isset($_SESSION['structure']) && $_SESSION['structure'] == "pseudoknot") echo 'selected="selected"'; ?>>pseudoknot</option>
+                </select>
 
                 <div class="entete_propriete_decal">Recoding motif : </div>
                 <div class="seq"><textarea cols=100 rows=3 name="recoding_seq"><?php echo isset($_SESSION['recoding_seq']) ?  $_SESSION['recoding_seq'] : ""; ?></textarea> </div>
@@ -444,7 +444,7 @@ $fond_base = 'class="base_' . $base_name . '"';         // couleur de background
                 <input type="hidden" name="MAX_FILE_SIZE" value="200000" />
                 <label for="Recoding_image" class='entete_propriete_decal'>Recoding image (file .jpg) :</label>
                 <?php echo $_SESSION['recoding_image'] ?>;
-                <INPUT TYPE="file" NAME="recoding_image" SIZE=20 MAXLENGTH=30 />
+                <input type="file" name="recoding_image" size=20 maxlength=30 />
                 <input type="button" name="rec_image" value="Upload" onclick="document.getElementById('DynModif').value='3' ; document.forms['ficheIS'].submit();" />
                 <?php if (!empty($_SESSION['recoding_image_error'])) {
                     echo "<p class='erreur'>" . $_SESSION['recoding_image_error'];
@@ -489,12 +489,12 @@ mais sans utiliser le bouton Onsubmit ( Attention à ne pas nommer le bouton de 
                                     <th <?php echo $fond_base; ?>>Fusion ORF</th>
                                 </tr>
                                 <tr>
-                                    <td><INPUT TYPE="text" NAME="ORF_Length_DNA<?php echo $i; ?>" align="right" VALUE="<?php echo isset($_SESSION['ORF_Length_DNA' . $i]) ? $_SESSION['ORF_Length_DNA' . $i] : ""; ?>" SIZE=20 MAXLENGTH=50> bp &nbsp;</td>
-                                    <td><INPUT TYPE="text" NAME="ORF_Length_AA<?php echo $i; ?>" alt="aa" VALUE="<?php echo isset($_SESSION['ORF_Length_AA' . $i]) ? $_SESSION['ORF_Length_AA' . $i] : ""; ?>" SIZE=20 MAXLENGTH=50> aa &nbsp;</td>
-                                    <td><INPUT TYPE="text" NAME="ORF_Begin<?php echo $i; ?>" VALUE="<?php echo isset($_SESSION['ORF_Begin' . $i]) ? $_SESSION['ORF_Begin' . $i] : ""; ?>" SIZE=20 MAXLENGTH=120></td>
-                                    <td><INPUT TYPE="text" NAME="ORF_End<?php echo $i; ?>" VALUE="<?php echo isset($_SESSION['ORF_End' . $i]) ? $_SESSION['ORF_End' . $i] : ""; ?>" SIZE=20 MAXLENGTH=50></td>
-                                    <td><INPUT TYPE="text" NAME="ORF_Strand<?php echo $i; ?>" VALUE="<?php echo isset($_SESSION['ORF_Strand' . $i]) ? $_SESSION['ORF_Strand' . $i] : ""; ?>" SIZE=10 MAXLENGTH=10></td>
-                                    <td><INPUT TYPE="text" NAME="ORF_Frameshift<?php echo $i; ?>" VALUE="<?php echo isset($_SESSION['ORF_Frameshift' . $i]) ? $_SESSION['ORF_Frameshift' . $i] : ""; ?>" SIZE=10 MAXLENGTH=10></td>
+                                    <td><input type="text" name="ORF_Length_DNA<?php echo $i; ?>" align="right" value="<?php echo isset($_SESSION['ORF_Length_DNA' . $i]) ? $_SESSION['ORF_Length_DNA' . $i] : ""; ?>" size=20 maxlength=50> bp &nbsp;</td>
+                                    <td><input type="text" name="ORF_Length_AA<?php echo $i; ?>" alt="aa" value="<?php echo isset($_SESSION['ORF_Length_AA' . $i]) ? $_SESSION['ORF_Length_AA' . $i] : ""; ?>" size=20 maxlength=50> aa &nbsp;</td>
+                                    <td><input type="text" name="ORF_Begin<?php echo $i; ?>" value="<?php echo isset($_SESSION['ORF_Begin' . $i]) ? $_SESSION['ORF_Begin' . $i] : ""; ?>" size=20 maxlength=120></td>
+                                    <td><input type="text" name="ORF_End<?php echo $i; ?>" value="<?php echo isset($_SESSION['ORF_End' . $i]) ? $_SESSION['ORF_End' . $i] : ""; ?>" size=20 maxlength=50></td>
+                                    <td><input type="text" name="ORF_Strand<?php echo $i; ?>" value="<?php echo isset($_SESSION['ORF_Strand' . $i]) ? $_SESSION['ORF_Strand' . $i] : ""; ?>" size=10 maxlength=10></td>
+                                    <td><input type="text" name="ORF_Frameshift<?php echo $i; ?>" value="<?php echo isset($_SESSION['ORF_Frameshift' . $i]) ? $_SESSION['ORF_Frameshift' . $i] : ""; ?>" size=10 maxlength=10></td>
                                 </tr>
                             </table>
 
@@ -558,7 +558,7 @@ mais sans utiliser le bouton Onsubmit ( Attention à ne pas nommer le bouton de 
                                         </select>
                                         <p>&nbsp;</p>
                                         <label for="Annotation">Annotation :</label>
-                                        <INPUT type="text" name="PG_annotation<?php echo $i; ?>" VALUE="<?php echo isset($_SESSION['PG_annotation' . $i]) ? $_SESSION['PG_annotation' . $i] : ""; ?> " SIZE=100 MAXLENGTH=150>
+                                        <input type="text" name="PG_annotation<?php echo $i; ?>" value="<?php echo isset($_SESSION['PG_annotation' . $i]) ? $_SESSION['PG_annotation' . $i] : ""; ?> " size=100 maxlength=150>
                                     </div>
                                 </div>
                             </div>
@@ -600,7 +600,7 @@ mais sans utiliser le bouton Onsubmit ( Attention à ne pas nommer le bouton de 
             <div class="piedSection">
                 <ul>
                     <li><input type="submit" name="Onsubmit" value="Submit" onclick="return Confirmer(this)"></li>
-                    <li><INPUT TYPE="reset" name="reset" VALUE="Reset Defaults" onclick="loadPage(window.location.pathname, 0);"></li>
+                    <li><input type="reset" name="reset" value="Reset Defaults" onclick="loadPage(window.location.pathname, 0);"></li>
                 </ul>
             </div>
         </form>
@@ -613,7 +613,7 @@ mais sans utiliser le bouton Onsubmit ( Attention à ne pas nommer le bouton de 
                 <input type="hidden" name="MAX_FILE_SIZE" value="200000" />
                 <label for="Recoding_image" class='entete_propriete_decal'>Recoding image (file .jpg) :</label> 
                     <?php echo $_SESSION['recoding_image'] ?>;
-                    <INPUT TYPE="file" NAME="recoding_image" SIZE=20 MAXLENGTH=30 />    
+                    <input type="file" name="recoding_image" size=20 maxlength=30 />    
                     <input type="submit" name="rec_image" value="Upload" />
                     <?php if (!empty($_SESSION['recoding_image_error'])) { echo "<p class='erreur'>".$_SESSION['recoding_image_error'] ;} ?>
                     </fieldset>

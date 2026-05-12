@@ -78,7 +78,7 @@ if ($cnx = connexion($bdd)) {
             print "</table>";
         }
     } else {                                    /* Pas de rsultat */
-        print "<h2> Requests </h2> Nothing was found<BR/>";
+        print "<h2> Requests </h2> Nothing was found<br/>";
     }
 } else {
     $error = "Problème de connexion";

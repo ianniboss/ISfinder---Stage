@@ -57,7 +57,7 @@ if (isset($_GET['base_submiter']) && $_GET['base_submiter'] == 1) {            /
         affiche_submiters($result, $fond_base);
         print "</table>";
     } else {
-        print "<h2> Submiters </h2> Nothing was found<BR/>";
+        print "<h2> Submiters </h2> Nothing was found<br/>";
     }
 
     // Si la base n'est pas encore choisie on redirige vers index.php

@@ -51,7 +51,7 @@ if ($_GET['base_submiter'] == 1) {            // Affichage de la table Submiters
         affiche_submiters($result, $fond_base);
         print "</table>";
     } else {
-        print "<h2> $base_select </h2> Nothing was found<BR/>";
+        print "<h2> $base_select </h2> Nothing was found<br/>";
     }
 
     // S'il ne s'agit pas de la table Submiters	
@@ -144,7 +144,7 @@ if ($_GET['base_submiter'] == 1) {            // Affichage de la table Submiters
                 }
                 print "</table>";
             } else {                                    /* Pas de rsultat */
-                print "<h2> $base_select </h2> Nothing was found<BR/>";
+                print "<h2> $base_select </h2> Nothing was found<br/>";
             }
         }            // Fin du Foreach (chaque base)
     }            // Fin isset[$_SESSION['base']

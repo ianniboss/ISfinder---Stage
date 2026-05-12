@@ -20,7 +20,7 @@ require_once('includes/aside.inc.php');
     </div>
     <section>
         <form enctype="multipart/form-data" action="blast/ncbiIS.php" method="POST">
-            <h4>Job Title: <INPUT NAME="title" VALUE="" SIZE="60"> </h4>
+            <h4>Job Title: <input name="title" value="" size="60"> </h4>
             <fieldset id="query">
                 <legend>Enter Query Sequence</legend>
                 <ul>
@@ -32,7 +32,7 @@ require_once('includes/aside.inc.php');
                         <input type="button" class="btn-droit" value="Clear" onclick="this.form.elements['seq'].value=''">
                     </li>
                     <li>
-                        Or, upload file <INPUT TYPE="file" NAME="seqfile" />
+                        Or, upload file <input type="file" NAME="seqfile" />
                     </li>
                 </ul>
             </fieldset>
@@ -41,11 +41,11 @@ require_once('includes/aside.inc.php');
                 <ul>
                     <li>
                         <label for="database">Database :</label>
-                        <SELECT style='width:150px' NAME="database">
-                            <OPTION value="isfinder" selected>ISfinder
-                            <OPTION value="ISsub" >ISsubmit
-                            <OPTION value="ISwait" >ISwait
-                        </SELECT>
+                        <select style='width:150px' NAME="database">
+                            <option value="isfinder" selected>ISfinder
+                            <option value="ISsub" >ISsubmit
+                            <option value="ISwait" >ISwait
+                        </select>
                     </li>
                     <?php
                     if ($prog == "blastn") {
@@ -68,13 +68,13 @@ require_once('includes/aside.inc.php');
                     <li>
                         <label for="alignment" style="width:160px">Alignment view options:</label>
                         <select name="alignment" style="width:250px">
-                            <option VALUE="0"> pairwise
-                            <option VALUE="1"> query-anchored showing identities
-                            <option VALUE="2"> query-anchored no identities
-                            <option VALUE="3"> flat query-anchored, show identities
-                            <option VALUE="4"> flat query-anchored, no identities
-                            <option VALUE="5"> XML Blast output
-                            <option VALUE="6"> tabular
+                            <option value="0"> pairwise
+                            <option value="1"> query-anchored showing identities
+                            <option value="2"> query-anchored no identities
+                            <option value="3"> flat query-anchored, show identities
+                            <option value="4"> flat query-anchored, no identities
+                            <option value="5"> XML Blast output
+                            <option value="6"> tabular
                             <option value="7"> tabular with comment lines
                             <option value="10"> Comma-separated values
                         </select>
@@ -83,7 +83,7 @@ require_once('includes/aside.inc.php');
                 <ul class='li-haut'>
                     <li>
                         <label for="wordsize">Word size :</label>
-                        <SELECT NAME="wordsize">
+                        <select name="wordsize">
                             <?php
                             switch ($prog) {
                                 case "blastn":
@@ -98,12 +98,12 @@ require_once('includes/aside.inc.php');
                                     $def = '3';
                             }
                             foreach ($tab_wordsize as $value) {
-                                echo ($value == $def) ? "<OPTION value=$value selected> $value" : "<OPTION value=$value> $value";
+                                echo ($value == $def) ? "<option value=$value selected> $value" : "<option value=$value> $value";
                             }
                             ?>
-                        </SELECT>
+                        </select>
                     </li>
-                    <li><label for="evalue" class="li-large">Evalue : </label><INPUT NAME="expect" VALUE="10.0" SIZE="8">
+                    <li><label for="evalue" class="li-large">Evalue : </label><input name="expect" value="10.0" size="8">
                     </li>
                 </ul>
                 <?php
@@ -113,7 +113,7 @@ require_once('includes/aside.inc.php');
 
                     switch ($prog) {
                         case "blastn":
-                            echo '<SELECT style="width:180px" id="gapcosts" defval="5 2" NAME="gapcosts">';
+                            echo '<select style="width:180px" id="gapcosts" defval="5 2" NAME="gapcosts">';
                             echo '<option value="5 2" selected>Existence: 5 &nbsp;&nbsp;Extension: 2</option>';
                             echo '<option value="2 2">Existence: 2 &nbsp;&nbsp;Extension: 2</option>';
                             echo '<option value="1 2">Existence: 1 &nbsp;&nbsp;Extension: 2</option>';
@@ -122,7 +122,7 @@ require_once('includes/aside.inc.php');
                             echo '<option value="1 1">Existence: 1 &nbsp;&nbsp;Extension: 1</option>';
                             break;
                         case "megabl":
-                            echo '<SELECT style="width:180px" id="gapcosts" defval="" NAME="gapcosts">';
+                            echo '<select style="width:180px" id="gapcosts" defval="" NAME="gapcosts">';
                             echo '<option value="0 0" selected>Linear</option>';
                             echo '<option value="5 2">Existence: 5 &nbsp;&nbsp;Extension: 2</option>';
                             echo '<option value="2 2">Existence: 2 &nbsp;&nbsp;Extension: 2</option>';
@@ -132,7 +132,7 @@ require_once('includes/aside.inc.php');
                             echo '<option value="1 1">Existence: 1 &nbsp;&nbsp;Extension: 1</option>';
                             break;
                         default:
-                            echo '<SELECT style="width:185px" id="gapcosts" defval="11 1" NAME="gapcosts">';
+                            echo '<select style="width:185px" id="gapcosts" defval="11 1" NAME="gapcosts">';
                             echo '<option value="11 2">Existence: 11 &nbsp;&nbsp;Extension: 2</option>';
                             echo '<option value="10 2">Existence: 10 &nbsp;&nbsp;Extension: 2</option>';
                             echo '<option value="9 2">Existence: 9 &nbsp;&nbsp;Extension: 2</option>';
@@ -156,7 +156,7 @@ require_once('includes/aside.inc.php');
 
             <div class="piedSection">
                 <!--			<ul>
-			<li><INPUT TYPE="RESET" VALUE="Reset Defaults"></li>
+			<li><input type="RESET" value="Reset Defaults"></li>
 			</ul>				
 -->
             </div>

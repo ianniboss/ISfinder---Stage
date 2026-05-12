@@ -71,49 +71,49 @@ if (!$cnx) {
                 <ul>
                     <li>
                         <label for="nom">First Name :</label>
-                        <INPUT TYPE="text" NAME="Firstname" VALUE="<?php echo $Firstname; ?>" SIZE="25" MAXLENGTH=60>
+                        <input type="text" NAME="Firstname" value="<?php echo $Firstname; ?>" size="25" maxlength=60>
                     </li>
                     <li>
                         <label for="mname">Middle Name :</label>
-                        <INPUT TYPE="text" NAME="Middlename" VALUE="<?php echo $Middlename; ?>" SIZE="20" MAXLENGTH=60>
+                        <input type="text" NAME="Middlename" value="<?php echo $Middlename; ?>" size="20" maxlength=60>
                     </li>
                     <li>
                         <label for="lname">Last Name :</label>
-                        <INPUT TYPE="text" NAME="Lastname" VALUE="<?php echo $Lastname; ?>" SIZE="25" required MAXLENGTH=60>
+                        <input type="text" NAME="Lastname" value="<?php echo $Lastname; ?>" size="25" required maxlength=60>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <label for="institut">Institution :</label>
-                        <INPUT TYPE="text" NAME="Institution" VALUE="<?php echo $Institution; ?>" SIZE=80 MAXLENGTH=100>
+                        <input type="text" NAME="Institution" value="<?php echo $Institution; ?>" size=80 maxlength=100>
                     </li>
                     <li>
                         <label for="depart">Department :</label>
-                        <INPUT TYPE="text" NAME="Department" VALUE="<?php echo $Department; ?>" SIZE=80 MAXLENGTH=100>
+                        <input type="text" NAME="Department" value="<?php echo $Department; ?>" size=80 maxlength=100>
                     </li>
                     <li>
                         <label for="address">Postal address :</label>
-                        <INPUT TYPE="text" NAME="Address" VALUE="<?php echo $Address; ?>" SIZE=80 MAXLENGTH=100>
+                        <input type="text" NAME="Address" value="<?php echo $Address; ?>" size=80 maxlength=100>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <label for="postCode">Postal/ZIP code :</label>
-                        <INPUT TYPE="text" NAME="Code" VALUE="<?php echo $Code; ?>" SIZE="25" MAXLENGTH=60>
+                        <input type="text" NAME="Code" value="<?php echo $Code; ?>" size="25" maxlength=60>
                     </li>
                     <li>
                         <label for="country">Country :</label>
-                        <INPUT TYPE="text" NAME="Country" VALUE="<?php echo $Country; ?>" SIZE="27" MAXLENGTH=60>
+                        <input type="text" NAME="Country" value="<?php echo $Country; ?>" size="27" maxlength=60>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <label for="courriel">e-mail address :</label>
-                        <INPUT TYPE="email" NAME="Mail" required VALUE="<?php echo $Mail; ?>" SIZE="40" MAXLENGTH=80>
+                        <input type="email" NAME="Mail" required value="<?php echo $Mail; ?>" size="40" maxlength=80>
                     </li>
                     <li>
                         <label for="tel">Telephone :</label>
-                        <INPUT TYPE="text" NAME="Phone" VALUE="<?php echo $Phone; ?>" SIZE="20" MAXLENGTH=60>
+                        <input type="text" NAME="Phone" value="<?php echo $Phone; ?>" size="20" maxlength=60>
                     </li>
                 </ul>
             </fieldset>
@@ -126,10 +126,10 @@ if (!$cnx) {
 
                     <div>
                         <label class="label_gros" for="Qui">Qui :</label>
-                        <SELECT NAME="Qui">
-                            <OPTION value="a">auto-attribué</option>
-                            <OPTION value="r">renommé </option>
-                            <OPTION value="x" selected>isfinder </option>
+                        <select name="Qui">
+                            <option value="a">auto-attribué</option>
+                            <option value="r">renommé </option>
+                            <option value="x" selected>isfinder </option>
                         </SELECT>
                     </div>
                     <ul>
@@ -157,42 +157,42 @@ if (!$cnx) {
                         <tr><th>N°</th><th>ET_name</th><th>Organisme</th><th>Commentaire</th></tr>
                         <?php for ($i = 1; $i <= $nbr_names; $i++) { ?>
                             <tr>
-                                <td><INPUT TYPE="text" NAME="num" VALUE="<?php echo $i; ?>" SIZE=3 ></td>
-                                <td><INPUT TYPE="text" NAME="ET_name<?php echo $i; ?>" required VALUE="<?php echo ""; ?>" SIZE=15 MAXLENGTH=20></td>
-                                <td><SELECT NAME="organism<?php echo $i; ?>">
-                                        <OPTION value="1" selected>Bacteria</option>
-                                        <OPTION value="2">Metagenomic</option>
-                                        <OPTION value="3">Virus </option>
+                                <td><input type="text" NAME="num" value="<?php echo $i; ?>" size=3 ></td>
+                                <td><input type="text" NAME="ET_name<?php echo $i; ?>" required value="<?php echo ""; ?>" size=15 maxlength=20></td>
+                                <td><select name="organism<?php echo $i; ?>">
+                                        <option value="1" selected>Bacteria</option>
+                                        <option value="2">Metagenomic</option>
+                                        <option value="3">Virus </option>
                                     </SELECT> </td>
-                                <td><INPUT TYPE="text" NAME="comment<?php echo $i; ?>" VALUE="" SIZE=95 MAXLENGTH=128></td>
+                                <td><input type="text" NAME="comment<?php echo $i; ?>" value="" size=95 maxlength=128></td>
                             </tr>
                         <?php } ?>
                     </table>
                 <?php } else { ?>
                     <div>
                         <label class="label_gros" for="MGEtype">Qui :</label>
-                        <SELECT NAME="Qui">
-                            <OPTION value="a">auto-attribué</option>
-                            <OPTION value="r">renommé </option>
-                            <OPTION value="x" selected>isfinder </option>
+                        <select name="Qui">
+                            <option value="a">auto-attribué</option>
+                            <option value="r">renommé </option>
+                            <option value="x" selected>isfinder </option>
                         </SELECT>
                     </div>
                     <ul>
                         <li>
                             <label class="label_gros" for="nom">Origine :</label>
-                            <INPUT TYPE="text" NAME="bact_origin" VALUE="<?php echo $bact_origin; ?>" SIZE="40" MAXLENGTH=80>
+                            <input type="text" NAME="bact_origin" value="<?php echo $bact_origin; ?>" size="40" maxlength=80>
                         </li>
                         <li>
                             <label class="label_gros_decal" for="NomType">Nom Type :</label>
-                            <INPUT TYPE="text" NAME="nomType" VALUE="" SIZE="10" MAXLENGTH=20>
+                            <input type="text" NAME="nomType" value="" size="10" maxlength=20>
                         </li>
                         <li>
                             <label class="label_gros" for="nom">Nv taxo :</label>
-                            <INPUT TYPE="text" NAME="new_taxo" VALUE="<?php echo $new_taxo; ?>" SIZE="40" MAXLENGTH=80>
+                            <input type="text" NAME="new_taxo" value="<?php echo $new_taxo; ?>" size="40" maxlength=80>
                         </li>
                         <li>
                             <label class="label_gros_decal" for="comment_NomType">Commentaire :</label>
-                            <INPUT TYPE="text" NAME="comment" VALUE="" SIZE="40" MAXLENGTH=100>
+                            <input type="text" NAME="comment" value="" size="40" maxlength=100>
                         </li>
                     </ul>
                     <ul>
@@ -212,14 +212,14 @@ if (!$cnx) {
                         <tr><th>N°</th><th>ET_name</th><th>Organisme</th><th>Commentaire</th></tr>
                         <?php for ($i = 1; $i <= $nbr_names; $i++) { ?>
                             <tr>
-                                <td><INPUT TYPE="text" NAME="num" VALUE="<?php echo $i; ?>" SIZE=3 ></td>
-                                <td><INPUT TYPE="text" NAME="ET_name<?php echo $i; ?>" required VALUE="<?php echo ""; ?>" SIZE=15 MAXLENGTH=20></td>
-                                <td><SELECT NAME="organism<?php echo $i; ?>">
-                                        <OPTION value="bact" selected>Bacteria</option>
-                                        <OPTION value="meta">Metagenomic</option>
-                                        <OPTION value="virus">Virus </option>
+                                <td><input type="text" NAME="num" value="<?php echo $i; ?>" size=3 ></td>
+                                <td><input type="text" NAME="ET_name<?php echo $i; ?>" required value="<?php echo ""; ?>" size=15 maxlength=20></td>
+                                <td><select name="organism<?php echo $i; ?>">
+                                        <option value="bact" selected>Bacteria</option>
+                                        <option value="meta">Metagenomic</option>
+                                        <option value="virus">Virus </option>
                                     </SELECT> </td>
-                                <td><INPUT TYPE="text" NAME="comments<?php echo $i; ?>" VALUE="" SIZE=95 MAXLENGTH=128></td>
+                                <td><input type="text" NAME="comments<?php echo $i; ?>" value="" size=95 maxlength=128></td>
                             </tr>
                         <?php } ?>
                     </table>
@@ -229,7 +229,7 @@ if (!$cnx) {
             <div class="piedSection">
                 <ul>
                     <li><input type="submit" name="OnsubAttribName" value="Submit" onclick="return Confirmer(this)"></li>
-                    <li><INPUT TYPE="reset" name="reset" VALUE="Reset Defaults" onclick="loadPage(window.location.pathname, 0);"></li>
+                    <li><input type="reset" name="reset" value="Reset Defaults" onclick="loadPage(window.location.pathname, 0);"></li>
                 </ul>
             </div>
         </form>

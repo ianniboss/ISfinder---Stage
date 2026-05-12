@@ -63,49 +63,49 @@ $fond_base = 'class="base_ISsubmiters"';  // couleur de background des <TH>
                 <ul>
                     <li>
                         <label for="nom">First Name :</label>
-                        <INPUT TYPE="text" NAME="Firstname" required VALUE="<?php echo isset($_SESSION['Firstname']) ? $_SESSION['Firstname'] : ""; ?>" SIZE="25" MAXLENGTH=60>
+                        <input type="text" name="Firstname" required value="<?php echo isset($_SESSION['Firstname']) ? $_SESSION['Firstname'] : ""; ?>" size="25" maxlength=60>
                     </li>
                     <li>
                         <label for="mname">Middle Name :</label>
-                        <INPUT TYPE="text" NAME="Middlename" VALUE="<?php echo isset($_SESSION['Middlename']) ? $_SESSION['Middlename'] : ""; ?>" SIZE="20" MAXLENGTH=60>
+                        <input type="text" name="Middlename" value="<?php echo isset($_SESSION['Middlename']) ? $_SESSION['Middlename'] : ""; ?>" size="20" maxlength=60>
                     </li>
                     <li>
                         <label for="lname">Last Name :</label>
-                        <INPUT TYPE="text" NAME="Lastname" VALUE="<?php echo isset($_SESSION['Lastname']) ? $_SESSION['Lastname'] : ""; ?>" SIZE="25" required MAXLENGTH=60>
+                        <input type="text" name="Lastname" value="<?php echo isset($_SESSION['Lastname']) ? $_SESSION['Lastname'] : ""; ?>" size="25" required maxlength=60>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <label for="institut">Institution :</label>
-                        <INPUT TYPE="text" NAME="Institution" VALUE="<?php echo isset($_SESSION['Institution']) ? $_SESSION['Institution'] : ""; ?>" SIZE=80 required MAXLENGTH=100>
+                        <input type="text" name="Institution" value="<?php echo isset($_SESSION['Institution']) ? $_SESSION['Institution'] : ""; ?>" size=80 required maxlength=100>
                     </li>
                     <li>
                         <label for="depart">Department :</label>
-                        <INPUT TYPE="text" NAME="Department" VALUE="<?php echo isset($_SESSION['Department']) ? $_SESSION['Department'] : ""; ?>" SIZE=80 MAXLENGTH=100>
+                        <input type="text" name="Department" value="<?php echo isset($_SESSION['Department']) ? $_SESSION['Department'] : ""; ?>" size=80 maxlength=100>
                     </li>
                     <li>
                         <label for="address">Postal address :</label>
-                        <INPUT TYPE="text" NAME="Address" VALUE="<?php echo isset($_SESSION['Address']) ? $_SESSION['Address'] : ""; ?>" SIZE=80 MAXLENGTH=100>
+                        <input type="text" name="Address" value="<?php echo isset($_SESSION['Address']) ? $_SESSION['Address'] : ""; ?>" size=80 maxlength=100>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <label for="postCode">Postal/ZIP code :</label>
-                        <INPUT TYPE="text" NAME="Code" VALUE="<?php echo isset($_SESSION['Code']) ? $_SESSION['Code'] : ""; ?>" SIZE="25" MAXLENGTH=60>
+                        <input type="text" name="Code" value="<?php echo isset($_SESSION['Code']) ? $_SESSION['Code'] : ""; ?>" size="25" maxlength=60>
                     </li>
                     <li>
                         <label for="country">Country :</label>
-                        <INPUT TYPE="text" NAME="Country" VALUE="<?php echo isset($_SESSION['Country']) ? $_SESSION['Country'] : ""; ?>" SIZE="27" required MAXLENGTH=60>
+                        <input type="text" name="Country" value="<?php echo isset($_SESSION['Country']) ? $_SESSION['Country'] : ""; ?>" size="27" required maxlength=60>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <label for="courriel">e-mail address :</label>
-                        <INPUT TYPE="email" NAME="Mail" VALUE="<?php echo isset($_SESSION['Mail']) ? $_SESSION['Mail'] : ""; ?>" SIZE="40" required MAXLENGTH=80>
+                        <input type="email" name="Mail" value="<?php echo isset($_SESSION['Mail']) ? $_SESSION['Mail'] : ""; ?>" size="40" required maxlength=80>
                     </li>
                     <li>
                         <label for="tel">Telephone :</label>
-                        <INPUT TYPE="text" NAME="Phone" VALUE="<?php echo isset($_SESSION['Phone']) ? $_SESSION['Phone'] : ""; ?>" SIZE="20" MAXLENGTH=60>
+                        <input type="text" name="Phone" value="<?php echo isset($_SESSION['Phone']) ? $_SESSION['Phone'] : ""; ?>" size="20" maxlength=60>
                     </li>
                 </ul>
             </fieldset>
@@ -113,7 +113,7 @@ $fond_base = 'class="base_ISsubmiters"';  // couleur de background des <TH>
             <div class="piedSection">
                 <ul>
                     <li><input type="submit" name="Onsubmit" value="Submit"></li>
-                    <li><INPUT TYPE="reset" name="reset" VALUE="Reset Defaults" onclick="loadPage(window.location.pathname, 0);"></li>
+                    <li><input type="reset" name="reset" value="Reset Defaults" onclick="loadPage(window.location.pathname, 0);"></li>
                 </ul>
             </div>
         </form>
