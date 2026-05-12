@@ -370,25 +370,31 @@ function suppression($ident,$name,$bdd){
   
   if ($cnx){
 	  	// Récupération de l'ident du submiter et Suppression du submiter
-	  $reqIS = "SELECT `Submiters_ID_Submiter` FROM `submission` WHERE `Element_transposable_ID_ET`= $ident LIMIT 1" ;		
-	  $result = execute_sql($cnx,$reqIS);
-	  $submiter = mysqli_fetch_row($result);
+	  if (!empty($ident)) {
+		  $reqIS = "SELECT `Submiters_ID_Submiter` FROM `submission` WHERE `Element_transposable_ID_ET`= $ident LIMIT 1" ;		
+		  $result = execute_sql($cnx,$reqIS);
+		  $submiter = mysqli_fetch_row($result);
 
-			// Suppression du submiter dans la table submiters
-	  $reqIS = "DELETE FROM `submiters` WHERE `ID_Submiter` = $submiter[0] LIMIT 1" ;		
-	  $result = execute_sql($cnx,$reqIS);
-	
-	  	// Récupération des ident des hosts et Suppression des hosts dans la table host
-	  $reqHost = "SELECT `Host_ID_host` FROM `element_transposable_has_host` WHERE `Element_transposable_ID_ET`= $ident" ;		
-	  $result = execute_sql($cnx,$reqHost);
-	  while ($hote = mysqli_fetch_row($result)){
-		  $reqHost = "DELETE FROM `host` WHERE `ID_host` = $hote[0]" ;
-		  $result_supprHote = execute_sql($cnx,$reqHost);		
+		  // Suppression du submiter dans la table submiters (uniquement s'il existe)
+		  if ($submiter && isset($submiter[0])) {
+			  $reqIS = "DELETE FROM `submiters` WHERE `ID_Submiter` = $submiter[0] LIMIT 1" ;		
+			  $result = execute_sql($cnx,$reqIS);
+		  }
+		
+			// Récupération des ident des hosts et Suppression des hosts dans la table host
+		  $reqHost = "SELECT `Host_ID_host` FROM `element_transposable_has_host` WHERE `Element_transposable_ID_ET`= $ident" ;		
+		  $result = execute_sql($cnx,$reqHost);
+		  while ($hote = mysqli_fetch_row($result)){
+			  if (isset($hote[0])) {
+				  $reqDelHost = "DELETE FROM `host` WHERE `ID_host` = $hote[0]" ;
+				  execute_sql($cnx,$reqDelHost);
+			  }
+		  }
+
+				// Suppression de l'élément dans la table element_transposable
+		  $reqDelET = "DELETE FROM `element_transposable` WHERE `ID_ET`= $ident LIMIT 1" ;		
+		  execute_sql($cnx,$reqDelET);
 	  }
-
-			// Suppression de l'élément dans la table element_transposable
-	  $reqIS = "DELETE FROM `element_transposable` WHERE `ID_ET`= $ident LIMIT 1" ;		
-	  $result = execute_sql($cnx,$reqIS);
 	  
 	  mysqli_close($cnx);
   }else{
