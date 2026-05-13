@@ -1,4 +1,4 @@
-<?PHP
+<?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -8,8 +8,4 @@ define('DB_server', 'localhost');
 define('DB_user', 'ibinsyahrulazlan');
 define('DB_password', 'yNCNLvH9vwX^f~$i');
 define('DB_bdd', 'isfinder');
-
-
-
-
 ?>
