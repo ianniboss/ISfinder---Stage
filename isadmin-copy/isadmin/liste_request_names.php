@@ -37,7 +37,7 @@ if ($bdd == "ISsubmit") {        // Requête pour lister les demandes de nom
     */
     $condition = "`bact_origin` LIKE '%$champrecherche%' OR `ET_name` LIKE '%$champrecherche%'";
 
-    $requete = "SELECT `bact_origin`, `ET_name`, `Lastname`, `Firstname`, `date_attribution`
+    $requete = "SELECT `ID_Current_names`, `bact_origin`, `ET_name`, `Lastname`, `Firstname`, `date_attribution`
 	FROM  `nom_type`
 	LEFT JOIN `current_names` CN 	ON `ID_nom_type` = CN.`nom_type_ID_nom_type` 
 	LEFT JOIN `name_attribution` NA 	ON `ID_Current_names` = NA.`current_names_ID_Current_names` 	

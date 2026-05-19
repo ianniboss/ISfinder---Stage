@@ -52,6 +52,8 @@ if ((strlen($id_fichier) == 9) && (!preg_match('/[^A-Za-z0-9]/', $id_fichier)) &
             $stop = false;
             reset($lignes);
             $nbr_lignes = count($lignes);
+            // Correction PHP 8.5 : Initialiser le tableau pour éviter une erreur TypeError si le résultat du blast est vide
+            $lignesext = array();
 
     		// On parse le fichier rsultat de blast pour rajouter les liens vers la base
             while ($lignes[$j] && $j < $nbr_lignes - 1) {
@@ -120,8 +122,10 @@ if ((strlen($id_fichier) == 9) && (!preg_match('/[^A-Za-z0-9]/', $id_fichier)) &
     		// On affiche toutes les lignes
             $nbr_lignes = count($lignesext);
 
-            for ($j = 0; $j < ($nbr_lignes - 1); $j++) {
-                echo $lignesext[$j];
+            if ($nbr_lignes > 0) {
+                for ($j = 0; $j < ($nbr_lignes - 1); $j++) {
+                    echo $lignesext[$j];
+                }
             }
 
             echo "</article></body></html>";

@@ -37,7 +37,10 @@ if (!$cnx) {
     } else {
         $is = mysqli_fetch_array($result);
         foreach ($is as $index => $valeur) {
-            $_SESSION[$index] = strip_tags($valeur);
+            // Correction PHP 8.5 : Ignorer les index numériques pour éviter l'erreur "Skipping numeric key" dans $_SESSION
+            if (!is_numeric($index)) {
+                $_SESSION[$index] = strip_tags($valeur);
+            }
         }
 
         mysqli_close($cnx);

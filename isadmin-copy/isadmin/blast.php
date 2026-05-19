@@ -19,7 +19,9 @@ require_once('includes/aside.inc.php');
         ?>
     </div>
     <section>
-        <form enctype="multipart/form-data" action="blast/ncbiIS.php" method="POST">
+        <!-- <form enctype="multipart/form-data" action="blast/ncbiIS.php" method="POST"> this one for localhost-->
+        <form enctype="multipart/form-data" action="https://secure.ibcg.biotoul.fr/isadmin/blast/ncbiIS.php" method="POST">
+            
             <h4>Job Title: <input name="title" value="" size="60"> </h4>
             <fieldset id="query">
                 <legend>Enter Query Sequence</legend>
@@ -42,7 +44,7 @@ require_once('includes/aside.inc.php');
                     <li>
                         <label for="database">Database :</label>
                         <select style='width:150px' NAME="database">
-                            <option value="isfinder" selected>ISfinder
+                            <option value="ISfinder" selected>ISfinder
                             <option value="ISsub" >ISsubmit
                             <option value="ISwait" >ISwait
                         </select>

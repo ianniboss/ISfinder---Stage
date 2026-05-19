@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 date_default_timezone_set('Europe/Paris');
 
 // On recupere les donnees du formulaire
@@ -171,7 +171,7 @@ $max_process = 3;
 exec("ps -ef|grep blast", $lignes_ret);
 
 if (count($lignes_ret) > $max_process) {
-    echo "<html><head><title>Result</title><body bgcolor="out#F8E9C2"out>\n";
+    echo "<html><head><title>Result</title><body bgcolor=\"#F8E9C2\">\n";
     echo "<br><br><h3>Too many blast processes on this server!!</h3>\n";
     echo "<br>Please try later...</h3><br><br>";
     echo "<a href='javascript:history.go(-1)'>Back...</a>";
@@ -205,7 +205,7 @@ if (count($lignes_ret) > $max_process) {
         echo "URL=resultat.php?id=$nomfich&database=$database&title=$title'></head>\n";
         echo "<body><h2>Please wait, your request is in progress...$nomfich</h2>\n";
         echo "<p>If automatic refresh doesn't work, please click ";
-        echo "<a href="outresultat.php?id=$nomfich&database=$database&title=$title"out>here...</a></p></body></html>\n";
+        echo "<a href=\"resultat.php?id=$nomfich&database=$database&title=$title\">here...</a></p></body></html>\n";
     } else {
         // PHP 8.5 Fix : Suppression de l'URL du serveur de production en dur
         echo "URL=resultatnorm.php?id=$nomfich&title=$title'></head>\n";

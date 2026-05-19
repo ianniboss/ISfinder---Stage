@@ -28,7 +28,7 @@ if (isset($_POST['submitrecherche'])) {
         $$champ = strip_tags($valeur);
     }
 
-    header("Location: ../liste_request_names.php?champ=$champNameAttrRecherche&bdd=ISfinder");
+    header("Location: ../liste_request_names.php?champ=$champNameAttrRecherche&bdd=isfinder");
 
     /* Si formulaire pas soumis  */
 } else {

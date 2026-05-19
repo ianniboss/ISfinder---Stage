@@ -89,14 +89,18 @@ if (intval($_GET['val_session'] ?? 0) != 1) {            // val_session = 1 On g
             $is = mysqli_fetch_array($result);
 
             foreach ($is as $index => $valeur) {
-                $_SESSION[$index] = strip_tags($valeur);
+                // Correction PHP 8.5 : Ignorer les index numériques pour éviter l'erreur "Skipping numeric key" dans $_SESSION
+                if (!is_numeric($index)) {
+                    $_SESSION[$index] = strip_tags($valeur);
+                }
             }
 
             is_submiter($cnx, $_SESSION['ID_ET']);        // récupere le submiter à partir de IDET résulta écrit dans $_SESSION
 
             $origin = is_origin($cnx, $_SESSION['ID_ET']);
             $origintab = explode(" ", $origin);
-            $_SESSION['Origin']    = $origintab[0] . " " . $origintab[1];
+            // Correction PHP 8.5 : Vérifier l'existence de l'index 1 pour éviter l'avertissement "Undefined array key 1"
+            $_SESSION['Origin'] = $origintab[0] . (isset($origintab[1]) ? " " . $origintab[1] : "");
 
             $hosts = is_hosts($cnx, $_SESSION['ID_ET']);
             $i = 0;
