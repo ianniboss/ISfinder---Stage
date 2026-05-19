@@ -128,3 +128,10 @@ migration made on the following pages :
 ### Command to check the error log : 
 
 tail -f /var/log/apache2/error.log
+  
+for line 118 in ficheIS.php:
+print "<ul><li><span class='entete_propriete'>Family </span>".$family."</li>";
+		if (strcasecmp($groupe, 'No group') !== 0) {
+			print "<li><span class='entete_propriete'>Group </span>".$groupe."</li>";
+		}
+		print "</ul>";
