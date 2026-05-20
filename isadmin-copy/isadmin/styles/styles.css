@@ -353,7 +353,7 @@ article {
     margin-left: 16em !important;
     margin-right: 2em !important;
 }
-article h2 {
+.welcome-title {
     text-align: center !important;
 }
 /* --- END PROTOTYPE LAYOUT FIXES --- */
@@ -370,3 +370,54 @@ aside form#ISrecherche input[type="submit"] {
     margin-top: 0 !important;
 }
 /* --- END PROTOTYPE BUTTON POSITION FIX --- */
+
+/* --- PROTOTYPE BUTTON STYLES --- */
+.btn-droit {
+    font-family: inherit !important;
+    font-size: 0.85em !important;
+    padding: 0.4em 1em !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    font-weight: bold !important;
+    transition: all 0.2s ease !important;
+    display: inline-block !important;
+    text-align: center !important;
+    border: none !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+}
+
+/* Primary Button (Submit) */
+.btn-droit[type="submit"] {
+    background: #a70003 !important;
+    color: #fff !important;
+}
+
+.btn-droit[type="submit"]:hover {
+    background: #c90004 !important;
+    box-shadow: 0 2px 5px rgba(167,0,3,0.3) !important;
+    transform: translateY(-1px) !important;
+}
+
+.btn-droit[type="submit"]:active {
+    transform: translateY(0) !important;
+}
+
+/* Secondary Button (Clear) */
+.btn-droit[type="button"] {
+    background: #fff !important;
+    color: #555 !important;
+    border: 1px solid #bdac99 !important;
+    margin-bottom: 0.5em !important;
+}
+
+.btn-droit[type="button"]:hover {
+    background: #f7f5f2 !important;
+    color: #a70003 !important;
+    border-color: #a70003 !important;
+    transform: translateY(-1px) !important;
+}
+
+.btn-droit[type="button"]:active {
+    transform: translateY(0) !important;
+}
+/* --- END PROTOTYPE BUTTON STYLES --- */

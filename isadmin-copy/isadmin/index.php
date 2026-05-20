@@ -5,7 +5,7 @@ require_once('includes/aside.inc.php');
 
 <article>
     <section>
-        <h2> Bienvenue sur l'outil de gestion d'ISfinder </h2>
+        <h2 class="welcome-title"> Bienvenue sur l'outil de gestion d'ISfinder </h2>
 
         <table>
             <tr>
