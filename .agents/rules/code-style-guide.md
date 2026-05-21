@@ -175,6 +175,7 @@ Always verify:
 3. Verify database
 4. Test edge cases
 5. Confirm no regression
+6. Add comments as to why the changes are made so that its easy to understand (anyone who sees the code can know why)
 
 ---
 
