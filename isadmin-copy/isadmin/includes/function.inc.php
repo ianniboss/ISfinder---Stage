@@ -75,12 +75,18 @@ function mysqli_result($res, $row = 0, $col = 0) {
 //executer requete
 function execute_sql($connect, $req)
 {
-    $res = mysqli_query($connect, $req);
-    if ($res === false) {
-        erreur_sql($res, $req, $connect);
-        exit;
+    try {
+        $res = mysqli_query($connect, $req);
+        if ($res === false) {
+            erreur_sql($res, $req, $connect);
+            exit;
+        }
+        return $res;
+    } catch (mysqli_sql_exception $e) {
+        echo "<div style='color:red;'><b>SQL Error:</b> " . $e->getMessage() . "<br><b>Query:</b> " . htmlspecialchars($req) . "</div>";
+        // Re-throw to maintain error trace or just exit
+        throw $e;
     }
-    return $res;
 }
 
 // La variable est une séquence nucléotidique

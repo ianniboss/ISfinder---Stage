@@ -146,8 +146,10 @@ if (intval($_GET['val_session'] ?? 0) != 1) {            // val_session = 1 On g
                 // la structure de la BDD ISfinder est différente d'ISsubmit aussi pour groupe et famille
                 $parent = unserialize(is_champX($cnx, 'Element_transposable_parent_ID_ET', 'parent_link', 'Element_transposable_ID_ET', $_SESSION['ID_ET'], ''));
                 $_SESSION['parents'] = "";
-                for ($i = 0; $i < count($parent) && $parent; $i++) {
-                    $_SESSION['parents'] = $_SESSION['parents'] . $parent[$i]['Element_transposable_parent_ID_ET'] . " ";
+                if (is_array($parent)) {
+                    for ($i = 0; $i < count($parent); $i++) {
+                        $_SESSION['parents'] = $_SESSION['parents'] . $parent[$i]['Element_transposable_parent_ID_ET'] . " ";
+                    }
                 }
 
                 $result_syn = (!empty($is['Synonyme'])) ? is_syn($cnx, $_SESSION['ID_ET']) : null;

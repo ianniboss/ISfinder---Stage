@@ -143,6 +143,22 @@ function ecrit_data($ident, $name, $base_ecriture) {
                     $_SESSION["error"] .= (isset($$var_dynamique) && estprot($$var_dynamique) != true) ? "Only amino acid and * are allowed.</br>" : "";
                 }
             }
+            // PHP 8.5 Fix: Prevent Fatal Error if Family doesn't exist
+            $sql_family_check = "SELECT ID_Family FROM `family` WHERE `Family_Name` LIKE '" . mysqli_real_escape_string($cnx, $Family_ID_Family) . "' LIMIT 1";
+            $res_family_check = execute_sql($cnx, $sql_family_check);
+            if (mysqli_num_rows($res_family_check) == 0 && !empty($Family_ID_Family)) {
+                $_SESSION["error"] .= "La famille d'IS <b>" . htmlspecialchars($Family_ID_Family) . "</b> n'existe pas dans la base ISfinder ! Veuillez d'abord la créer via phpMyAdmin avant d'approuver cette soumission.</br>";
+            }
+
+            // Optional: Also check Groups if provided
+            if (!empty($Groups_ID_Groups)) {
+                $sql_group_check = "SELECT ID_Groups FROM `groups` WHERE `Group_Name` LIKE '" . mysqli_real_escape_string($cnx, $Groups_ID_Groups) . "' LIMIT 1";
+                $res_group_check = execute_sql($cnx, $sql_group_check);
+                if (mysqli_num_rows($res_group_check) == 0) {
+                    $_SESSION["error"] .= "Le groupe d'IS <b>" . htmlspecialchars($Groups_ID_Groups) . "</b> n'existe pas dans la base ISfinder ! Veuillez d'abord le créer via phpMyAdmin.</br>";
+                }
+            }
+
 
             if ($_SESSION["error"] === "") {
                 /*				foreach ($_SESSION as $elt_session => $var_session){			// Pour afficher les variables sur la page web 
@@ -167,11 +183,13 @@ function ecrit_data($ident, $name, $base_ecriture) {
                 $res = execute_sql($cnx, $sql_group);
                 $res_grp = mysqli_fetch_assoc($res);
                 $group = ($res_grp) ? "'" . $res_grp['ID_Groups'] . "'" : "NULL";
+                $group_sql = $group;
 
                 $sql_family = "SELECT ID_Family FROM `family` WHERE `Family_Name` LIKE '$Family_ID_Family' LIMIT 1";
                 $res = execute_sql($cnx, $sql_family);
                 $res_fam = mysqli_fetch_assoc($res);
                 $family = ($res_fam) ? $res_fam['ID_Family'] : "0";
+                $family_sql = ($res_fam) ? "'" . $res_fam['ID_Family'] . "'" : "NULL";
 
                 $sql_iso = "SELECT ID_ET FROM `element_transposable` WHERE `ET_Name` LIKE '$ID_iso' LIMIT 1";
                 $res = execute_sql($cnx, $sql_iso);
@@ -207,7 +225,7 @@ function ecrit_data($ident, $name, $base_ecriture) {
                 $submission_date_sql = (empty($Submission_date) || $Submission_date == "0000-00-00") ? "NULL" : "'" . mysqli_real_escape_string($cnx, $Submission_date) . "'";
 
                 $sql_sub = "INSERT INTO element_transposable(Groups_ID_Groups, Family_ID_Family, type_element_transposable_ID_Type_ET, ET_Accession_number, ET_name, ET_Length, ET_partial, ET_DNA_Sequence, Transposition, ET_Blast_Result, ET_Comments, ET_Private_comments, ET_Reference, ID_iso, recode, frame, type, recoding_seq, recoding_annot, SD,structure, exp_demontred, recoding_image )";
-                $sql_sub .= " VALUES ($group, '" . $family . "', $type_id_sql, '" . $ET_Accession_number . "', '" . $ET_name . "', $length_sql, $partial_sql, '" . $ET_DNA_Sequence . "', $transposition_sql, $blast_result_sql, $comments_sql, $private_comments_sql, $reference_sql, $iso, $recode_sql, $frame_sql, $type_sql, $recoding_seq_sql, $recoding_annot_sql, $SD_sql, $structure_sql, $exp_demontred_sql, $recoding_image_sql)";
+                $sql_sub .= " VALUES ($group_sql, $family_sql, $type_id_sql, '" . $ET_Accession_number . "', '" . $ET_name . "', $length_sql, $partial_sql, '" . $ET_DNA_Sequence . "', $transposition_sql, $blast_result_sql, $comments_sql, $private_comments_sql, $reference_sql, $iso, $recode_sql, $frame_sql, $type_sql, $recoding_seq_sql, $recoding_annot_sql, $SD_sql, $structure_sql, $exp_demontred_sql, $recoding_image_sql)";
 
                 $result = execute_sql($cnx, $sql_sub);
                 $ID_ET = mysqli_insert_id($cnx);
