@@ -131,8 +131,10 @@ if (isset($_GET['base_submiter']) && $_GET['base_submiter'] == 1) {            /
             $result = execute_sql($cnx, $reqtrier);
             $nombre = mysqli_num_rows($result);
 
+            $display_title = ($base_select === "IS") ? "ISFinder" : $base_select;
+
             if ($nombre > 0) {
-                echo "<h2> $base_select </h2>";
+                echo "<h2> $display_title </h2>";
                 print "<h3>Result of your query: " . $nombre . "</h3>";
                 /*			$nom=sort_link('Name','ET_name',$_SESSION['champrecherche'],$champ);
                 			$family=sort_link('Family',$famille,$_SESSION['champrecherche'],$champ);
@@ -153,7 +155,7 @@ if (isset($_GET['base_submiter']) && $_GET['base_submiter'] == 1) {            /
                 }
                 print "</table>";
             } else {                                    /* Pas de rsultat */
-                print "<h2> $base_select </h2> Nothing was found<BR/>";
+                print "<h2> $display_title </h2> Nothing was found<BR/>";
             }
         }            // Fin du Foreach (chaque base)
     }            // Fin isset[$_SESSION['base']
