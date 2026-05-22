@@ -193,7 +193,8 @@ if (count($lignes_ret) > $max_process) {
         }
 
 		# La commande finale, tout est redirige dans un fichier pour avoir aussi les messages d'erreurs.
-        // PHP 8.5 Fix : Remplacement de la syntaxe specifique bash '>&' par la redirection standard POSIX '> $file 2>&1 &' pour eviter les erreurs de syntaxe shell
+        // PHP 8.5 Fix : Remplacement de la syntaxe specifique bash '>&' par la redirection standard POSIX '> 
+        // $file 2>&1 &' pour eviter les erreurs de syntaxe shell
         $finalcom = "/var/www/html/secure/isadmin/blast/bin/" . $command . " > $fichfinal 2>&1 &";
         $result = exec($finalcom);
     }
