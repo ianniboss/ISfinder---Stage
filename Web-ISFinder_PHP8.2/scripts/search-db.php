@@ -29,8 +29,6 @@ include_once('../include/menu.inc.php');
 <?php 
 include_once ("../include/function.inc.php");
 include_once ("../include/affiche.inc.php");
-var_dump($_POST);
-die(); // Arrête l'exécution du script pour voir uniquement le résultat de var_dump
 // $demande_tri = isset($_SESSION["demande_tri"]) ? $_SESSION["demande_tri"] : '0';
 // $form_soumis = (!empty($_POST['Onsubmit'])) ? htmlspecialchars($_POST['Onsubmit']) : Null ;
 

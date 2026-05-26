@@ -14,7 +14,17 @@ function addressMail($prenomDest, $nomDest, $domaineDest) {
 }
 
 // Database Connection
-function connexion($host, $user, $bdd, $mdp) {
+// Supports both shorthand (1 arg: DB name) and full (4 args: host, user, db, password) forms.
+// The shorthand form uses the server's known credentials.
+function connexion($host, $user = null, $bdd = null, $mdp = null) {
+    // Shorthand: connexion("ISfinder") or connexion("ISsubmit")
+    if ($user === null) {
+        $dbname = $host;
+        $host   = 'localhost';
+        $user   = 'isfinder';
+        $mdp    = 'mCjMPEJ_16';
+        $bdd    = $dbname;
+    }
     $connecte = mysqli_connect($host, $user, $mdp, $bdd) or die("Server connection error");
     mysqli_select_db($connecte, $bdd) or die("connection error to the database" . $bdd);
     mysqli_query($connecte, "SET NAMES 'utf8'");
