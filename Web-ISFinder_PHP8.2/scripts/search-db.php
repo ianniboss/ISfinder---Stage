@@ -4,13 +4,12 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-<title>Result of your query</title>
-<meta charset="utf-8" /> 
-<link type="text/css" rel="stylesheet" href="../styles/styles.css" media="screen" />
-<link type="text/css" rel="stylesheet" href="../styles/menu.css" media="screen" />
-<link rel="icon" href="favicon.ico" type="image/x-icon">
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-
+	<title>Result of your query</title>
+	<meta charset="utf-8" /> 
+	<link type="text/css" rel="stylesheet" href="../styles/styles.css" media="screen" />
+	<link type="text/css" rel="stylesheet" href="../styles/menu.css" media="screen" />
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -20,7 +19,7 @@ session_start();
 
 <?php 
 $nav_en_cours='tools';
-include('../include/menu.inc.php');
+include_once('../include/menu.inc.php');
 ?>
 <article>
 
@@ -28,8 +27,8 @@ include('../include/menu.inc.php');
 	<section> 
 
 <?php 
-Include_once ("../include/function.inc.php");
-Include_once ("../include/affiche.inc.php");
+include_once ("../include/function.inc.php");
+include_once ("../include/affiche.inc.php");
 var_dump($_POST);
 die(); // Arrête l'exécution du script pour voir uniquement le résultat de var_dump
 // $demande_tri = isset($_SESSION["demande_tri"]) ? $_SESSION["demande_tri"] : '0';
@@ -72,8 +71,8 @@ if($form_soumis === "Submit" || $_SESSION['demande_tri'] == 1){
 
 	 // On récupère les champs soumis en supprimant les balises HTML avec une valeur par défaut si non défini
        // $name 			= isset($_POST['name']) ? trim(strip_tags($_POST['name'])) : null;
-$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
-$name = !empty($name) ? trim($name) : null;
+		$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
+		$name = !empty($name) ? trim($name) : null;
 
         $accession     = isset($_POST['accession']) ? strip_tags($_POST['accession']) : null;
         $family        = isset($_POST['family']) ? strip_tags($_POST['family']) : null;
@@ -349,13 +348,13 @@ $name = !empty($name) ? trim($name) : null;
 		$nom=sort_link('Name','ET_name');
 		$family=sort_link('Family','Family_Name');
 		$group=sort_link('Group','Group_Name');
-//		$origin=sort_link('Origin','Host');
+		//$origin=sort_link('Origin','Host');
 		$length=sort_link('Length','ET_Length');
 		$DR=sort_link('DR','Direct_Repeat_Length');
 
 		print "<h3>Result of your query: ".$nombre."</h3>";
 		print "<table>";
-// echo $reqfinal;
+		// echo $reqfinal;
 		$output = $_SESSION['affichage'];
 		if ($output==0){
 			print "<table class=\"result\"><tr><th>N°</th><th>$nom</th><th>$family</th><th>$group</th>";
@@ -397,7 +396,7 @@ $name = !empty($name) ? trim($name) : null;
 ?>
 	</section>
 </article>
-<?php include('../include/footer.inc.php'); ?>
+<?php include_once('../include/footer.inc.php'); ?>
 
 </div> <!-- Fin du div page -->
 </body>

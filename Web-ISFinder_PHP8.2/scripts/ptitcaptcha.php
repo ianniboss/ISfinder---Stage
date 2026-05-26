@@ -6,32 +6,25 @@
  * @license Creative Commons By
  * @license http://creativecommons.org/licenses/by/2.0/fr/
  */
- 
-/* Change it to have a specific encoding ! 
-define("PTITCAPTCHA_ENTROPY","ABCDEFGHJKLMNPRSTUVWXYZabcdefghklmnpqrstuvwxyz23456789");
-*/
 
-define("PTITCAPTCHA_ENTROPY","pionduitr");
+define("PTITCAPTCHA_ENTROPY", "pionduitr");
  
 /* Choose length (max 32) */
-define("PTITCAPTCHA_LENGTH",5);
+define("PTITCAPTCHA_LENGTH", 5);
  
 $GLOBALS["ptitcaptcha_akey"] = md5(uniqid(rand(), true));
  
 /**
  * Helper to generate html form tags
- *
  */
-class PtitCaptchaHelper
-{
+class PtitCaptchaHelper {
     /**
      * Generate IMG Tag
      *
      * @param string $baseuri : relative or absolute path to folder containing this file on web
      * @return string IMG Tag
      */
-    public static function generateImgTags($baseuri)
-    {
+    public static function generateImgTags($baseuri) {
         return "<a href=\"#\"><img alt=\"???\" title=\"?\"" .
             " src=\"" . $baseuri . "scripts/ptitcaptcha.php?pck=" . $GLOBALS['ptitcaptcha_akey'] . "\"" .
             " id=\"ptitcaptcha\"" .
@@ -45,8 +38,7 @@ class PtitCaptchaHelper
      *
      * @return string input hidden tag
      */
-    public static function generateHiddenTags()
-    {
+    public static function generateHiddenTags() {
         return "<input type=\"hidden\" name=\"ptitcaptcha_key\" value=\"" . $GLOBALS['ptitcaptcha_akey'] . "\"/>";
     }
  
@@ -55,8 +47,7 @@ class PtitCaptchaHelper
      *
      * @return string input tag
      */
-    public static function generateInputTags()
-    {
+    public static function generateInputTags() {
         return "<input type=\"text\" name=\"ptitcaptcha_entry\" value=\"\"/>";
     }
  
@@ -65,12 +56,11 @@ class PtitCaptchaHelper
      *
      * @return boolean (true=correct, false=incorrect)
      */
-    public static function checkCaptcha()
-    {
+    public static function checkCaptcha() {
         $captcha_entre = isset($_POST['ptitcaptcha_entry']) ? htmlentities($_POST['ptitcaptcha_entry']) : '';
         $captcha_key = isset($_POST['ptitcaptcha_key']) ? htmlentities($_POST['ptitcaptcha_key']) : '';
         
-        if (!empty($captcha_entre) && $captcha_entre == self::_getDisplayText($captcha_key)) {
+        if (!empty($captcha_entre) && $captcha_entre === self::_getDisplayText($captcha_key)) {
             return true;
         }
         return false;
@@ -82,8 +72,7 @@ class PtitCaptchaHelper
      * @param string $pck
      * @return string
      */
-    public static function _getDisplayText($pck)
-    {
+    public static function _getDisplayText($pck) {
         $src = md5(PTITCAPTCHA_ENTROPY . $pck);
         $txt = "";
         for ($i = 0; $i < PTITCAPTCHA_LENGTH; $i++) {
@@ -92,7 +81,6 @@ class PtitCaptchaHelper
         return $txt;
     }
 }	
- 
  
 // If script called directly : generate image
 $cle = isset($_GET["pck"]) ? htmlentities($_GET["pck"]) : '';

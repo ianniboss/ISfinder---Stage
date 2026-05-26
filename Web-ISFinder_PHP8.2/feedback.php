@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Comments and Suggession</title>
-<meta charset="utf-8" /> 
-<meta name="author" content="Jo" />
-<meta name="keywords" content="Feedback" />
-<link type="text/css" rel="stylesheet" href="styles/styles.css" media="screen" />
-<link type="text/css" rel="stylesheet" href="styles/submission.css" media="screen" />
-<link type="text/css" rel="stylesheet" href="styles/styles_feedback.css" media="screen" />
-<link type="text/css" rel="stylesheet" href="styles/menu.css" media="screen" />
-<link rel="icon" href="favicon.ico" type="image/x-icon">
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>Comments and Suggession</title>
+    <meta charset="utf-8" /> 
+    <meta name="author" content="Jo" />
+    <meta name="keywords" content="Feedback" />
+    <link type="text/css" rel="stylesheet" href="styles/styles.css" media="screen" />
+    <link type="text/css" rel="stylesheet" href="styles/submission.css" media="screen" />
+    <link type="text/css" rel="stylesheet" href="styles/styles_feedback.css" media="screen" />
+    <link type="text/css" rel="stylesheet" href="styles/menu.css" media="screen" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
 <div id="page">

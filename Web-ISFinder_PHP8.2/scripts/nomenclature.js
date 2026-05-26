@@ -1,5 +1,3 @@
-
-// ___________________________________________________________________________________
 // Rechargement de la page (meme url sans la partie ? .....) avec transmission de 3 parametres
 function reLoadPage3Param(page_form,lettre,type,host) {
 	var type ;

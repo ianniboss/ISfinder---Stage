@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>ISfinder</title>
-<meta charset="utf-8" /> 
-<meta name="author" content="Jo" />
-<meta name="keywords" content="IS, Insertion Sequence" />
-<link type="text/css" rel="stylesheet" href="../styles/styles.css" media="screen" />
-<link type="text/css" rel="stylesheet" href="../styles/menu.css" media="screen" />
-<link type="text/css" rel="stylesheet" href="../styles/ficheMGE.css" media="screen" />
-<link rel="icon" href="../favicon.ico" type="image/x-icon">
-<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+	<title>ISfinder</title>
+	<meta charset="utf-8" /> 
+	<meta name="author" content="Jo" />
+	<meta name="keywords" content="IS, Insertion Sequence" />
+	<link type="text/css" rel="stylesheet" href="../styles/styles.css" media="screen" />
+	<link type="text/css" rel="stylesheet" href="../styles/menu.css" media="screen" />
+	<link type="text/css" rel="stylesheet" href="../styles/ficheMGE.css" media="screen" />
+	<link rel="icon" href="../favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
 </head>
 <body>
 <div id="page">
@@ -20,8 +20,8 @@
 header('Content-Type: text/html; charset=UTF-8'); 
 $nav_en_cours='tools';
 include('../include/menu.inc.php'); 
-Include_once ("../include/function.inc.php");
-Include_once ("../include/affiche.inc.php");	
+include_once ("../include/function.inc.php");
+include_once ("../include/affiche.inc.php");	
 
 	/* Ajout pour register globals off*/
 $name = (!empty($_GET['name'])) ? htmlspecialchars($_GET['name']) : "" ;
@@ -310,34 +310,40 @@ mysqli_close($cnx);
     </section>
     
     <section>
-    <div class="enteteSection">
-	<span class='entete_propriete'>Comments</span>
-	</div>
-    <div class="texte">
-	<?php print nl2br($comment); ?></div>
-   	<div class="piedSection"></div>    
-    </section>   
-     
-    <div class="enteteSection">
-	<span class='entete_propriete'>References</span>
-	</div>
-    <div class="texte">
-	<?php print nl2br($reference); ?></div>
-   	<div class="piedSection"></div>    
+		<div class="enteteSection">
+			<span class='entete_propriete'>Comments</span>
+		</div>
+
+		<div class="texte">
+			<?php print nl2br($comment); ?>
+		</div>
+
+		<div class="piedSection"></div>  
+
+		</section>   
+		
+		<div class="enteteSection">
+			<span class='entete_propriete'>References</span>
+		</div>
+		
+		<div class="texte">
+			<?php print nl2br($reference); ?>
+		</div>
+		<div class="piedSection"></div>    
     </section> 
 </article>
 
 <?php
-include('../include/footer.inc.php');
-		}else{
+include_once('../include/footer.inc.php');
+	} else {
+		erreur_val("name", "Sequence IS not found");
+	}
+	} else {
 			erreur_val("name", "Sequence IS not found");
 		}
-	}else{
-			erreur_val("name", "Sequence IS not found");
-		}
-}else{
-	erreur_val("name", "Sequence not found");
-}
+	} else {
+		erreur_val("name", "Sequence not found");
+	}
 ?>
 
 </div> <!-- Fin du div page -->
