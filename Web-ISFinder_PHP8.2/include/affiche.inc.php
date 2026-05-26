@@ -26,7 +26,7 @@ function ncbi_origin_link($origin) {
 		$oritab = array();
 
         $oritab = explode(" ", $origin); 
-        for ($k=2;$k<count($oritab);$k++) {
+        for ($k=2;$k<(is_array($oritab) ? count($oritab) : 0);$k++) {
                 $texteori=$texteori." ".$oritab[$k];
         }
 		$oritab[0] = (!empty($oritab[0])) ? $oritab[0] : "";
@@ -165,7 +165,8 @@ function affiche_result($result,$sortie) {
 					// ORF Affichage de longueur, begin et end pour chaque orf
 				print "<td>" ;
 				$result_orfs = unserialize(is_champX("ORF_Length_AA`, `ORF_Begin`, `ORF_End","orf","Element_transposable_ID_ET",$IDET));
-				$size = !empty($result_orfs) ? count($result_orfs) : 0;
+				// PHP 8.5: guard count() on $result_orfs in case unserialize returns false
+				$size = (is_array($result_orfs)) ? count($result_orfs) : 0;
 				for ($j = 0 ; $j < $size ; $j++){
 					print $result_orfs[$j]['ORF_Length_AA']." (".$result_orfs[$j]['ORF_Begin']."-".$result_orfs[$j]['ORF_End'].")<BR>";
 					}

@@ -96,7 +96,8 @@ $reqIS = "SELECT `ID_ET`,`ET_name`,`ET_Length`,`ET_Accession_number`,`ID_iso`,`S
 	
 			$insertion_site= is_champX('*','et_insertion_site','Element_transposable_ID_ET',$ID_ET);
 			$insertion = unserialize ($insertion_site);
-			$nbr_siteInsert = ($insertion == '') ? 0 : count($insertion) ;
+			// PHP 8.5: count() on non-array throws TypeError; guard with is_array()
+			$nbr_siteInsert = is_array($insertion) ? count($insertion) : 0 ;
 	
 	/*		$Left_flank= is_champ('DR_Left_Flank','et_insertion_site','Element_transposable_ID_ET',$ID_ET);
 			$Direct_repeat= is_champ('Direct_Repeat','et_insertion_site','Element_transposable_ID_ET',$ID_ET);

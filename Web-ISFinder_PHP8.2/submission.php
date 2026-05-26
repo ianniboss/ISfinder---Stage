@@ -1,5 +1,7 @@
 <?php
-session_start(); //déclare l'ouverture d'une session si aucune n'a été déclarée auparavant.
+if (session_status() === PHP_SESSION_NONE) {
+    session_start(); //déclare l'ouverture d'une session si aucune n'a été déclarée auparavant.
+}
 //Gestion du bouton reset
 $raz = (empty($_GET['raz'])) ? 0 : intval($_GET['raz']);
 if ($raz == 1) {

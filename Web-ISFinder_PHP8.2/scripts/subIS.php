@@ -224,7 +224,8 @@ if ($form_soumis == "Submit") {
 
             // règle pb de $orf_function dans l'écriture de la requête Sql: Qd Null, il ne faut pas les '' mais si valeur il faut 'valeur' avec les apostrophes
             $orf_function_ecriture = ($orf_function == 'NULL') ? $orf_function : "'".$orf_function."'";
-            $sql_sub .= " VALUES ('".$ID_ET."',$chem, $chemAG,$chemPG,'".intval($$var_dyn_begin)."','".intval($$var_dyn_end)."','".$$var_dyn_seq."','".$i."', '".$$var_dyn_strand."', '".mysqli_real_escape_string($cnx, $$var_dyn_comment)."', '".intval($$var_dyn_lengthbp)."', '".intval($$var_dyn_lengthaa)."', '".$$var_dyn_frameshift."', $orf_function_ecriture, '".mysqli_real_escape_string($cnx, $$var_dyn_annotation)."')";
+            // SQL hardening: $$var_dyn_seq escaped (free-text sequence); strand/frameshift cast to int (integer flags from select)
+            $sql_sub .= " VALUES ('".$ID_ET."',$chem, $chemAG,$chemPG,'".intval($$var_dyn_begin)."','".intval($$var_dyn_end)."','".mysqli_real_escape_string($cnx, $$var_dyn_seq)."','".$i."', '".intval($$var_dyn_strand)."', '".mysqli_real_escape_string($cnx, $$var_dyn_comment)."', '".intval($$var_dyn_lengthbp)."', '".intval($$var_dyn_lengthaa)."', '".intval($$var_dyn_frameshift)."', $orf_function_ecriture, '".mysqli_real_escape_string($cnx, $$var_dyn_annotation)."')";
 
             if ($$var_dyn_chem != '' || $$var_dyn_chemAG != '' || $$var_dyn_chemPG != '' || $$var_dyn_begin != '' || $$var_dyn_end != '' || $$var_dyn_seq != '' || $$var_dyn_strand != '' || $$var_dyn_comment != '' || $$var_dyn_lengthbp != '' || $$var_dyn_lengthaa != '' || $$var_dyn_frameshift != '' || $$var_dyn_function != '') {
                 $res = execute_sql_new($cnx, $sql_sub);

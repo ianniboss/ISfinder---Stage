@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 // Gestion du bouton reset
 $raz = (isset($_GET['raz'])) ? intval($_GET['raz']) : 0;
 if ($raz == 1) {
