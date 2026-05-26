@@ -42,13 +42,7 @@
         <li<?php if ($nav_en_cours == 'about') { echo ' id="en-cours"'; } ?>><a href="#">ABOUT</a>
             <ul class="sousmenu">
                 <li><a href="/about.php">About</a></li>
-                <li><a href="/howto.php">How to ...</a>
-                    <ul class="sousmenu2">
-                        <li><a href="/howto.php">cite ?</a></li>
-                        <li><a href="/howto.php">Request an attribution number ?</a></li>
-                        <li><a href="/howto.php">Submit a sequence ?</a></li>
-                    </ul>        
-                </li>
+                <li><a href="/howto.php">How to ...</a></li>
                 <li><a href="/credits.php">Credits</a></li>
                 <li><a href="/feedback.php">Feedback</a></li>
                 <li><a href="/under_construct.php">ISfinder team</a></li>
