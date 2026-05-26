@@ -1,10 +1,122 @@
-table.links{
-	border-spacing:2px 2px;
-    margin-bottom:10px;
-	margin-top:1.5em;	 
-	width:97%;
-	}
-th.links{
-	background-color:#9ca8ba;
-	width:25%;
- }
+/*
+ * links.css — Card grid layout for the Favourite Links page
+ *
+ * WHY: Replaces legacy table-based layout with a modern card grid.
+ *       Approved by Patricia based on wireframe.
+ *       Colors reuse the existing site palette from styles.css.
+ *
+ * LAYOUT: Horizontal carousel per category.
+ *         4 cards visible at a time, arrow slides to reveal more.
+ */
+
+/* ── Category sections ── */
+.links-category {
+    margin-bottom: 2em;
+    padding-right: 2em; /* match article padding on the right */
+}
+
+.links-category-title {
+    font-size: 1.2em;
+    color: #0b4255;
+    margin-bottom: 0.8em;
+    padding-bottom: 0.3em;
+    padding-left: 0; /* WHY: override article h3 { padding-left:12em } from styles.css */
+    border-bottom: 2px solid #9ca8ba;
+}
+
+/* ── Row container: carousel viewport + arrow side by side ── */
+.links-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+}
+
+/* ── Carousel viewport: hides overflow, shows 4 cards ── */
+.links-carousel {
+    flex: 1;
+    overflow: hidden; /* hide cards that are off-screen */
+}
+
+/* ── Track: all cards in a single horizontal line ── */
+.links-track {
+    display: flex;
+    gap: 1em;
+    transition: transform 0.4s ease; /* smooth slide animation */
+}
+
+/* ── Individual card ── */
+.link-card {
+    /* WHY calc: each card takes exactly 1/4 of the viewport width,
+       minus the gap between cards (3 gaps shared across 4 cards) */
+    min-width: calc(25% - 0.75em);
+    max-width: calc(25% - 0.75em);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 1em;
+    text-decoration: none;
+    color: #0b4255;
+    background-color: #fafafa;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    min-height: 120px;
+    box-sizing: border-box;
+}
+
+.link-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+    text-decoration: none; /* override default <a> hover underline */
+}
+
+/* ── Logo container inside each card ── */
+.link-card-img {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5em;
+}
+
+.link-card-img img {
+    max-height: 70px;
+    max-width: 180px;
+    object-fit: contain;
+}
+
+/* ── Card label text ── */
+.link-card-name {
+    font-size: 0.85em;
+    text-align: center;
+    color: #0b4255;
+    margin-top: auto; /* push name to the bottom of the card */
+}
+
+/* ── Arrow "see more" button ── */
+.links-see-more {
+    background: none;
+    border: 1px solid #9ca8ba;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    cursor: pointer;
+    font-size: 1.1em;
+    line-height: 32px;
+    text-align: center;
+    color: #0b4255;
+    transition: background-color 0.2s ease;
+    flex-shrink: 0;
+    padding: 0;
+}
+
+.links-see-more:hover {
+    background-color: #f3f3f3;
+}
+
+/* Hide arrow when there are 4 or fewer cards (nothing to scroll) */
+.links-see-more.hidden {
+    visibility: hidden;
+}

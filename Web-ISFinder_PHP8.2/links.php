@@ -22,91 +22,289 @@
     ?>
 
     <article>
-        <h2>Favorite LINKS</h2>
+        <h2>Favourite Links</h2>
         <hr/>
-        <table class="links">
-            <tr>
-                <th class="links">Sequencing centers</th>
-                <th class="links">Databases</th>
-                <th class="links">Institutions</th>
-                <th class="links">Tools</th>
-            </tr>
-            <tr>
-                <td>
-                    <a href="http://www.jcvi.org/cms/home/" target="_blank"><img src="images/logo_Venter.png" alt="Craig Venter Institute">(ex. TIGR)</a>
-                </td>
-                <td>
-                    <a href="http://db-mml.sjtu.edu.cn/ICEberg/index.php" target="_blank"><img src="images/logo_iceberg.png" alt="ICEberg"><br>
-                    ICEberg: a web-based resource for integrative and conjugative elements found in Bacteria</a>
-                </td>
-                <td>
-                    <p><a href="http://www.cnrs.fr/index.php" title="CNRS" target="_blank"><img src="images/logo_CNRS.svg" alt="cnrs, advancing the frontiers"></a></p>
-                </td>
-                <td>
-                    <a href="http://migale.jouy.inra.fr/?q=accueil" target="_blank"><img src="images/logo_migale.png" width="195" height="63" alt="Logo Migale"><br>
-                    Plateforme de BioInformatique - <br>
-                    INRA Jouy en Josas</a>
-                </td>
-            </tr>
-            <tr>
-                <td><a href="http://www.genome.wisc.edu/" target="_blank" title="E. Coli Genome Project"><img src="images/logo_EColiGenome.png" alt="E. Coli Genome Project"></a></td>
-                <td><a href="http://www.uniprot.org/" target="_blank"><img src="images/logo_UniProt.png" width="235" height="107" alt="UniProt"></a></td>
-                <td><a href="https://uclouvain.be/en/index.html" title="Université de Louvain" target="_blank"><img src="images/logo_UnivLouvain.png" alt="Université catholique de Louvain"></a></td>
-                <td><a href="http://multalin.toulouse.inra.fr/multalin/" target="_blank"><img src="images/logo_Multalign.png" width="200" height="50" alt="Multalign"></a></td>
-            </tr>
-            <tr>
-                <td><a href="https://www.sanger.ac.uk/" target="_blank"><img src="images/logo_Sanger.png" width="205" height="60" alt="Sanger Insttute"></a></td>
-                <td><a href="http://medicine.cf.ac.uk/infect-immun/research/infection/antibacterial-agents/iscr-elements/" target="_blank">ISCR Elements</a></td>
-                <td><a href="http://www.embl.de/" target="_blank"><img src="images/logo_EMBL.png" alt="EMBL"></a></td>
-                <td><h1><a href="http://www.unafold.org/mfold/applications/dna-folding-form.php" target="_blank" alt="Mfold WebServer">The mfold Web Server</a></h1></td>
-            </tr>
-            <tr>
-                <td><a href="http://www.genoscope.cns.fr/spip/" target="_blank"><img src="images/logo_Genoscope.png" width="220" height="109" alt="CEA-Genoscope"></a></td>
-                <td><a href="http://genome.microbedb.jp/cyanobase" target="_blank"><img src="images/logo_cyanobase.png" width="200" height="49" alt="Cyanobase"></a></td>
-                <td><a href="http://www.ncbi.nlm.nih.gov/" target="_blank"><img src="images/logo_NCBI.png" alt="NCBI"></a></td>
-                <td><a href="http://weblogo.berkeley.edu/logo.cgi" target="_blank" alt="WebLogo"><img src="images/logo_WebLogo.png" alt="WebLogo" width="146" height="65"></a></td>
-            </tr>
-            <tr>
-                <td><a href="http://jgi.doe.gov/" target="_blank"><img src="images/logo_JGI.png" width="220" height="40" alt="JointGenomeInstitute"></a></td>
-                <td><a href="http://pfam.xfam.org/" target="_blank"><img src="images/logo_Pfam.png" width="200" height="66" alt="Pfam"></a></td>
-                <td><a href="http://www.ncbi.nlm.nih.gov/taxonomy" target="_blank"><img src="images/logo_NCBI.png" alt="NCBI">Taxonomy</a></td>
-                <td><a href="http://www.expasy.org/tools/" target="_blank"><img src="images/logo_Expasy.png" width="229" height="32" alt="Expasy"></a></td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td>
-                    <a href="http://integrall.bio.ua.pt/" target="_blank"><img src="images/logo_IntegronDB.png" width="80" height="82" alt="INTEGRALL">INTEGRALL<br>
-                    The Integron Database</a>
-                </td>
-                <td><a href="http://www.pasteur.fr/fr" target="_blank"><img src="images/logo_Pasteur.png" width="220" height="83" alt="Institut Pasteur"></a></td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td><a href="http://ecoliwiki.net/colipedia/index.php/Welcome_to_EcoliWiki" target="_blank" title="EcoliWiki"><img src="images/logo_ECO.png" width="188" height="93" alt="EcoliWiki"></a></td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td><h1><a href="https://transposon.lstmed.ac.uk/" target="_blank"><img src="images/logo_TransposonRegistry.png" alt="Tn Number Registry"></a></h1></td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td><h1><a href="https://tncentral.ncc.unesp.br/TnPedia/index.php" target="_blank"><img src="images/logo_Tn.png" alt="TnPedia ">TnPedia</a></h1></td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td><h1><a href="https://tncentral.proteininformationresource.org/" target="_blank"><img src="images/logo_Tn.png" alt="Tn central">Tn Central</a></h1></td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-        </table>
-        <p>&nbsp;</p>
+
+        <!-- ============================================= -->
+        <!-- Category: Sequencing Centers (5 links)        -->
+        <!-- ============================================= -->
+        <section class="links-category">
+            <h3 class="links-category-title">Sequencing Centers</h3>
+            <div class="links-row">
+                <div class="links-carousel">
+                    <div class="links-track">
+                        <!-- Card 1: JCVI -->
+                        <a href="http://www.jcvi.org/cms/home/" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_Venter.png" alt="Craig Venter Institute">
+                            </div>
+                            <span class="link-card-name">JCVI (ex. TIGR)</span>
+                        </a>
+                        <!-- Card 2: E. Coli Genome Project -->
+                        <a href="http://www.genome.wisc.edu/" target="_blank" class="link-card" title="E. Coli Genome Project">
+                            <div class="link-card-img">
+                                <img src="images/logo_EColiGenome.png" alt="E. Coli Genome Project">
+                            </div>
+                            <span class="link-card-name">E. Coli Genome Project</span>
+                        </a>
+                        <!-- Card 3: Sanger Institute -->
+                        <a href="https://www.sanger.ac.uk/" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_Sanger.png" alt="Sanger Institute">
+                            </div>
+                            <span class="link-card-name">Sanger Institute</span>
+                        </a>
+                        <!-- Card 4: Genoscope -->
+                        <a href="http://www.genoscope.cns.fr/spip/" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_Genoscope.png" alt="CEA-Genoscope">
+                            </div>
+                            <span class="link-card-name">CEA-Genoscope</span>
+                        </a>
+                        <!-- Card 5: JGI -->
+                        <a href="http://jgi.doe.gov/" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_JGI.png" alt="Joint Genome Institute">
+                            </div>
+                            <span class="link-card-name">Joint Genome Institute</span>
+                        </a>
+                    </div>
+                </div>
+                <button class="links-see-more" aria-label="Show more Sequencing Centers links" title="Show more">&#10132;</button>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- Category: Databases (10 links)                -->
+        <!-- ============================================= -->
+        <section class="links-category">
+            <h3 class="links-category-title">Databases</h3>
+            <div class="links-row">
+                <div class="links-carousel">
+                    <div class="links-track">
+                        <!-- Card 1: ICEberg -->
+                        <a href="http://db-mml.sjtu.edu.cn/ICEberg/index.php" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_iceberg.png" alt="ICEberg">
+                            </div>
+                            <span class="link-card-name">ICEberg</span>
+                        </a>
+                        <!-- Card 2: UniProt -->
+                        <a href="http://www.uniprot.org/" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_UniProt.png" alt="UniProt">
+                            </div>
+                            <span class="link-card-name">UniProt</span>
+                        </a>
+                        <!-- Card 3: ISCR Elements -->
+                        <a href="http://medicine.cf.ac.uk/infect-immun/research/infection/antibacterial-agents/iscr-elements/" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <!-- No logo for this link in the original -->
+                            </div>
+                            <span class="link-card-name">ISCR Elements</span>
+                        </a>
+                        <!-- Card 4: Cyanobase -->
+                        <a href="http://genome.microbedb.jp/cyanobase" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_cyanobase.png" alt="Cyanobase">
+                            </div>
+                            <span class="link-card-name">Cyanobase</span>
+                        </a>
+                        <!-- Card 5: Pfam -->
+                        <a href="http://pfam.xfam.org/" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_Pfam.png" alt="Pfam">
+                            </div>
+                            <span class="link-card-name">Pfam</span>
+                        </a>
+                        <!-- Card 6: INTEGRALL -->
+                        <a href="http://integrall.bio.ua.pt/" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_IntegronDB.png" alt="INTEGRALL">
+                            </div>
+                            <span class="link-card-name">INTEGRALL — The Integron Database</span>
+                        </a>
+                        <!-- Card 7: EcoliWiki -->
+                        <a href="http://ecoliwiki.net/colipedia/index.php/Welcome_to_EcoliWiki" target="_blank" class="link-card" title="EcoliWiki">
+                            <div class="link-card-img">
+                                <img src="images/logo_ECO.png" alt="EcoliWiki">
+                            </div>
+                            <span class="link-card-name">EcoliWiki</span>
+                        </a>
+                        <!-- Card 8: Tn Number Registry -->
+                        <a href="https://transposon.lstmed.ac.uk/" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_TransposonRegistry.png" alt="Tn Number Registry">
+                            </div>
+                            <span class="link-card-name">Tn Number Registry</span>
+                        </a>
+                        <!-- Card 9: TnPedia -->
+                        <a href="https://tncentral.ncc.unesp.br/TnPedia/index.php" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_Tn.png" alt="TnPedia">
+                            </div>
+                            <span class="link-card-name">TnPedia</span>
+                        </a>
+                        <!-- Card 10: Tn Central -->
+                        <a href="https://tncentral.proteininformationresource.org/" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_Tn.png" alt="Tn Central">
+                            </div>
+                            <span class="link-card-name">Tn Central</span>
+                        </a>
+                    </div>
+                </div>
+                <button class="links-see-more" aria-label="Show more Databases links" title="Show more">&#10132;</button>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- Category: Institutions (6 links)              -->
+        <!-- ============================================= -->
+        <section class="links-category">
+            <h3 class="links-category-title">Institutions</h3>
+            <div class="links-row">
+                <div class="links-carousel">
+                    <div class="links-track">
+                        <!-- Card 1: CNRS -->
+                        <a href="http://www.cnrs.fr/index.php" target="_blank" class="link-card" title="CNRS">
+                            <div class="link-card-img">
+                                <img src="images/logo_CNRS.svg" alt="CNRS">
+                            </div>
+                            <span class="link-card-name">CNRS</span>
+                        </a>
+                        <!-- Card 2: Université de Louvain -->
+                        <a href="https://uclouvain.be/en/index.html" target="_blank" class="link-card" title="Université de Louvain">
+                            <div class="link-card-img">
+                                <img src="images/logo_UnivLouvain.png" alt="Université catholique de Louvain">
+                            </div>
+                            <span class="link-card-name">Univ. de Louvain</span>
+                        </a>
+                        <!-- Card 3: EMBL -->
+                        <a href="http://www.embl.de/" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_EMBL.png" alt="EMBL">
+                            </div>
+                            <span class="link-card-name">EMBL</span>
+                        </a>
+                        <!-- Card 4: NCBI -->
+                        <a href="http://www.ncbi.nlm.nih.gov/" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_NCBI.png" alt="NCBI">
+                            </div>
+                            <span class="link-card-name">NCBI</span>
+                        </a>
+                        <!-- Card 5: NCBI Taxonomy -->
+                        <a href="http://www.ncbi.nlm.nih.gov/taxonomy" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_NCBI.png" alt="NCBI Taxonomy">
+                            </div>
+                            <span class="link-card-name">NCBI Taxonomy</span>
+                        </a>
+                        <!-- Card 6: Institut Pasteur -->
+                        <a href="http://www.pasteur.fr/fr" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_Pasteur.png" alt="Institut Pasteur">
+                            </div>
+                            <span class="link-card-name">Institut Pasteur</span>
+                        </a>
+                    </div>
+                </div>
+                <button class="links-see-more" aria-label="Show more Institutions links" title="Show more">&#10132;</button>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- Category: Tools (5 links)                     -->
+        <!-- ============================================= -->
+        <section class="links-category">
+            <h3 class="links-category-title">Tools</h3>
+            <div class="links-row">
+                <div class="links-carousel">
+                    <div class="links-track">
+                        <!-- Card 1: Migale -->
+                        <a href="http://migale.jouy.inra.fr/?q=accueil" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_migale.png" alt="Migale">
+                            </div>
+                            <span class="link-card-name">Migale — INRA Jouy en Josas</span>
+                        </a>
+                        <!-- Card 2: Multalign -->
+                        <a href="http://multalin.toulouse.inra.fr/multalin/" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_Multalign.png" alt="Multalign">
+                            </div>
+                            <span class="link-card-name">Multalign</span>
+                        </a>
+                        <!-- Card 3: mfold Web Server -->
+                        <a href="http://www.unafold.org/mfold/applications/dna-folding-form.php" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <!-- No logo for this link in the original -->
+                            </div>
+                            <span class="link-card-name">The mfold Web Server</span>
+                        </a>
+                        <!-- Card 4: WebLogo -->
+                        <a href="http://weblogo.berkeley.edu/logo.cgi" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_WebLogo.png" alt="WebLogo">
+                            </div>
+                            <span class="link-card-name">WebLogo</span>
+                        </a>
+                        <!-- Card 5: Expasy -->
+                        <a href="http://www.expasy.org/tools/" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_Expasy.png" alt="Expasy">
+                            </div>
+                            <span class="link-card-name">Expasy</span>
+                        </a>
+                    </div>
+                </div>
+                <button class="links-see-more" aria-label="Show more Tools links" title="Show more">&#10132;</button>
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- JS: Horizontal carousel slider                -->
+        <!-- WHY: Clicking the arrow slides the card track -->
+        <!--      to the right by 4 cards. Wraps back to   -->
+        <!--      the start when reaching the end.         -->
+        <!-- ============================================= -->
+        <script>
+        document.querySelectorAll('.links-category').forEach(function(section) {
+            var track = section.querySelector('.links-track');
+            var btn = section.querySelector('.links-see-more');
+            var cards = track.querySelectorAll('.link-card');
+            var totalCards = cards.length;
+            var visibleCards = 4;
+            var currentOffset = 0; /* how many cards we've scrolled past */
+
+            /* Hide arrow if 4 or fewer cards (nothing to scroll) */
+            if (totalCards <= visibleCards) {
+                btn.classList.add('hidden');
+                return;
+            }
+
+            btn.addEventListener('click', function() {
+                currentOffset += visibleCards;
+
+                /* If we've scrolled past all cards, wrap back to start */
+                if (currentOffset >= totalCards) {
+                    currentOffset = 0;
+                }
+
+                /* Calculate the pixel offset to translate the track.
+                   Each card is 25% of the carousel width, with 1em gaps.
+                   We use the first card's actual width + gap for precision. */
+                var cardStyle = window.getComputedStyle(cards[0]);
+                var cardWidth = cards[0].offsetWidth;
+                var gap = parseFloat(window.getComputedStyle(track).gap) || 16;
+                var translateX = currentOffset * (cardWidth + gap);
+
+                track.style.transform = 'translateX(-' + translateX + 'px)';
+            });
+        });
+        </script>
+
     </article>
 
     <?php include_once('include/footer.inc.php'); ?>
