@@ -7,22 +7,13 @@ function sort_link($text, $order) {
         $order = $text;
     }
 
-    $link = '<a href="search-db.php?tri=' . $order;
-/*		
-		if($order_by==$order && $order_dir=='ASC')
-		     $link .= '&inverse=true';
-		$link .= '"';
-		if($order_by==$order && $order_dir=='ASC')
-		    $link .= ' class="order_asc"';
-		elseif($order_by==$order && $order_dir=='DESC')
-		     $link .= ' class="order_desc"';
-*/			 
+    $link = '<a href="search-db.php?tri=' . $order;		 
     $link .= '">' . $text . '</a>';
 
     return $link;
 }
 
-//_______Affichage du lien pour la taxonomie____________________________
+// Affichage du lien pour la taxonomie
 function ncbi_origin_link($origin) {
     $texteori = "";
     $oritab = array();
@@ -35,12 +26,12 @@ function ncbi_origin_link($origin) {
     $oritab[1] = (!empty($oritab[1])) ? $oritab[1] : "";
     $origin_link = "<a href=\"http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?name=";
     $origin_link .= $oritab[0] . "+" . $oritab[1] . "\" target=\"_blank\">" . $oritab[0] . " " . $oritab[1] . "</a>";
-//   Dcommenter pour avoir le nom d'hote complet  
-/*        $origin_link .= $texteori;*/
+    // Decommenter pour avoir le nom d'hote complet  
+    // $origin_link .= $texteori;
     return $origin_link;
 }
 
-// ___________Requete pour rcuprer Origin d'un IS $IDET___________________
+// Requete pour recuprer Origin d'un IS $IDET
 function is_origin($IDET) {
     $req = "SELECT `Host` FROM `element_transposable_has_host` ETHH 
 					LEFT JOIN `element_transposable` ON `ID_ET` = ETHH.`Element_transposable_ID_ET` 
@@ -48,39 +39,37 @@ function is_origin($IDET) {
 					WHERE  `Element_transposable_ID_ET` = $IDET AND `Origin` = 1";
     $result_origin = execute_sql($req);
 
-//	$originvar= mysql_result($result_origin,0);
+    //	$originvar= mysql_result($result_origin,0);
     $originvar = (mysqli_num_rows($result_origin) == 0) ? "" : mysqli_result($result_origin, 0);
 	
     return $originvar;
 }
 
-// ___________Requete pour rcuprer le nom de l'iso  partir de ID_iso___________________
+// Requete pour recuperer le nom de l'iso  partir de ID_iso
 function is_iso($iso) {
     $req = "SELECT `ET_name` FROM `element_transposable` WHERE `ID_ET` LIKE '$iso'";
     $result_iso = execute_sql($req);
-//	$name_iso= mysql_result($result_iso,0);
+    //	$name_iso= mysql_result($result_iso,0);
     $name_iso = (mysqli_num_rows($result_iso) == 0) ? "" : mysqli_result($result_iso, 0);
-	
     return $name_iso;
 }
 
-// ___________Requete pour rcuprer le ou les synonymes  partir de IDET___________________
+// Requete pour rcuprer le ou les synonymes  partir de IDET
 function is_syn($ID_ET) {
     $req_syn = "SELECT `Synonyme` FROM `synonyme` WHERE synonyme.`Element_transposable_ID_ET` LIKE '$ID_ET'";
     $result = execute_sql($req_syn);
     return $result;
 }
 
-// ___________Requete gnrique - renvoie une valeur ___________________
+// Requete genrique - renvoie une valeur
 function is_champ($champ_select, $table, $champ_ID, $like) {
     $req_syn = "SELECT `$champ_select` FROM `$table` WHERE $table.`$champ_ID` LIKE '$like'";
     $result = execute_sql($req_syn);
     $champ_result = (mysqli_num_rows($result) == 0) ? '' : mysqli_result($result, 0);
-
     return $champ_result;
 }
 
-// ___________Requete gnrique - Renvoie un tableau ___________________
+// Requete genrique - Renvoie un tableau
 function is_champX($champ_select, $table, $champ_ID, $like) {
     $champ_selectionne = ($champ_select == "*") ? "*" : "`$champ_select`";
     $req_syn = "SELECT $champ_selectionne FROM `$table` WHERE $table.`$champ_ID` LIKE '$like'";
@@ -92,10 +81,10 @@ function is_champX($champ_select, $table, $champ_ID, $like) {
             $champ_result[$i] = mysqli_fetch_array($result, MYSQLI_BOTH);
         }
     }
-    return serialize($champ_result);		// serialize puis unserialize pour passer un tableau d'un script  l'autre
+    return serialize($champ_result); // serialize puis unserialize pour passer un tableau d'un script  l'autre
 }
 
-// ___________Requete pour rcuprer le ou les parents  partir de IDET___________________
+// Requete pour rcuprer le ou les parents  partir de IDET
 function is_parent($ID_ET) {
     $reqParent = "SELECT `ET_name` FROM `element_transposable`  
 				LEFT JOIN `parent_link` ON parent_link.`Element_transposable_ID_ET` =$ID_ET
@@ -104,7 +93,7 @@ function is_parent($ID_ET) {
     return $result;
 }
 
-// ___________Requete pour rcuprer le ou les hosts  partir de IDET___________________
+// Requete pour rcuprer le ou les hosts  partir de IDET
 function is_hosts($ID_ET) {
     $req_hosts = "SELECT `Host` FROM `element_transposable_has_host` ETHH 
 				LEFT JOIN `element_transposable` ON `ID_ET` = ETHH.`Element_transposable_ID_ET` 
@@ -114,7 +103,7 @@ function is_hosts($ID_ET) {
     return $result;
 }
 
-//______________Recherche du nombre d'ORF dans un IS _______________
+//Recherche du nombre d'ORF dans un IS 
 function calcul_nbr_orf($ID_ET) {
     $req_orf = "SELECT `ID_ORF` FROM `orf` WHERE orf.`Element_transposable_ID_ET` LIKE '$ID_ET'";
     $result = execute_sql($req_orf);
@@ -123,7 +112,7 @@ function calcul_nbr_orf($ID_ET) {
     return $nbr;
 }
 
-// __________Affichage du rsultat ________________________________
+// Affichage du resultat d'une recherche dans la base de donnes
 function affiche_result($result, $sortie) {
 //	$tabPlus = (!empty($_POST['plus']))?$_POST['plus']:null;	comment le 18/02/16 car semble ne servir  rien
     $i = 1;
