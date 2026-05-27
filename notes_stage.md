@@ -128,6 +128,8 @@ migration made on the following pages :
 ### Command to check the error log : 
 
 tail -f /var/log/apache2/error.log
+tail -f /var/log/httpd/error_log
+
   
 for line 118 in ficheIS.php:
 print "<ul><li><span class='entete_propriete'>Family </span>".$family."</li>";

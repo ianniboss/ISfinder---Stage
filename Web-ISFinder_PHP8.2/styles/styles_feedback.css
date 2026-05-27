@@ -28,6 +28,19 @@ fieldset li{
 fieldset li input{
 	margin-right:2.6em;
 }
+
+/* Override: captcha label must not be floated/narrowed — it should sit inline
+   before the image+input on the same line, matching submission.php layout */
+#captcha li {
+    display: block;
+    float: none;
+    clear: both;
+}
+#captcha label {
+    display: inline;
+    width: auto;
+    float: none;
+}
 .requis{
 	font-family:Verdana, Geneva, sans-serif;
 	color:#bc5937;
