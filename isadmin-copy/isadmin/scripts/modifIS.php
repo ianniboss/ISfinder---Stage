@@ -1,4 +1,7 @@
 <?php
+// ob_start() must be called BEFORE any output (including includes that output HTML)
+// so that header() redirects (lines 282, 293, 296, 300) still work after HTML has been emitted.
+ob_start();
 session_start();
 require_once('../includes/entete.inc.php');
 require_once('../includes/aside.inc.php');
@@ -38,6 +41,11 @@ require_once("../includes/affiche.inc.php");
             if (isset($nb_orf) && $nb_orf < 16) {
                 for ($i = 1; $i <= $nb_orf; $i++) {
                     $var_dynamique = 'orf' . $i . '_seq';
+                    // Initialize to empty string if not set — avoids PHP 8 undefined-variable warning
+                    // when the ORF sequence field was not present in $_POST (e.g. after an image upload redirect)
+                    if (!isset($$var_dynamique)) {
+                        $$var_dynamique = '';
+                    }
                     $$var_dynamique = str_replace($car_elim, "", $$var_dynamique);
                     $_SESSION["error"] .= (isset($$var_dynamique) && estprot($$var_dynamique) != true) ? "Only amino acid and * are allowed.</br>" : "";
                 }
@@ -161,8 +169,17 @@ require_once("../includes/affiche.inc.php");
                         }
                         $rec = mysqli_real_escape_string($cnx, $recode);
                         $recode = ($rec != "") ? $rec : 'NULL';
+                        // The following fields are ENUM columns where 'NULL' is a valid member in ISsubmit
+                        // but NOT in the isfinder database. Sending the quoted string 'NULL' to isfinder
+                        // causes MariaDB strict mode to throw "Data truncated".
+                        // For all these ENUM fields: treat empty string or the string 'NULL' as SQL NULL (unquoted).
+                        $frame_val        = (!empty($frame)        && $frame        !== 'NULL') ? "'" . mysqli_real_escape_string($cnx, $frame)        . "'" : 'NULL';
+                        $type_val         = (!empty($type)         && $type         !== 'NULL') ? "'" . mysqli_real_escape_string($cnx, $type)         . "'" : 'NULL';
+                        $SD_val           = (!empty($SD)           && $SD           !== 'NULL') ? "'" . mysqli_real_escape_string($cnx, $SD)           . "'" : 'NULL';
+                        $structure_val    = (!empty($structure)    && $structure    !== 'NULL') ? "'" . mysqli_real_escape_string($cnx, $structure)    . "'" : 'NULL';
+                        $exp_dem_val      = (!empty($exp_demontred) && $exp_demontred !== 'NULL') ? "'" . mysqli_real_escape_string($cnx, $exp_demontred) . "'" : 'NULL';
 
-                        $sql_sub = "UPDATE `element_transposable` SET `Groups_ID_Groups` = $groupe, `Family_ID_Family` = '" . mysqli_real_escape_string($cnx, $famille) . "', `type_element_transposable_ID_Type_ET` = '" . intval($type_element_transposable_ID_Type_ET) . "', `ET_Accession_number` = '" . mysqli_real_escape_string($cnx, $ET_Accession_number) . "', `ET_name` = '" . $ET_name . "', `ET_Length` = '" . intval($ET_Length) . "', `ET_DNA_Sequence` = '" . $ET_DNA_Sequence . "', `Transposition` = '" . $Transposition . "', `ET_Comments` = '" . mysqli_real_escape_string($cnx, $ET_Comments) . "', `ET_Private_comments` = '" . mysqli_real_escape_string($cnx, $ET_Private_comments) . "', `ET_Reference` = '" . mysqli_real_escape_string($cnx, $ET_Reference) . "', `ID_iso` = $nom_iso, `recode` = $recode, `frame` = '" . $frame . "', `type` = '" . mysqli_real_escape_string($cnx, $type) . "', `SD` = '" . $SD . "', `structure` = '" . mysqli_real_escape_string($cnx, $structure) . "', `exp_demontred` = '" . mysqli_real_escape_string($cnx, $exp_demontred) . "', `recoding_seq` = '" . mysqli_real_escape_string($cnx, $recoding_seq) . "', `recoding_annot` = '" . mysqli_real_escape_string($cnx, $recoding_annot) . "', `recoding_image` = '" . $recoding_image . "'";
+                        $sql_sub = "UPDATE `element_transposable` SET `Groups_ID_Groups` = $groupe, `Family_ID_Family` = '" . mysqli_real_escape_string($cnx, $famille) . "', `type_element_transposable_ID_Type_ET` = '" . intval($type_element_transposable_ID_Type_ET) . "', `ET_Accession_number` = '" . mysqli_real_escape_string($cnx, $ET_Accession_number) . "', `ET_name` = '" . $ET_name . "', `ET_Length` = '" . intval($ET_Length) . "', `ET_DNA_Sequence` = '" . $ET_DNA_Sequence . "', `Transposition` = '" . $Transposition . "', `ET_Comments` = '" . mysqli_real_escape_string($cnx, $ET_Comments) . "', `ET_Private_comments` = '" . mysqli_real_escape_string($cnx, $ET_Private_comments) . "', `ET_Reference` = '" . mysqli_real_escape_string($cnx, $ET_Reference) . "', `ID_iso` = $nom_iso, `recode` = $recode, `frame` = $frame_val, `type` = $type_val, `SD` = $SD_val, `structure` = $structure_val, `exp_demontred` = $exp_dem_val, `recoding_seq` = '" . mysqli_real_escape_string($cnx, $recoding_seq) . "', `recoding_annot` = '" . mysqli_real_escape_string($cnx, $recoding_annot) . "', `recoding_image` = '" . $recoding_image . "'";
                         $sql_sub .= " WHERE `ID_ET` = '$ID_ET'";
                         $res = execute_sql($cnx, $sql_sub);
 
@@ -189,17 +206,21 @@ require_once("../includes/affiche.inc.php");
 
                         // Table et_insertion_site
                         for ($j = 0; $j < $_SESSION['nb_site']; $j++) {
-                            $id_site = $_SESSION[$j . 'ID_ET_Insertion_Site'];
-                            $Direct_Repeat = $_SESSION[$j . 'Direct_Repeat'];
-                            $Direct_Repeat_Length = $_SESSION[$j . 'Direct_Repeat_Length'];
-                            $DR_Left_Flank = $_SESSION[$j . 'DR_Left_Flank'];
-                            $DR_Rigth_Flank = $_SESSION[$j . 'DR_Rigth_Flank'];
-                            $LE_CS = $_SESSION[$j . 'LE_CS'];
-                            $RE_CS = $_SESSION[$j . 'RE_CS'];
-                            $LE_CS_Left_Flank = $_SESSION[$j . 'LE_CS_Left_Flank'];
-                            $RE_CS_Rigth_Flank = $_SESSION[$j . 'RE_CS_Rigth_Flank'];
+                            // Use ?? '' to avoid PHP 8 "Undefined array key" warnings
+                            // when the session was not pre-populated (e.g. IS has no existing insertion site yet)
+                            $id_site           = $_SESSION[$j . 'ID_ET_Insertion_Site'] ?? '';
+                            $Direct_Repeat     = $_SESSION[$j . 'Direct_Repeat']        ?? '';
+                            // Direct_Repeat_Length is INT UNSIGNED — empty string is rejected by MariaDB strict mode.
+                            // intval('') = 0, which matches the column DEFAULT 0.
+                            $Direct_Repeat_Length = intval($_SESSION[$j . 'Direct_Repeat_Length'] ?? 0);
+                            $DR_Left_Flank     = $_SESSION[$j . 'DR_Left_Flank']        ?? '';
+                            $DR_Rigth_Flank    = $_SESSION[$j . 'DR_Rigth_Flank']       ?? '';
+                            $LE_CS             = $_SESSION[$j . 'LE_CS']                ?? '';
+                            $RE_CS             = $_SESSION[$j . 'RE_CS']                ?? '';
+                            $LE_CS_Left_Flank  = $_SESSION[$j . 'LE_CS_Left_Flank']     ?? '';
+                            $RE_CS_Rigth_Flank = $_SESSION[$j . 'RE_CS_Rigth_Flank']   ?? '';
 
-                            if ($_SESSION[$j . 'ID_ET_Insertion_Site']) {
+                            if ($id_site) {
                                 $sql_sub = "UPDATE `et_insertion_site` SET `Element_transposable_ID_ET` = '" . $ID_ET . "', `Direct_Repeat` = '" . $Direct_Repeat . "' , `Direct_Repeat_Length` = '" . $Direct_Repeat_Length . "', `DR_Left_Flank` = '" . $DR_Left_Flank . "', `DR_Rigth_Flank` = '" . $DR_Rigth_Flank . "', `LE_CS` = '" . $LE_CS . "', `RE_CS` = '" . $RE_CS . "', `LE_CS_Left_Flank` = '" . $LE_CS_Left_Flank . "', `RE_CS_Rigth_Flank` = '" . $RE_CS_Rigth_Flank . "'";
                                 $sql_sub .= " WHERE `ID_ET_Insertion_Site` = '$id_site'";
                             } else {
@@ -208,6 +229,7 @@ require_once("../includes/affiche.inc.php");
                             }
                             $res = execute_sql($cnx, $sql_sub);
                         } // fin du for
+
 
                         // Table orf
                         for ($i = 1; $i <= $nb_orf; $i++) {

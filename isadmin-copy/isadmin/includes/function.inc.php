@@ -167,7 +167,7 @@ function encodaccent($chaine) {
 //upload
 function upload() {
     $uploaddir = "/var/www/html/intranet/secure/isadmin/drawings/";
-    header('Content-Type: image/jpg;');
+    // Note: do NOT send Content-Type: image/jpg here — this function runs inside an HTML page context.
     $_SESSION['recoding_image_error'] = "";
     // Si le fichier à télécharger est un .jpg et pas d'erreur de téléchargement
     if (preg_match("/.jpg$/i", $_FILES['recoding_image']['name']) && is_uploaded_file($_FILES['recoding_image']['tmp_name'])) {
