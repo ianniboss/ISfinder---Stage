@@ -33,3 +33,35 @@ fieldset#search1 select,#search2 select{
 #search2 li{padding-right:7em;}
 #search2 li label{width: 100px;}
 
+/*************************************    Buttons (Submit / Reset) ***************/
+/* Submit button — teal, matches the site's link/heading colour */
+.piedSection input[type="submit"] {
+    background-color: #2a8fa8;
+    color: #ffffff;
+    border: none;
+    padding: 7px 20px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.piedSection input[type="submit"]:hover {
+    background-color: #226f85;
+}
+
+/* Reset button — subtle neutral outline so it reads as secondary */
+.piedSection input[type="reset"] {
+    background-color: #ffffff;
+    color: #555555;
+    border: 1px solid #bbbbbb;
+    padding: 7px 20px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.piedSection input[type="reset"]:hover {
+    background-color: #f0f0f0;
+    border-color: #999999;
+}
+
