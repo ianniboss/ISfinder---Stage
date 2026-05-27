@@ -86,6 +86,11 @@ function validsuppr() {
     return confirm("Etes-vous bien sur de vouloir supprimer cette fiche dans ISsub?\n Cette opération ne peut être annulée!");
 }
 
+// fonction de validation de suppression (ISfinder)
+function validsuppr_isfinder() {
+    return confirm("Etes-vous bien sur de vouloir supprimer cette fiche de ISfinder?\n Cette opération ne peut être annulée!");
+}
+
 function validsub() {
     return confirm("Etes-vous bien sur de vouloir transférer cette fiche dans ISsub?\n Cette opération ne peut être annulée!");
 }
@@ -100,4 +105,9 @@ function validtrash() {
 
 function validIS() {
     return confirm("Etes-vous bien sur de vouloir valider cette soumission?\n Cette opération ne peut être annulée!\nLa fiche sera automatiquement publiée sur la base IS publique!");
-}
+}
+
+function validsendback() {
+    return confirm("Etes-vous bien sur de vouloir renvoyer cette fiche dans ISsub?\n Cette opération ne peut être annulée!\nLa fiche sera retirée de ISfinder et placée dans ISSub pour révision.");
+}
+

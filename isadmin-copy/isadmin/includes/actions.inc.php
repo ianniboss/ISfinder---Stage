@@ -7,13 +7,15 @@ function recup_data($ident, $name, $bdd) {
     $condition = ($ident == '') ? "`ET_name` like '" . $name . "'" : "`ID_ET` like '" . $ident . "'";
 
     if ($cnx) {
+        // La table `base` n'existe que dans ISsubmit (pas dans isfinder) — JOIN conditionnel
+        $join_base = ($bdd !== 'isfinder') ? "LEFT JOIN `base` ON `base_ID_Base` = `ID_Base`" : "";
+
         $reqIS = "SELECT * FROM `element_transposable` ET
                 LEFT JOIN `family` FAM
                 ON `Family_ID_Family` = `ID_Family`
                 LEFT JOIN `groups` GRP
                 ON `Groups_ID_Groups` = `ID_Groups`
-                LEFT JOIN `base`
-                ON `base_ID_Base` = `ID_Base`
+                $join_base
                 LEFT JOIN `parent_link` PL
                 ON `ID_ET` = PL.`Element_transposable_ID_ET`
                 LEFT JOIN `type_element_transposable` TET
@@ -31,6 +33,7 @@ function recup_data($ident, $name, $bdd) {
                 LEFT JOIN `submission` SUB
                 ON `ID_ET` = SUB.`Element_transposable_ID_ET`
                 WHERE $condition LIMIT 1";
+
 
         /* Execution de la requette et si résultat, alors on continue */
         $result = execute_sql($cnx, $reqIS);
@@ -434,6 +437,154 @@ function suppression($ident, $name, $bdd) {
     }
 
     return ($retour);
+}
+
+// ─── Suppression safe dans ISfinder ────────────────────────────────────────
+// Supprime uniquement les enregistrements liés à l'IS dans ISfinder.
+// IMPORTANT : ne supprime PAS le submiter ni les hosts partagés avec d'autres IS.
+// Seules les tables enfants propres à cet ID_ET sont nettoyées.
+function suppression_isfinder($ident, $bdd) {
+    $retour = "1";
+    $cnx = connexion($bdd);
+
+    if (!$cnx) {
+        return "0";
+    }
+
+    if (empty($ident) || !is_numeric($ident)) {
+        mysqli_close($cnx);
+        return "0";
+    }
+
+    // Suppression des tables liées (ne pas toucher à submiters ni host globaux)
+    $tables_liees = [
+        "DELETE FROM `synonyme` WHERE `Element_transposable_ID_ET` = $ident",
+        "DELETE FROM `is_ends` WHERE `Element_transposable_ID_ET` = $ident",
+        "DELETE FROM `et_insertion_site` WHERE `Element_transposable_ID_ET` = $ident",
+        "DELETE FROM `orf` WHERE `Element_transposable_ID_ET` = $ident",
+        "DELETE FROM `parent_link` WHERE `Element_transposable_ID_ET` = $ident",
+        "DELETE FROM `element_transposable_has_host` WHERE `Element_transposable_ID_ET` = $ident",
+        "DELETE FROM `submission` WHERE `Element_transposable_ID_ET` = $ident",
+        // Suppression de l'IS lui-même en dernier
+        "DELETE FROM `element_transposable` WHERE `ID_ET` = $ident LIMIT 1",
+    ];
+
+    foreach ($tables_liees as $sql) {
+        execute_sql($cnx, $sql);
+    }
+
+    mysqli_close($cnx);
+    return $retour;
+}
+
+// ─── Écriture dans ISsubmit (renvoi depuis ISfinder) ───────────────────────
+// Écrit les données d'une fiche ISfinder dans ISsubmit avec base_ID_Base = 1 (ISSub).
+// Les données doivent avoir été chargées en SESSION via recup_data() au préalable.
+function ecrit_data_issub($ident, $name, $base_ecriture) {
+    $retour = "1";
+    $cnx = connexion($base_ecriture);
+
+    if (!$cnx) {
+        $_SESSION['error'] = "Problème de connexion à ISsubmit<br>";
+        return "0";
+    }
+
+    // Vérifie que le nom n'existe pas déjà dans ISsubmit
+    $reqIS = "SELECT ID_ET FROM `element_transposable` WHERE `ET_name` LIKE '" . mysqli_real_escape_string($cnx, $name) . "' LIMIT 1";
+    $result = execute_sql($cnx, $reqIS);
+    if (mysqli_num_rows($result) > 0) {
+        $_SESSION['error'] = "Ce nom d'IS existe déjà dans ISsubmit<br>";
+        mysqli_close($cnx);
+        return "0";
+    }
+
+    // Récupération des variables SESSION peuplées par recup_data()
+    foreach ($_SESSION as $elt_session => $var_session) {
+        $$elt_session = is_string($var_session) ? strip_tags($var_session) : $var_session;
+    }
+
+    // Recherche ou insertion du submiter dans ISsubmit
+    $sql_submiter = "SELECT ID_Submiter FROM `submiters` WHERE `Lastname` LIKE '" . mysqli_real_escape_string($cnx, $Lastname) . "' AND `Mail` LIKE '$Mail' LIMIT 1";
+    $result = execute_sql($cnx, $sql_submiter);
+    if ($submiter = mysqli_fetch_assoc($result)) {
+        $ID_Submiter = $submiter['ID_Submiter'];
+    } else {
+        $sql_sub = "INSERT INTO submiters(Firstname, Middlename, Lastname, Institution, Department, Address, Code, Country, Mail, Phone)";
+        $sql_sub .= " VALUES ('" . mysqli_real_escape_string($cnx, $Firstname) . "','" . mysqli_real_escape_string($cnx, $Middlename) . "','" . mysqli_real_escape_string($cnx, $Lastname) . "','" . mysqli_real_escape_string($cnx, $Institution) . "','" . mysqli_real_escape_string($cnx, $Department) . "','" . mysqli_real_escape_string($cnx, $Address) . "','" . mysqli_real_escape_string($cnx, $Code) . "', '" . mysqli_real_escape_string($cnx, $Country) . "', '" . $Mail . "', '" . mysqli_real_escape_string($cnx, $Phone) . "')";
+        execute_sql($cnx, $sql_sub);
+        $ID_Submiter = mysqli_insert_id($cnx);
+    }
+
+    // Normalisation des champs ENUM/nullable pour ISsubmit
+    $recode_sql      = ($recode == "NULL" || $recode == "")      ? "NULL" : "'" . mysqli_real_escape_string($cnx, $recode) . "'";
+    $frame_sql       = ($frame == "NULL" || $frame == "")        ? "NULL" : "'" . mysqli_real_escape_string($cnx, $frame) . "'";
+    $type_sql        = ($type == "NULL" || $type == "")          ? "NULL" : "'" . mysqli_real_escape_string($cnx, $type) . "'";
+    $SD_sql          = ($SD == "NULL" || $SD == "")              ? "NULL" : "'" . mysqli_real_escape_string($cnx, $SD) . "'";
+    $structure_sql   = ($structure == "NULL" || $structure == "") ? "NULL" : "'" . mysqli_real_escape_string($cnx, $structure) . "'";
+    $exp_sql         = ($exp_demontred == "NULL" || $exp_demontred == "") ? "NULL" : "'" . mysqli_real_escape_string($cnx, $exp_demontred) . "'";
+    $transposition_sql = ($Transposition == "NULL" || $Transposition == "") ? "NULL" : "'" . mysqli_real_escape_string($cnx, $Transposition) . "'";
+    $length_sql      = ($ET_Length == "")   ? "NULL" : intval($ET_Length);
+    $type_id_sql     = ($type_element_transposable_ID_Type_ET == "") ? "NULL" : intval($type_element_transposable_ID_Type_ET);
+    $partial_sql_et  = intval($ET_partial);
+    $submission_date_sql = (empty($Submission_date) || $Submission_date == "0000-00-00") ? "NULL" : "'" . mysqli_real_escape_string($cnx, $Submission_date) . "'";
+    $blast_result_sql    = ($ET_Blast_Result == "") ? "NULL" : "'" . mysqli_real_escape_string($cnx, $ET_Blast_Result) . "'";
+    $comments_sql        = ($ET_Comments == "") ? "NULL" : "'" . mysqli_real_escape_string($cnx, $ET_Comments) . "'";
+    $reference_sql       = ($ET_Reference == "") ? "NULL" : "'" . mysqli_real_escape_string($cnx, $ET_Reference) . "'";
+
+    // Insertion de l'IS dans ISsubmit avec base_ID_Base = 1 (ISSub)
+    $sql_insert = "INSERT INTO element_transposable(Groups_ID_Groups, Family_ID_Family, type_element_transposable_ID_Type_ET, base_ID_Base, ET_Accession_number, ET_name, ET_Length, ET_partial, ET_DNA_Sequence, Transposition, ET_Blast_Result, ET_Comments, ET_Reference, recode, frame, type, SD, structure, exp_demontred)";
+    $sql_insert .= " VALUES ('" . mysqli_real_escape_string($cnx, $Groups_ID_Groups) . "', '" . mysqli_real_escape_string($cnx, $Family_ID_Family) . "', $type_id_sql, 1, '" . mysqli_real_escape_string($cnx, $ET_Accession_number) . "', '" . mysqli_real_escape_string($cnx, $ET_name) . "', $length_sql, $partial_sql_et, '" . mysqli_real_escape_string($cnx, $ET_DNA_Sequence) . "', $transposition_sql, $blast_result_sql, $comments_sql, $reference_sql, $recode_sql, $frame_sql, $type_sql, $SD_sql, $structure_sql, $exp_sql)";
+
+    execute_sql($cnx, $sql_insert);
+    $new_ID_ET = mysqli_insert_id($cnx);
+
+    if (!$new_ID_ET) {
+        $_SESSION['error'] = "Problème lors de l'insertion dans ISsubmit<br>";
+        mysqli_close($cnx);
+        return "0";
+    }
+
+    // Table submission
+    $date_val = date("Y-m-d");
+    $sql_sub = "INSERT INTO submission(Submiters_ID_Submiter, Element_transposable_ID_ET, Submission_date, Validation_Date) VALUES ('$ID_Submiter', '$new_ID_ET', $submission_date_sql, '$date_val')";
+    execute_sql($cnx, $sql_sub);
+
+    // Table synonyme
+    if (!empty($Synonyme)) {
+        $Synonymes = explode(",", $Synonyme);
+        foreach ($Synonymes as $syn) {
+            $sql_sub = "INSERT INTO synonyme(Element_transposable_ID_ET, Synonyme) VALUES ($new_ID_ET, '" . mysqli_real_escape_string($cnx, trim($syn)) . "')";
+            execute_sql($cnx, $sql_sub);
+        }
+    }
+
+    // Table is_ends
+    $sql_sub = "INSERT INTO is_ends(Element_transposable_ID_ET, Left_End, Rigth_End, IR_Length, LE_Structure_II, RE_Structure_II, Ends_comments)";
+    $sql_sub .= " VALUES ('$new_ID_ET', '" . mysqli_real_escape_string($cnx, $Left_End) . "', '" . mysqli_real_escape_string($cnx, $Rigth_End) . "', '" . mysqli_real_escape_string($cnx, $IR_Length) . "', '" . mysqli_real_escape_string($cnx, $LE_Structure_II) . "', '" . mysqli_real_escape_string($cnx, $RE_Structure_II) . "', '" . mysqli_real_escape_string($cnx, $Ends_comments) . "')";
+    execute_sql($cnx, $sql_sub);
+
+    // Table host
+    $liste_hosts = explode("\n", $Hosts);
+    $origin = 1;
+    foreach ($liste_hosts as $Host) {
+        if (preg_match('/^[a-zA-Z]/', trim($Host))) {
+            $reqHost = "SELECT ID_host FROM `host` WHERE `Host` LIKE '" . mysqli_real_escape_string($cnx, trim($Host)) . "' LIMIT 1";
+            $resultHost = execute_sql($cnx, $reqHost);
+            $res_host = mysqli_fetch_assoc($resultHost);
+            if ($res_host) {
+                $ID_host = $res_host['ID_host'];
+            } else {
+                execute_sql($cnx, "INSERT INTO host(Host) VALUES ('" . mysqli_real_escape_string($cnx, trim($Host)) . "')");
+                $ID_host = mysqli_insert_id($cnx);
+            }
+            $sql_sub = "INSERT INTO element_transposable_has_host(Element_transposable_ID_ET, Host_ID_host, Origin) VALUES ('$new_ID_ET', '$ID_host', $origin)";
+            execute_sql($cnx, $sql_sub);
+            $origin = 0;
+        }
+    }
+
+    mysqli_close($cnx);
+    return $retour;
 }
 
 function envoyerMail($nomIS, $courriel) {

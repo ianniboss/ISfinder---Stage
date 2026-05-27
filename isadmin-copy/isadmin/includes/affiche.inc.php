@@ -231,7 +231,13 @@ function affiche_resultIS($cnx, $result, $fond, $bdd) {
         $numaccvar = (!empty($table["ET_Accession_number"])) ? $table["ET_Accession_number"] : "";
         $date = $table["Submission_date"];
 
-        print "<tr><td $fond>$i</td><td></td><td></td>";
+        print "<tr><td $fond>$i</td>";
+        // Action: Delete from ISfinder
+        print "<td><a href=\"scripts/actions.php?IDET=" . $IDET . "&action=suppr&bdd=" . $bdd . "\" title=\"Suppression !!!\"";
+        echo " onclick=\"return validsuppr_isfinder()\"><img src=\"images/suppr.png\" border=\"0\"></td>\n";
+        // Action: Send back to ISsub (base_ID_Base = 1)
+        print "<td><a href=\"scripts/actions.php?IDET=" . $IDET . "&action=sendback&bdd=" . $bdd . "\" title=\"Renvoyer dans ISsub!\"";
+        echo " onclick=\"return validsendback()\"><img src=\"images/sub.gif\" border=\"0\"></td>\n";
                                 // Name de l'IS
         print "<td><a href='ficheIS.php?ident=$IDET&bdd=$bdd'>$namevar</a></td>\n";
 
