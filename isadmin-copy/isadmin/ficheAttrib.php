@@ -188,7 +188,12 @@ if (!$cnx) {
                         </li>
                         <li>
                             <label class="label_gros" for="nom">Nv taxo :</label>
-                            <input type="text" NAME="new_taxo" value="<?php echo $new_taxo; ?>" size="40" maxlength=80>
+                            <?php
+                            // $new_taxo is NOT a column in request_names — it belongs to nom_type.
+                            // When this else-branch executes ($nomType is falsy), there is no nom_type row,
+                            // so $new_taxo is never set by the $$index loop. Default to empty string.
+                            ?>
+                            <input type="text" NAME="new_taxo" value="<?php echo $new_taxo ?? ''; ?>" size="40" maxlength=80>
                         </li>
                         <li>
                             <label class="label_gros_decal" for="comment_NomType">Commentaire :</label>

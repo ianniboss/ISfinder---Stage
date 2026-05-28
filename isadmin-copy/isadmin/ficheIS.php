@@ -459,9 +459,23 @@ $fond_base = 'class="base_' . $base_name . '"';         // couleur de background
                 <?php
                 if ($_SESSION['recoding_image'] != NULL) {
                     $recoding_image = $_SESSION['recoding_image'];
-                    $taille = getimagesize('drawings/' . $recoding_image);
-                    $largeur = ($taille[0] < 800) ? $taille[0] : 800;
-                    print "<div id='image'><img src='drawings/$recoding_image' width=$largeur></div>";
+                    $image_path = 'drawings/' . $recoding_image;
+                    // PHP 8.5 fix: Check file exists before getimagesize() — avoids
+                    // "Failed to open stream" warning and subsequent "array offset on bool" fatal error
+                    // when the image file is referenced in DB but missing from the drawings/ directory.
+                    if (file_exists($image_path)) {
+                        $taille = getimagesize($image_path);
+                        if ($taille !== false) {
+                            $largeur = ($taille[0] < 800) ? $taille[0] : 800;
+                            print "<div id='image'><img src='drawings/$recoding_image' width=$largeur></div>";
+                        } else {
+                            // File exists but is not a valid image
+                            print "<div id='image'><img src='drawings/$recoding_image'></div>";
+                        }
+                    } else {
+                        // Image file referenced in DB but not found on disk
+                        print "<div id='image'><p class='erreur'>Image not found: " . htmlspecialchars($recoding_image) . "</p></div>";
+                    }
                 }
                 ?>
                 <section>
