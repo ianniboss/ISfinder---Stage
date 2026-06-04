@@ -53,6 +53,13 @@ if (isset($_GET['champrecherche'])) {
         <hr/>
     </section>
     <section>
+        <h3>Exportation</h3>
+        <ul style="list-style-type: none; padding-left: 0;">
+            <li><a href="/isadmin/export_csv.php">Export CSV (Tables)</a></li>
+        </ul>
+        <hr/>
+    </section>
+    <section>
         <h3><a href="http://astun.ibcg.biotoul.fr/phpmyadmin" target="_blank">PhpMyAdmin</a></h3>
         <hr/>
     </section>
