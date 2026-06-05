@@ -38,7 +38,7 @@ if ($selected_table !== '') {
         <form method="get" action="export_csv.php">
             <p>
                 <label for="table_select"><strong>Table :</strong></label>
-                <select name="table" id="table_select" onchange="this.form.submit()">
+                <select name="table" id="table_select" onchange="this.form.submit()" style="padding: 6px; border: 1px solid #bdac99; border-radius: 4px; font-weight: bold; min-width: 250px;">
                     <option value="">-- Sélectionnez une table --</option>
                     <?php foreach ($allowed_tables as $table): ?>
                         <option value="<?php echo htmlspecialchars($table); ?>" <?php if ($table === $selected_table) echo 'selected'; ?>>
@@ -68,7 +68,7 @@ if ($selected_table !== '') {
                 <h3>Filtre (optionnel) :</h3>
                 <p>
                     <label for="filter_column">Champ :</label>
-                    <select name="filter_column" id="filter_column">
+                    <select name="filter_column" id="filter_column" style="padding: 4px; border: 1px solid #bdac99; border-radius: 4px;">
                         <option value="">-- Aucun filtre --</option>
                         <?php foreach ($columns as $col): ?>
                             <option value="<?php echo htmlspecialchars($col); ?>"><?php echo htmlspecialchars($col); ?></option>
@@ -76,7 +76,7 @@ if ($selected_table !== '') {
                     </select>
 
                     <label for="filter_operator">Op&eacute;rateur :</label>
-                    <select name="filter_operator" id="filter_operator">
+                    <select name="filter_operator" id="filter_operator" style="padding: 4px; border: 1px solid #bdac99; border-radius: 4px;">
                         <option value="=">=</option>
                         <option value="!=">!=</option>
                         <option value=">">&gt;</option>
@@ -88,11 +88,12 @@ if ($selected_table !== '') {
                     </select>
 
                     <label for="filter_value">Valeur :</label>
-                    <input type="text" name="filter_value" id="filter_value" placeholder="Valeur de recherche..." />
+                    <input type="text" name="filter_value" id="filter_value" placeholder="Valeur de recherche..." style="padding: 4px; border: 1px solid #bdac99; border-radius: 4px;" />
                 </p>
                 <br />
                 <p>
-                    <input type="submit" value="T&eacute;l&eacute;charger le fichier CSV" style="padding: 5px 15px; cursor: pointer; font-weight: bold;" />
+                    <!-- Correction CSS/Design : Utilisation de la classe btn-droit pour harmoniser le bouton avec le reste du site admin -->
+                    <input type="submit" class="btn-droit" value="T&eacute;l&eacute;charger le fichier CSV" />
                 </p>
             </form>
         <?php endif; ?>
