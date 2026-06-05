@@ -5,13 +5,29 @@ require_once('includes/init.inc.php');
 require_once('includes/function_sql.inc.php');
 
 $allowed_tables = [
+    'ag_description',
+    'current_names',
     'element_transposable',
-    'orf',
-    'submiters',
-    'submission',
-    'request_names',
+    'element_transposable_has_host',
+    'et_insertion_site',
+    'family',
+    'groups',
     'host',
-    'et_insertion_site'
+    'is_ends',
+    'name_attribution',
+    'nom_type',
+    'orf',
+    'orf_has_orf_modification',
+    'orf_modification',
+    'parent_link',
+    'pg_function',
+    'References',
+    'submission',
+    'submiters',
+    'synonyme',
+    'tnp_chemestry',
+    'tnp_description',
+    'type_element_transposable'
 ];
 
 $selected_table = isset($_POST['table']) ? $_POST['table'] : (isset($_GET['table']) ? $_GET['table'] : '');
