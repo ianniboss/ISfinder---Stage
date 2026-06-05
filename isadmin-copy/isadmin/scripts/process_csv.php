@@ -6,13 +6,29 @@ require_once('../includes/init.inc.php');
 require_once('../includes/function_sql.inc.php');
 
 $allowed_tables = [
+    'ag_description',
+    'current_names',
     'element_transposable',
-    'orf',
-    'submiters',
-    'submission',
-    'request_names',
+    'element_transposable_has_host',
+    'et_insertion_site',
+    'family',
+    'groups',
     'host',
-    'et_insertion_site'
+    'is_ends',
+    'name_attribution',
+    'nom_type',
+    'orf',
+    'orf_has_orf_modification',
+    'orf_modification',
+    'parent_link',
+    'pg_function',
+    'References',
+    'submission',
+    'submiters',
+    'synonyme',
+    'tnp_chemestry',
+    'tnp_description',
+    'type_element_transposable'
 ];
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -30,11 +46,16 @@ if (empty($columns_post)) {
 }
 
 // Check real columns to prevent SQL injection on column names
-$query = "SELECT COLUMN_NAME AS Field FROM information_schema.columns WHERE table_schema = '" . DB_bdd . "' AND table_name = '" . $table . "'";
-$result = sqlRequete($query);
 $actual_columns = [];
-if ($result) {
-    foreach ($result as $row) {
+$lien = mysqli_connect(DB_server, DB_user, DB_password, DB_bdd);
+if (!$lien) {
+    die("Erreur de connexion &agrave; la base de donn&eacute;es.");
+}
+
+$query = "SELECT COLUMN_NAME AS Field FROM information_schema.columns WHERE table_schema = '" . mysqli_real_escape_string($lien, DB_bdd) . "' AND table_name = '" . mysqli_real_escape_string($lien, $table) . "'";
+$result = mysqli_query($lien, $query);
+if ($result && mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
         $actual_columns[] = $row['Field'];
     }
 }
@@ -61,29 +82,25 @@ $allowed_operators = ['=', '!=', '>', '<', '>=', '<=', 'LIKE', 'NOT LIKE'];
 
 // Applying structured filter safely
 if ($filter_column !== '' && in_array($filter_column, $actual_columns) && in_array($filter_operator, $allowed_operators)) {
-    $lien = mysqli_connect(DB_server, DB_user, DB_password, DB_bdd);
-    if ($lien) {
-        $escaped_value = mysqli_real_escape_string($lien, $filter_value);
-        $where_clause = "`" . $filter_column . "` " . $filter_operator . " '" . $escaped_value . "'";
-        mysqli_close($lien);
-    } else {
-        die("Erreur de connexion &agrave; la base de donn&eacute;es pour le filtrage.");
-    }
+    $escaped_value = mysqli_real_escape_string($lien, $filter_value);
+    $where_clause = "`" . $filter_column . "` " . $filter_operator . " '" . $escaped_value . "'";
 }
 
-$query_select = "SELECT " . implode(", ", $selected_columns) . " FROM `" . $table . "`";
+$query_select = "SELECT " . implode(", ", $selected_columns) . " FROM `" . mysqli_real_escape_string($lien, $table) . "`";
 if ($where_clause !== '') {
     $query_select .= " WHERE " . $where_clause;
 }
 
-$data = sqlRequete($query_select);
-
-if ($data === false) {
-    // Determine if query succeeded but returned 0 rows, or if it failed
-    // sqlRequete returns false on error or 0 rows for SELECT. 
-    // We can just output an empty CSV with headers in both cases for safety.
-    $data = [];
+$data = [];
+$result_data = mysqli_query($lien, $query_select);
+if ($result_data && mysqli_num_rows($result_data) > 0) {
+    while ($row = mysqli_fetch_assoc($result_data)) {
+        $data[] = $row;
+    }
 }
+
+// Close connection now that we're done with DB
+mysqli_close($lien);
 
 header('Content-Type: text/csv; charset=utf-8');
 header('Content-Disposition: attachment; filename="' . $table . '_export_' . date('Ymd_His') . '.csv"');

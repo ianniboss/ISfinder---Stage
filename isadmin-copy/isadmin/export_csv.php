@@ -38,12 +38,16 @@ if (!in_array($selected_table, $allowed_tables)) {
 
 $columns = [];
 if ($selected_table !== '') {
-    $query = "SELECT COLUMN_NAME AS Field FROM information_schema.columns WHERE table_schema = '" . DB_bdd . "' AND table_name = '" . $selected_table . "'";
-    $result = sqlRequete($query);
-    if ($result) {
-        foreach ($result as $row) {
-            $columns[] = $row['Field'];
+    $lien = mysqli_connect(DB_server, DB_user, DB_password, DB_bdd);
+    if ($lien) {
+        $query = "SELECT COLUMN_NAME AS Field FROM information_schema.columns WHERE table_schema = '" . mysqli_real_escape_string($lien, DB_bdd) . "' AND table_name = '" . mysqli_real_escape_string($lien, $selected_table) . "'";
+        $result = mysqli_query($lien, $query);
+        if ($result && mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $columns[] = $row['Field'];
+            }
         }
+        mysqli_close($lien);
     }
 }
 ?>
