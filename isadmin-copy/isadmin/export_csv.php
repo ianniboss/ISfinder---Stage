@@ -159,13 +159,14 @@ if ($lien) {
         let selectFields = [];
         let fromTables = new Set();
         let whereClauses = [];
+        let hasError = false;
         
         blocks.forEach(block => {
             const table = block.querySelector('.qb-table').value;
             const field = block.querySelector('.qb-field').value;
             const isShow = block.querySelector('.qb-show').checked;
             const operator = block.querySelector('.qb-operator').value;
-            let criteria = block.querySelector('.qb-criteria').value;
+            let criteria = block.querySelector('.qb-criteria').value.trim();
             
             if (table) {
                 fromTables.add(table);
@@ -177,11 +178,26 @@ if ($lien) {
                 }
                 
                 if (fieldRef && operator && criteria !== '') {
-                    whereClauses.push(`${fieldRef} ${operator} ${criteria}`);
+                    if (field === '*') {
+                        alert(`Attention : Impossible de filtrer sur '*' (Toutes les colonnes). Veuillez ajouter un nouveau bloc, sélectionner la colonne spécifique (ex: et_name), décocher "Afficher dans le SELECT", et appliquer votre condition là-bas.`);
+                        hasError = true;
+                        return;
+                    }
+
+                    let formattedCriteria = criteria;
+                    // Auto-quote if it's a string (not a number, no dot for table.column relationships, and no existing quotes)
+                    if (isNaN(criteria) && !criteria.includes('.') && !criteria.startsWith("'") && !criteria.startsWith('"')) {
+                        // Double up single quotes for SQL escaping in the generated text
+                        formattedCriteria = "'" + criteria.replace(/'/g, "''") + "'";
+                    }
+
+                    whereClauses.push(`${fieldRef} ${operator} ${formattedCriteria}`);
                 }
             }
         });
         
+        if (hasError) return;
+
         if (fromTables.size === 0) {
             alert("Veuillez s\u00e9lectionner au moins une table.");
             return;
