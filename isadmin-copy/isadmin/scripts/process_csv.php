@@ -13,23 +13,23 @@ function afficherErreur($msg) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    afficherErreur("M&eacute;thode non autoris&eacute;e.");
+    afficherErreur("Méthode non autorisée.");
 }
 
 $raw_sql = isset($_POST['custom_sql']) ? trim($_POST['custom_sql']) : '';
 
 if (empty($raw_sql)) {
-    afficherErreur("La requ&ecirc;te SQL est vide.");
+    afficherErreur("La requête SQL est vide.");
 }
 
 // SECURITY VALIDATION 1: Must start with SELECT
 if (stripos($raw_sql, 'SELECT') !== 0) {
-    afficherErreur("S&eacute;curit&eacute; : Seules les requ&ecirc;tes SELECT sont autoris&eacute;es.");
+    afficherErreur("Sécurité : Seules les requêtes SELECT sont autorisées.");
 }
 
 // SECURITY VALIDATION 2: No semicolons to prevent multiple statements
 if (strpos($raw_sql, ';') !== false) {
-    afficherErreur("S&eacute;curit&eacute; : L'utilisation de points-virgules (;) est interdite pour emp&ecirc;cher les requ&ecirc;tes multiples.");
+    afficherErreur("Sécurité : L'utilisation de points-virgules (;) est interdite pour empêcher les requêtes multiples.");
 }
 
 // SECURITY VALIDATION 3: Blacklist destructive commands
@@ -41,14 +41,14 @@ $upper_sql = strtoupper($raw_sql);
 foreach ($blacklist as $keyword) {
     // Check for whole words to avoid matching columns casually
     if (preg_match('/\b' . $keyword . '\b/', $upper_sql)) {
-         afficherErreur("S&eacute;curit&eacute; : L'utilisation du mot-cl&eacute; " . $keyword . " est strictement interdite.");
+         afficherErreur("Sécurité : L'utilisation du mot-clé " . $keyword . " est strictement interdite.");
     }
 }
 
 // Connect to DB and execute
 $lien = mysqli_connect(DB_server, DB_user, DB_password, DB_bdd);
 if (!$lien) {
-    afficherErreur("Erreur de connexion &agrave; la base de donn&eacute;es.");
+    afficherErreur("Erreur de connexion à la base de données.");
 }
 
 $result = mysqli_query($lien, $raw_sql);
@@ -62,7 +62,7 @@ if ($result === false) {
 // It must be a result set from a SELECT
 if (!($result instanceof mysqli_result)) {
     mysqli_close($lien);
-    afficherErreur("S&eacute;curit&eacute; : La requ&ecirc;te n'a pas retourn&eacute; de jeu de r&eacute;sultats.");
+    afficherErreur("Sécurité : La requête n'a pas retourné de jeu de résultats.");
 }
 
 // Prepare CSV output

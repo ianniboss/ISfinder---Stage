@@ -42,26 +42,26 @@ if ($lien) {
 <article>
     <section>
         <h2> Export (CSV)</h2>
-        <p>Utilisez le constructeur ci-dessous pour cr&eacute;er votre requ&ecirc;te SQL. Vous pouvez &eacute;galement modifier la requ&ecirc;te g&eacute;n&eacute;r&eacute;e manuellement avant l'exportation.</p>
+        <p>Utilisez le constructeur ci-dessous pour créer votre requête SQL. Vous pouvez également modifier la requête générée manuellement avant l'exportation.</p>
         
         <div id="query-builder" style="background: #f9f9f9; padding: 15px; border: 1px solid #ccc; margin-bottom: 20px;">
-            <h3>G&eacute;n&eacute;rateur de Requ&ecirc;te</h3>
+            <h3>Générateur de Requête</h3>
             <div id="blocks-container" style="display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 15px;">
                 <!-- Les blocs seront ajoutes ici par JS -->
             </div>
             
             <button type="button" id="btn-add-block" style="padding: 5px 10px; cursor: pointer;">+ Ajouter une colonne</button>
-            <button type="button" id="btn-generate-sql" class="btn-droit" style="margin-left: 10px;">G&eacute;n&eacute;rer SQL</button>
+            <button type="button" id="btn-generate-sql" class="btn-droit" style="margin-left: 10px;">Générer SQL</button>
         </div>
 
         <form method="post" action="scripts/process_csv.php">
-            <h3>Requ&ecirc;te SQL (&Eacute;ditable) :</h3>
-            <p style="font-size: 0.9em; color: #666;">Seules les requ&ecirc;tes <code>SELECT</code> sont autoris&eacute;es. L'utilisation de points-virgules (<code>;</code>) est interdite pour s&eacute;curit&eacute;.</p>
-            <textarea id="custom_sql" name="custom_sql" style="width: 100%; height: 150px; font-family: monospace; padding: 10px; border: 1px solid #bdac99; border-radius: 4px;" placeholder="La requ&ecirc;te appara&icirc;tra ici..."></textarea>
+            <h3>Requête SQL (Éditable) :</h3>
+            <p style="font-size: 0.9em; color: #666;">Seules les requêtes <code>SELECT</code> sont autorisées. L'utilisation de points-virgules (<code>;</code>) est interdite pour sécurité.</p>
+            <textarea id="custom_sql" name="custom_sql" style="width: 100%; height: 150px; font-family: monospace; padding: 10px; border: 1px solid #bdac99; border-radius: 4px;" placeholder="La requête apparaîtra ici..."></textarea>
             
             <br /><br />
             <p>
-                <input type="submit" class="btn-droit" value="Ex&eacute;cuter et T&eacute;l&eacute;charger CSV" />
+                <input type="submit" class="btn-droit" value="Exécuter et Télécharger CSV" />
             </p>
         </form>
     </section>
