@@ -2,123 +2,208 @@
 require_once('includes/entete.inc.php');
 require_once('includes/aside.inc.php');
 require_once('includes/init.inc.php');
-require_once('includes/function_sql.inc.php');
 
 $allowed_tables = [
-    'ag_description',
-    'current_names',
-    'element_transposable',
-    'element_transposable_has_host',
-    'et_insertion_site',
-    'family',
-    'groups',
-    'host',
-    'is_ends',
-    'name_attribution',
-    'nom_type',
-    'orf',
-    'orf_has_orf_modification',
-    'orf_modification',
-    'parent_link',
-    'pg_function',
-    'References',
-    'submission',
-    'submiters',
-    'synonyme',
-    'tnp_chemestry',
-    'tnp_description',
+    'ag_description', 'current_names', 'element_transposable', 'element_transposable_has_host',
+    'et_insertion_site', 'family', 'groups', 'host', 'is_ends', 'name_attribution', 'nom_type',
+    'orf', 'orf_has_orf_modification', 'orf_modification', 'parent_link', 'pg_function',
+    'References', 'submission', 'submiters', 'synonyme', 'tnp_chemestry', 'tnp_description',
     'type_element_transposable'
 ];
 
-$selected_table = isset($_POST['table']) ? $_POST['table'] : (isset($_GET['table']) ? $_GET['table'] : '');
+// Fetch complete schema for allowed tables
+$schema = [];
+$lien = mysqli_connect(DB_server, DB_user, DB_password, DB_bdd);
+if ($lien) {
+    // Escaping database name
+    $db_esc = mysqli_real_escape_string($lien, DB_bdd);
+    
+    // Instead of querying 23 times, query once using IN
+    $tables_esc = array_map(function($t) use ($lien) {
+        return "'" . mysqli_real_escape_string($lien, $t) . "'";
+    }, $allowed_tables);
+    $in_clause = implode(',', $tables_esc);
 
-if (!in_array($selected_table, $allowed_tables)) {
-    $selected_table = '';
-}
-
-$columns = [];
-if ($selected_table !== '') {
-    $lien = mysqli_connect(DB_server, DB_user, DB_password, DB_bdd);
-    if ($lien) {
-        $query = "SELECT COLUMN_NAME AS Field FROM information_schema.columns WHERE table_schema = '" . mysqli_real_escape_string($lien, DB_bdd) . "' AND table_name = '" . mysqli_real_escape_string($lien, $selected_table) . "'";
-        $result = mysqli_query($lien, $query);
-        if ($result && mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                $columns[] = $row['Field'];
+    $query = "SELECT table_name, COLUMN_NAME AS Field FROM information_schema.columns WHERE table_schema = '{$db_esc}' AND table_name IN ({$in_clause}) ORDER BY table_name, ordinal_position";
+    $result = mysqli_query($lien, $query);
+    if ($result && mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $t = $row['table_name'];
+            if (!isset($schema[$t])) {
+                $schema[$t] = [];
             }
+            $schema[$t][] = $row['Field'];
         }
-        mysqli_close($lien);
     }
+    mysqli_close($lien);
 }
 ?>
 
 <article>
     <section>
-        <h2>Export CSV</h2>
-        <form method="get" action="export_csv.php">
+        <h2>Advanced Multi-Table Export (CSV)</h2>
+        <p>Utilisez le constructeur ci-dessous pour cr&eacute;er votre requ&ecirc;te SQL. Vous pouvez &eacute;galement modifier la requ&ecirc;te g&eacute;n&eacute;r&eacute;e manuellement avant l'exportation.</p>
+        
+        <div id="query-builder" style="background: #f9f9f9; padding: 15px; border: 1px solid #ccc; margin-bottom: 20px;">
+            <h3>G&eacute;n&eacute;rateur de Requ&ecirc;te</h3>
+            <div id="blocks-container" style="display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 15px;">
+                <!-- Les blocs seront ajoutes ici par JS -->
+            </div>
+            
+            <button type="button" id="btn-add-block" style="padding: 5px 10px; cursor: pointer;">+ Ajouter une colonne</button>
+            <button type="button" id="btn-generate-sql" class="btn-droit" style="margin-left: 10px;">G&eacute;n&eacute;rer SQL</button>
+        </div>
+
+        <form method="post" action="scripts/process_csv.php">
+            <h3>Requ&ecirc;te SQL (&Eacute;ditable) :</h3>
+            <p style="font-size: 0.9em; color: #666;">Seules les requ&ecirc;tes <code>SELECT</code> sont autoris&eacute;es. L'utilisation de points-virgules (<code>;</code>) est interdite pour s&eacute;curit&eacute;.</p>
+            <textarea id="custom_sql" name="custom_sql" style="width: 100%; height: 150px; font-family: monospace; padding: 10px; border: 1px solid #bdac99; border-radius: 4px;" placeholder="La requ&ecirc;te appara&icirc;tra ici..."></textarea>
+            
+            <br /><br />
             <p>
-                <label for="table_select"><strong>Table :</strong></label>
-                <select name="table" id="table_select" onchange="this.form.submit()" style="padding: 6px; border: 1px solid #bdac99; border-radius: 4px; font-weight: bold; min-width: 250px;">
-                    <option value="">-- Sélectionnez une table --</option>
-                    <?php foreach ($allowed_tables as $table): ?>
-                        <option value="<?php echo htmlspecialchars($table); ?>" <?php if ($table === $selected_table) echo 'selected'; ?>>
-                            <?php echo htmlspecialchars($table); ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
+                <input type="submit" class="btn-droit" value="Ex&eacute;cuter et T&eacute;l&eacute;charger CSV" />
             </p>
         </form>
-
-        <?php if ($selected_table !== '' && !empty($columns)): ?>
-            <hr />
-            <form method="post" action="scripts/process_csv.php">
-                <input type="hidden" name="table" value="<?php echo htmlspecialchars($selected_table); ?>" />
-                
-                <h3>Colonnes &agrave; exporter :</h3>
-                <div style="column-count: 3; margin-bottom: 20px;">
-                    <?php foreach ($columns as $col): ?>
-                        <label>
-                            <input type="checkbox" name="columns[]" value="<?php echo htmlspecialchars($col); ?>" checked="checked" />
-                            <?php echo htmlspecialchars($col); ?>
-                        </label><br />
-                    <?php endforeach; ?>
-                </div>
-
-                <hr />
-                <h3>Filtre (optionnel) :</h3>
-                <p>
-                    <label for="filter_column">Champ :</label>
-                    <select name="filter_column" id="filter_column" style="padding: 4px; border: 1px solid #bdac99; border-radius: 4px;">
-                        <option value="">-- Aucun filtre --</option>
-                        <?php foreach ($columns as $col): ?>
-                            <option value="<?php echo htmlspecialchars($col); ?>"><?php echo htmlspecialchars($col); ?></option>
-                        <?php endforeach; ?>
-                    </select>
-
-                    <label for="filter_operator">Op&eacute;rateur :</label>
-                    <select name="filter_operator" id="filter_operator" style="padding: 4px; border: 1px solid #bdac99; border-radius: 4px;">
-                        <option value="=">=</option>
-                        <option value="!=">!=</option>
-                        <option value=">">&gt;</option>
-                        <option value="<">&lt;</option>
-                        <option value=">=">&gt;=</option>
-                        <option value="<=">&lt;=</option>
-                        <option value="LIKE">LIKE</option>
-                        <option value="NOT LIKE">NOT LIKE</option>
-                    </select>
-
-                    <label for="filter_value">Valeur :</label>
-                    <input type="text" name="filter_value" id="filter_value" placeholder="Valeur de recherche..." style="padding: 4px; border: 1px solid #bdac99; border-radius: 4px;" />
-                </p>
-                <br />
-                <p>
-                    <!-- Correction CSS/Design : Utilisation de la classe btn-droit pour harmoniser le bouton avec le reste du site admin -->
-                    <input type="submit" class="btn-droit" value="T&eacute;l&eacute;charger le fichier CSV" />
-                </p>
-            </form>
-        <?php endif; ?>
     </section>
 </article>
+
+<script>
+    const dbSchema = <?php echo json_encode($schema); ?>;
+    const allowedTables = Object.keys(dbSchema);
+
+    const blocksContainer = document.getElementById('blocks-container');
+    const btnAddBlock = document.getElementById('btn-add-block');
+    const btnGenerateSql = document.getElementById('btn-generate-sql');
+    const customSqlTextarea = document.getElementById('custom_sql');
+    
+    let blockCounter = 0;
+
+    function createBlock() {
+        blockCounter++;
+        const blockId = 'block-' + blockCounter;
+        
+        const blockDiv = document.createElement('div');
+        blockDiv.id = blockId;
+        blockDiv.style.border = '1px solid #bdac99';
+        blockDiv.style.padding = '10px';
+        blockDiv.style.background = '#fff';
+        blockDiv.style.borderRadius = '4px';
+        blockDiv.style.minWidth = '250px';
+        
+        // Table Select
+        let tableOptions = '<option value="">-- Table --</option>';
+        allowedTables.forEach(t => {
+            tableOptions += `<option value="${t}">${t}</option>`;
+        });
+        
+        blockDiv.innerHTML = `
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <strong>Bloc ${blockCounter}</strong>
+                <button type="button" onclick="document.getElementById('${blockId}').remove()" style="color: red; border: none; background: none; cursor: pointer; font-weight: bold;">X</button>
+            </div>
+            <div style="margin-bottom: 5px;">
+                <select class="qb-table" style="width: 100%; padding: 4px; margin-bottom: 4px;">${tableOptions}</select>
+            </div>
+            <div style="margin-bottom: 5px;">
+                <select class="qb-field" style="width: 100%; padding: 4px; margin-bottom: 4px;">
+                    <option value="">-- Colonne --</option>
+                </select>
+            </div>
+            <div style="margin-bottom: 5px;">
+                <label><input type="checkbox" class="qb-show" checked> Afficher dans le SELECT</label>
+            </div>
+            <hr style="margin: 5px 0;" />
+            <div style="margin-bottom: 5px;">
+                <select class="qb-operator" style="width: 100%; padding: 4px; margin-bottom: 4px;">
+                    <option value="">-- Condition --</option>
+                    <option value="=">=</option>
+                    <option value="!=">!=</option>
+                    <option value=">">&gt;</option>
+                    <option value="<">&lt;</option>
+                    <option value=">=">&gt;=</option>
+                    <option value="<=">&lt;=</option>
+                    <option value="LIKE">LIKE</option>
+                    <option value="NOT LIKE">NOT LIKE</option>
+                </select>
+            </div>
+            <div>
+                <input type="text" class="qb-criteria" placeholder="Valeur ('string' ou orf.id)" style="width: 100%; padding: 4px; box-sizing: border-box;" />
+            </div>
+        `;
+        
+        blocksContainer.appendChild(blockDiv);
+        
+        // Add event listener for table change
+        const tableSelect = blockDiv.querySelector('.qb-table');
+        const fieldSelect = blockDiv.querySelector('.qb-field');
+        
+        tableSelect.addEventListener('change', function() {
+            const selectedTable = this.value;
+            fieldSelect.innerHTML = '<option value="">-- Colonne --</option><option value="*">* (Toutes)</option>';
+            if (selectedTable && dbSchema[selectedTable]) {
+                dbSchema[selectedTable].forEach(col => {
+                    fieldSelect.innerHTML += `<option value="${col}">${col}</option>`;
+                });
+            }
+        });
+    }
+
+    // Initialize with one block
+    createBlock();
+
+    btnAddBlock.addEventListener('click', createBlock);
+
+    btnGenerateSql.addEventListener('click', function() {
+        const blocks = document.querySelectorAll('#blocks-container > div');
+        
+        let selectFields = [];
+        let fromTables = new Set();
+        let whereClauses = [];
+        
+        blocks.forEach(block => {
+            const table = block.querySelector('.qb-table').value;
+            const field = block.querySelector('.qb-field').value;
+            const isShow = block.querySelector('.qb-show').checked;
+            const operator = block.querySelector('.qb-operator').value;
+            let criteria = block.querySelector('.qb-criteria').value;
+            
+            if (table) {
+                fromTables.add(table);
+                
+                let fieldRef = field === '*' ? `\`${table}\`.*` : (field ? `\`${table}\`.\`${field}\`` : null);
+                
+                if (fieldRef && isShow) {
+                    selectFields.push(fieldRef);
+                }
+                
+                if (fieldRef && operator && criteria !== '') {
+                    whereClauses.push(`${fieldRef} ${operator} ${criteria}`);
+                }
+            }
+        });
+        
+        if (fromTables.size === 0) {
+            alert("Veuillez s\u00e9lectionner au moins une table.");
+            return;
+        }
+        
+        let sql = "SELECT ";
+        if (selectFields.length > 0) {
+            sql += selectFields.join(", ");
+        } else {
+            sql += "*";
+        }
+        
+        sql += "\nFROM " + Array.from(fromTables).map(t => `\`${t}\``).join(", ");
+        
+        if (whereClauses.length > 0) {
+            sql += "\nWHERE " + whereClauses.join(" AND ");
+        }
+        
+        customSqlTextarea.value = sql;
+    });
+
+</script>
 
 <?php
 require_once('includes/pied.inc.php');
