@@ -1,14 +1,3 @@
-/*
- * links.css — Card grid layout for the Favourite Links page
- *
- * WHY: Replaces legacy table-based layout with a modern card grid.
- *       Approved by Patricia based on wireframe.
- *       Colors reuse the existing site palette from styles.css.
- *
- * LAYOUT: Horizontal carousel per category.
- *         4 cards visible at a time, arrow slides to reveal more.
- */
-
 /* ── Category sections ── */
 .links-category {
     margin-bottom: 2em;
