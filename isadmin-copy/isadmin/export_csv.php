@@ -199,7 +199,7 @@ if ($lien) {
         if (hasError) return;
 
         if (fromTables.size === 0) {
-            alert("Veuillez s\u00e9lectionner au moins une table.");
+            alert("Veuillez sélectionner au moins une table.");
             return;
         }
         
