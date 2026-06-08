@@ -11,14 +11,14 @@ $allowed_tables = [
     'type_element_transposable'
 ];
 
-// Fetch complete schema for allowed tables
+// Récupérer le schéma complet pour les tables autorisées
 $schema = [];
 $lien = mysqli_connect(DB_server, DB_user, DB_password, DB_bdd);
 if ($lien) {
-    // Escaping database name
+    // Échappement du nom de la base de données
     $db_esc = mysqli_real_escape_string($lien, DB_bdd);
     
-    // Instead of querying 23 times, query once using IN
+    // Au lieu de faire 23 requêtes, faire une seule requête en utilisant IN
     $tables_esc = array_map(function($t) use ($lien) {
         return "'" . mysqli_real_escape_string($lien, $t) . "'";
     }, $allowed_tables);
@@ -47,7 +47,7 @@ if ($lien) {
         <div id="query-builder" style="background: #f9f9f9; padding: 15px; border: 1px solid #ccc; margin-bottom: 20px;">
             <h3>Générateur de Requête</h3>
             <div id="blocks-container" style="display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 15px;">
-                <!-- Les blocs seront ajoutes ici par JS -->
+                <!-- Les blocs seront ajoutés ici par JS -->
             </div>
             
             <button type="button" id="btn-add-block" style="padding: 5px 10px; cursor: pointer;">+ Ajouter une colonne</button>
@@ -90,7 +90,7 @@ if ($lien) {
         blockDiv.style.borderRadius = '4px';
         blockDiv.style.minWidth = '250px';
         
-        // Table Select
+        // Sélection de la table
         let tableOptions = '<option value="">-- Table --</option>';
         allowedTables.forEach(t => {
             tableOptions += `<option value="${t}">${t}</option>`;
@@ -133,7 +133,7 @@ if ($lien) {
         
         blocksContainer.appendChild(blockDiv);
         
-        // Add event listener for table change
+        // Ajouter un écouteur d'événement pour le changement de table
         const tableSelect = blockDiv.querySelector('.qb-table');
         const fieldSelect = blockDiv.querySelector('.qb-field');
         
@@ -148,7 +148,7 @@ if ($lien) {
         });
     }
 
-    // Initialize with one block
+    // Initialiser avec un bloc
     createBlock();
 
     btnAddBlock.addEventListener('click', createBlock);
@@ -185,9 +185,9 @@ if ($lien) {
                     }
 
                     let formattedCriteria = criteria;
-                    // Auto-quote if it's a string (not a number, no dot for table.column relationships, and no existing quotes)
+                    // Ajout automatique de guillemets s'il s'agit d'une chaîne (pas un nombre, pas de point pour les relations table.colonne, et pas de guillemets existants)
                     if (isNaN(criteria) && !criteria.includes('.') && !criteria.startsWith("'") && !criteria.startsWith('"')) {
-                        // Double up single quotes for SQL escaping in the generated text
+                        // Doubler les guillemets simples pour l'échappement SQL dans le texte généré
                         formattedCriteria = "'" + criteria.replace(/'/g, "''") + "'";
                     }
 
