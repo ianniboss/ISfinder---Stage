@@ -41,7 +41,7 @@ if ($lien) {
 
 <article>
     <section>
-        <h2>Advanced Multi-Table Export (CSV)</h2>
+        <h2> Export (CSV)</h2>
         <p>Utilisez le constructeur ci-dessous pour cr&eacute;er votre requ&ecirc;te SQL. Vous pouvez &eacute;galement modifier la requ&ecirc;te g&eacute;n&eacute;r&eacute;e manuellement avant l'exportation.</p>
         
         <div id="query-builder" style="background: #f9f9f9; padding: 15px; border: 1px solid #ccc; margin-bottom: 20px;">
