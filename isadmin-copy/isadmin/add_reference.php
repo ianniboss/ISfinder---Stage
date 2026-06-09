@@ -10,6 +10,8 @@ require_once("includes/function.inc.php");
 echo '<link type="text/css" rel="stylesheet" href="styles/styles.css" media="screen" />';
 echo "<article>";
 echo "<h2>Add Reference Value</h2>";
+echo "<p style='font-style: italic; color: #666; margin-bottom: 15px;'>Permettre d'ajouter l'enregistrement dans les tables pre-remplies.</p>";
+
 
 $allowed_tables = [
     'family' => ['column' => 'Family_Name', 'label' => 'Family Name'],
