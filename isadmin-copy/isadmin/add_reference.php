@@ -14,11 +14,11 @@ echo "<p style='font-style: italic; color: #666; margin-bottom: 15px;'>Permettre
 
 
 $allowed_tables = [
-    'family' => ['column' => 'Family_Name', 'label' => 'Famille'],
-    'tnp_chemestry' => ['column' => 'chemestry', 'label' => 'Chimie Tnp'],
-    'type_element_transposable' => ['column' => 'Type_ET', 'label' => 'Type d\'élément transposable'],
-    'ag_description' => ['column' => 'description', 'label' => 'Description AG'],
-    'pg_function' => ['column' => 'function', 'label' => 'Fonction PG']
+    'family' => ['column' => 'Family_Name', 'label' => 'Family Name'],
+    'tnp_chemestry' => ['column' => 'chemestry', 'label' => 'Tnp Chemistry'],
+    'type_element_transposable' => ['column' => 'Type_ET', 'label' => 'Type Element Transposable'],
+    'ag_description' => ['column' => 'description', 'label' => 'AG Description'],
+    'pg_function' => ['column' => 'function', 'label' => 'PG Function']
 ];
 
 $message = "";
@@ -78,9 +78,9 @@ echo $message;
         <legend style="font-weight: bold; padding: 0 10px; color: #333;">Détails de la nouvelle valeur</legend>
         
         <p style="margin-bottom: 15px;">
-            <label for="table_name" style="display: block; margin-bottom: 5px; font-weight: bold;">Sélectionner la table cible :</label>
+            <label for="table_name" style="display: block; margin-bottom: 5px; font-weight: bold;">Sélectionner la table :</label>
             <select name="table_name" id="table_name" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
-                <option value="">-- Choisir une table --</option>
+                <option value="">-- Choisissez une table --</option>
                 <?php foreach ($allowed_tables as $table => $config): ?>
                     <option value="<?php echo htmlspecialchars($table); ?>" <?php echo (isset($_POST['table_name']) && $_POST['table_name'] === $table) ? 'selected' : ''; ?>>
                         <?php echo htmlspecialchars($config['label']); ?> (<?php echo htmlspecialchars($table); ?>)

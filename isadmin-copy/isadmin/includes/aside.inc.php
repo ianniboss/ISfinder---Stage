@@ -49,7 +49,7 @@ if (isset($_GET['champrecherche'])) {
         <hr/>
     </section>
     <section>
-        <h3><a href="/isadmin/scripts/is_end.php" target="_blank">IS Ends</a></h3>
+        <h3><a href="/isadmin/scripts/is_end.php">IS Ends</a></h3>
         <hr/>
     </section>
     <section>
