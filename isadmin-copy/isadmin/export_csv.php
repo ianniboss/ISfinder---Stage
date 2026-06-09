@@ -42,7 +42,7 @@ if ($lien) {
 <article>
     <section>
         <h2> Export (CSV)</h2>
-        <p>Utilisez le constructeur ci-dessous pour créer votre requête SQL. Vous pouvez également modifier la requête générée manuellement avant l'exportation.</p>
+        <p style="font-style: italic; color: #666; margin-bottom: 15px;">Utilisez le constructeur ci-dessous pour créer votre requête SQL. Vous pouvez également modifier la requête générée manuellement avant l'exportation.</p>
         
         <div id="query-builder" style="background: #f9f9f9; padding: 15px; border: 1px solid #ccc; margin-bottom: 20px;">
             <h3>Générateur de Requête</h3>
