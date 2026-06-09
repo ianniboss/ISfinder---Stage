@@ -62,6 +62,10 @@ if (isset($_GET['champrecherche'])) {
     </section>
     <section>
         <h3><a href="https://secure.ibcg.biotoul.fr/awstats/awstats.pl?config=www-is.biotoul.fr&configdir=/etc/awstats" target="_blank">Statistiques</a></h3>
+        <hr/>
+    </section>
+    <section>
+        <h3><a href="/isadmin/add_reference.php">Add Reference Value</a></h3>
         <hr/><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
         <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
     </section>
