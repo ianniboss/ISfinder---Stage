@@ -65,7 +65,7 @@ if (isset($_GET['champrecherche'])) {
         <hr/>
     </section>
     <section>
-        <h3><a href="/isadmin/add_reference.php">Add Reference Value</a></h3>
+        <h3><a href="/isadmin/add_reference.php">Ajouter une valeur</a></h3>
         <hr/><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
         <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
     </section>
