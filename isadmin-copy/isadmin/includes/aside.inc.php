@@ -11,6 +11,7 @@ if (isset($_GET['champrecherche'])) {
     <h2 class="accessibility">Encart </h2>
     <section>
         <h3><a href="/isadmin/liste.php?list=1">Lister</a></h3>
+        <h3><a href="/isadmin/liste_incomplete.php">Séquences Incomplètes</a></h3>
         <hr/>
     </section>
     <section>
