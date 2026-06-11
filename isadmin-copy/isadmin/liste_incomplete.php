@@ -54,7 +54,7 @@ if ($tri === 'ID_ET' && empty($_GET['tri'])) {
 $result = execute_sql($cnx, $reqtrier);
 $nombre = mysqli_num_rows($result);
 
-echo "<h2> Séquences Incomplètes (Audit) </h2>";
+echo "<h2> Séquences Incomplètes </h2>";
 echo "<p>Cette liste affiche les éléments transposables qui n'ont aucune soumission liée (le processus d'enregistrement s'est arrêté ou a échoué avant la fin).</p>";
 
 if ($nombre > 0) {

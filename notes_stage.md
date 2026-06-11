@@ -138,7 +138,4 @@ print "<ul><li><span class='entete_propriete'>Family </span>".$family."</li>";
 		}
 		print "</ul>";
 
-question :
-specifie le relation entre tables manuellement ou automatiquement
-juste en mode lecture pour que vous puisse verifier le requete generees avant d'installer le csv
-limite dans le colonnes/tables qu'on peut ajouter
+for ajouter l'enregistrement dans les tables pre-remplies, les tables groups et nom_type n'as pas encore ete implementee. 
