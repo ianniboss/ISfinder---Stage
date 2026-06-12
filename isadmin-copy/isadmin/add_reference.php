@@ -108,9 +108,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'get_values') {
     exit; // End of AJAX endpoint
 }
 
-// ---------------------------------------------------------------------------
-// Normal page rendering starts here
-// ---------------------------------------------------------------------------
 require_once('includes/entete.inc.php');
 require_once('includes/aside.inc.php');
 
@@ -123,9 +120,7 @@ $message = "";
 // Track which table was last used, so JS can restore the panel after a POST
 $last_table = $_POST['table_name'] ?? '';
 
-// ---------------------------------------------------------------------------
 // POST handler
-// ---------------------------------------------------------------------------
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_reference'])) {
     $table_name      = $_POST['table_name'] ?? '';
     $reference_value = trim($_POST['reference_value'] ?? '');
