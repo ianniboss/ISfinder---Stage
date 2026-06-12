@@ -82,7 +82,6 @@
             <div class="links-row">
                 <div class="links-carousel">
                     <div class="links-track">
-                        <!-- NOTE: The Tn databases (Tn Number Registry, TnPedia, Tn Central) have been moved to the start of the list to highlight transposable element databases first. -->
                         <!-- Card 1: Tn Number Registry -->
                         <a href="https://transposon.lstmed.ac.uk/" target="_blank" class="link-card">
                             <div class="link-card-img">
