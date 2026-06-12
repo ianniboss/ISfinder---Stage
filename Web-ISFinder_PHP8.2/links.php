@@ -82,75 +82,76 @@
             <div class="links-row">
                 <div class="links-carousel">
                     <div class="links-track">
-                        <!-- Card 1: ICEberg -->
-                        <a href="http://db-mml.sjtu.edu.cn/ICEberg/index.php" target="_blank" class="link-card">
-                            <div class="link-card-img">
-                                <img src="images/logo_iceberg.png" alt="ICEberg">
-                            </div>
-                            <span class="link-card-name">ICEberg</span>
-                        </a>
-                        <!-- Card 2: UniProt -->
-                        <a href="http://www.uniprot.org/" target="_blank" class="link-card">
-                            <div class="link-card-img">
-                                <img src="images/logo_UniProt.png" alt="UniProt">
-                            </div>
-                            <span class="link-card-name">UniProt</span>
-                        </a>
-                        <!-- Card 3: ISCR Elements -->
-                        <a href="http://medicine.cf.ac.uk/infect-immun/research/infection/antibacterial-agents/iscr-elements/" target="_blank" class="link-card">
-                            <div class="link-card-img">
-                                <!-- No logo for this link in the original -->
-                            </div>
-                            <span class="link-card-name">ISCR Elements</span>
-                        </a>
-                        <!-- Card 4: Cyanobase -->
-                        <a href="http://genome.microbedb.jp/cyanobase" target="_blank" class="link-card">
-                            <div class="link-card-img">
-                                <img src="images/logo_cyanobase.png" alt="Cyanobase">
-                            </div>
-                            <span class="link-card-name">Cyanobase</span>
-                        </a>
-                        <!-- Card 5: Pfam -->
-                        <a href="http://pfam.xfam.org/" target="_blank" class="link-card">
-                            <div class="link-card-img">
-                                <img src="images/logo_Pfam.png" alt="Pfam">
-                            </div>
-                            <span class="link-card-name">Pfam</span>
-                        </a>
-                        <!-- Card 6: INTEGRALL -->
-                        <a href="http://integrall.bio.ua.pt/" target="_blank" class="link-card">
-                            <div class="link-card-img">
-                                <img src="images/logo_IntegronDB.png" alt="INTEGRALL">
-                            </div>
-                            <span class="link-card-name">INTEGRALL — The Integron Database</span>
-                        </a>
-                        <!-- Card 7: EcoliWiki -->
-                        <a href="http://ecoliwiki.net/colipedia/index.php/Welcome_to_EcoliWiki" target="_blank" class="link-card" title="EcoliWiki">
-                            <div class="link-card-img">
-                                <img src="images/logo_ECO.png" alt="EcoliWiki">
-                            </div>
-                            <span class="link-card-name">EcoliWiki</span>
-                        </a>
-                        <!-- Card 8: Tn Number Registry -->
+                        <!-- NOTE: The Tn databases (Tn Number Registry, TnPedia, Tn Central) have been moved to the start of the list to highlight transposable element databases first. -->
+                        <!-- Card 1: Tn Number Registry -->
                         <a href="https://transposon.lstmed.ac.uk/" target="_blank" class="link-card">
                             <div class="link-card-img">
                                 <img src="images/logo_TransposonRegistry.png" alt="Tn Number Registry">
                             </div>
                             <span class="link-card-name">Tn Number Registry</span>
                         </a>
-                        <!-- Card 9: TnPedia -->
+                        <!-- Card 2: TnPedia -->
                         <a href="https://tncentral.ncc.unesp.br/TnPedia/index.php" target="_blank" class="link-card">
                             <div class="link-card-img">
                                 <img src="images/logo_Tn.png" alt="TnPedia">
                             </div>
                             <span class="link-card-name">TnPedia</span>
                         </a>
-                        <!-- Card 10: Tn Central -->
+                        <!-- Card 3: Tn Central -->
                         <a href="https://tncentral.proteininformationresource.org/" target="_blank" class="link-card">
                             <div class="link-card-img">
                                 <img src="images/logo_Tn.png" alt="Tn Central">
                             </div>
                             <span class="link-card-name">Tn Central</span>
+                        </a>
+                        <!-- Card 4: ICEberg -->
+                        <a href="http://db-mml.sjtu.edu.cn/ICEberg/index.php" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_iceberg.png" alt="ICEberg">
+                            </div>
+                            <span class="link-card-name">ICEberg</span>
+                        </a>
+                        <!-- Card 5: UniProt -->
+                        <a href="http://www.uniprot.org/" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_UniProt.png" alt="UniProt">
+                            </div>
+                            <span class="link-card-name">UniProt</span>
+                        </a>
+                        <!-- Card 6: ISCR Elements -->
+                        <a href="http://medicine.cf.ac.uk/infect-immun/research/infection/antibacterial-agents/iscr-elements/" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <!-- No logo for this link in the original -->
+                            </div>
+                            <span class="link-card-name">ISCR Elements</span>
+                        </a>
+                        <!-- Card 7: Cyanobase -->
+                        <a href="http://genome.microbedb.jp/cyanobase" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_cyanobase.png" alt="Cyanobase">
+                            </div>
+                            <span class="link-card-name">Cyanobase</span>
+                        </a>
+                        <!-- Card 8: Pfam -->
+                        <a href="http://pfam.xfam.org/" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_Pfam.png" alt="Pfam">
+                            </div>
+                            <span class="link-card-name">Pfam</span>
+                        </a>
+                        <!-- Card 9: INTEGRALL -->
+                        <a href="http://integrall.bio.ua.pt/" target="_blank" class="link-card">
+                            <div class="link-card-img">
+                                <img src="images/logo_IntegronDB.png" alt="INTEGRALL">
+                            </div>
+                            <span class="link-card-name">INTEGRALL — The Integron Database</span>
+                        </a>
+                        <!-- Card 10: EcoliWiki -->
+                        <a href="http://ecoliwiki.net/colipedia/index.php/Welcome_to_EcoliWiki" target="_blank" class="link-card" title="EcoliWiki">
+                            <div class="link-card-img">
+                                <img src="images/logo_ECO.png" alt="EcoliWiki">
+                            </div>
+                            <span class="link-card-name">EcoliWiki</span>
                         </a>
                     </div>
                 </div>
