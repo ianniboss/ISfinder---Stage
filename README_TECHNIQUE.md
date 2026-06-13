@@ -4,7 +4,7 @@
 * **Dates :** Du 14 Avril au 13 Juin 2026.
 * **Nombre de modifications analysées :** 95 modifications
 * **Les grandes nouveautés :**
-    * Mise à jour de tout l'ancien code pour qu'il fonctionne avec les nouvelles versions de PHP (8.4 et 8.5).
+    * Mise à jour de tout l'ancien code pour qu'il fonctionne avec les nouvelles versions de PHP (8.5).
     * Ajout d'une sécurité (Captcha) sur les formulaires ouverts au public, sans faire perdre le texte si on se trompe.
     * Création d'un outil pour exporter les données en fichier CSV, avec un système qui construit les recherches tout seul.
     * Création de menus pour ajouter ou supprimer des valeurs de référence (comme les familles), avec une sécurité qui vérifie qu'on ne casse rien ailleurs en supprimant.
