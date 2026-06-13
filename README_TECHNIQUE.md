@@ -10,10 +10,6 @@
     * Création de menus pour ajouter ou supprimer des valeurs de référence (comme les familles), avec une sécurité qui vérifie qu'on ne casse rien ailleurs en supprimant.
     * Ajout de boutons pour supprimer et renvoyer des fiches.
     * Outil pour trouver les séquences qui sont incomplètes.
-* **Ce qu'il reste à vérifier :**
-    * Tester l'exportation CSV sur la vraie base de données (le serveur .150) avec beaucoup de données.
-    * Bien vérifier que les formulaires de soumission marchent toujours parfaitement avec le nouveau Captcha.
-    * Tester les suppressions avec les responsables pour être sûr que ça réagit bien face aux erreurs.
 
 ---
 
