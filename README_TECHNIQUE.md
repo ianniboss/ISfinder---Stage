@@ -122,8 +122,8 @@ Sur le site, il y a plein de listes déroulantes (les familles, les groupes, les
 * C'est très simple : on choisit la liste à modifier, on tape le nouveau nom, et on valide.
 * En fond, le site vérifie tout seul que ce nom n'existe pas déjà pour éviter les doublons.
 
-### Supprimer un choix (La partie compliquée)
-* Le problème : Si on supprime la famille "IS3", que se passe-t-il pour les 4000 fiches qui disaient appartenir à la famille "IS3" ? Ça risque de casser le site.
+### Supprimer un choix (Gérer les clés étrangères)
+* Le problème : Si on supprime la famille "IS3", que se passe-t-il pour les 4000 fiches qui disaient appartenir à la famille "IS3" ? Ça risque de casser le site. C'est ce qu'on appelle un problème de clés étrangères (les liens de dépendance entre les données).
 * La solution : J'ai mis en place un système d'avertissement intelligent, qui change selon la liste qu'on modifie :
     * **Blocage total :** Pour les "familles", on n'a pas le droit de supprimer si des fiches l'utilisent encore. Le site bloque le bouton et vous le dit.
     * **Avertissement :** Pour les "groupes", on a le droit de supprimer. Mais le site va vous prévenir : "Attention, si vous faites ça, 42 fiches vont perdre leur groupe. Voulez-vous continuer ?".
