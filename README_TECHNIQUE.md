@@ -2,7 +2,7 @@
 
 **Résumé de ce qui a été fait**
 * **Dates :** Du 14 Avril au 13 Juin 2026.
-* **Nombre de modifications analysées :** 95 modifications (on a retiré tout ce qui touche à l'IA ou au design pour se concentrer sur le vrai travail).
+* **Nombre de modifications analysées :** 95 modifications
 * **Les grandes nouveautés :**
     * Mise à jour de tout l'ancien code pour qu'il fonctionne avec les nouvelles versions de PHP (8.4 et 8.5).
     * Ajout d'une sécurité (Captcha) sur les formulaires ouverts au public, sans faire perdre le texte si on se trompe.
