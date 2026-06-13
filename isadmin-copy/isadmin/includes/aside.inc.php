@@ -70,6 +70,10 @@ if (isset($_GET['champrecherche'])) {
     </section>
     <section>
         <h3><a href="/isadmin/add_reference.php">Ajouter une valeur</a></h3>
+        <hr/>
+    </section>
+    <section>
+        <h3><a href="/isadmin/delete_reference.php">Supprimer une valeur</a></h3>
         <hr/><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
         <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
     </section>
