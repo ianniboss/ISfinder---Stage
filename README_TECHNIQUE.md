@@ -80,7 +80,7 @@ Interface d'ajout et de suppression d'éléments de référence (familles, group
 - Vérification de l'existence du nom lors de l'ajout.
 - Blocage de la suppression d'une famille si elle est déjà référencée.
 - Affichage d'une alerte avec le nombre de fiches impactées lors de la suppression d'un groupe.
-* **Fichiers concernés :** `isadmin-copy/isadmin/add_reference.php`, `isadmin-copy/isadmin/delete_reference.php`
+* **Fichiers concernés :** `isadmin-copy/isadmin/add_reference.php`, `isadmin-copy/isadmin/delete_reference.php`, `isadmin-copy/isadmin/includes/aside.inc.php`
 * **Tables concernées :** `family`, `groups`, `tnp_chemestry`, `type_element_transposable`, `ag_description`, `pg_function`, `nom_type`
 * **Points d'attention :** Les suppressions de références dépendent des relations définies dans la base de données. Vérifier les contraintes avant toute modification du schéma.
 * **Statut :** Validé
@@ -108,3 +108,15 @@ Lors de futures modifications, les vérifications suivantes sont nécessaires :
 * **Architecture existante :** La logique PHP et l'affichage HTML sont intriqués dans les mêmes fichiers.
 * **Gestion des sessions :** Le système de session actuel peut s'avérer sensible selon la configuration du serveur (risques de déconnexion).
 * **Intégrité référentielle :** L'intégrité des contraintes (ex: interdiction de supprimer une famille utilisée) est actuellement gérée de manière applicative (code PHP) plutôt que par des clés étrangères (`FOREIGN KEY`) dans la base de données.
+
+## 7. Fonctionnalités développées durant le stage
+
+✓ Migration PHP 8.5
+✓ Captcha et conservation des formulaires
+✓ Refonte de la page Links
+✓ Actions rapides ISadmin
+✓ Suppression de séquences
+✓ Retour vers ISsubmit
+✓ Export CSV
+✓ Gestion des références
+✓ Détection des fiches incomplètes
