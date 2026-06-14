@@ -1,56 +1,95 @@
 # Documentation Technique - Maintenance ISfinder & ISadmin (PHP 8.5)
 
-Ce document liste les modifications techniques faites pour le passage à PHP 8.5. Le but n'était pas de tout réécrire, mais de garder l'existant fonctionnel tout en ajoutant quelques outils.
-
-Voici ce qui a été fait.
+Ce document liste les modifications techniques appliquées pour assurer la compatibilité avec PHP 8.5 et détaille les nouveaux outils intégrés. L'objectif principal est le maintien fonctionnel de l'existant.
 
 ## 1. Mise à jour vers PHP 8.5
 
-PHP 8.5 bloque complètement la page à la moindre petite erreur. Il a fallu corriger l'ancien code.
+Corrections apportées pour lever les erreurs fatales introduites par le passage à PHP 8.5.
 
-* **Variables inconnues :** J'ai ajouté des vérifications avant d'utiliser les variables. Si on essaie de lire un truc qui n'existe pas, ça plante.
-* **Sessions :** J'ai nettoyé les données avant de les stocker en mémoire. PHP 8 refuse de gérer les données avec des mauvais formats d'identifiant.
-* **Base de données :** Si une case est vide pour une information obligatoire, le code envoie maintenant "NULL" ou "DEFAULT". La base de données n'accepte plus les cases vides par défaut.
-* **Images manquantes :** Le serveur plantait s'il essayait de lire la taille d'une image absente. J'ai ajouté un test tout simple pour vérifier que le fichier est bien là avant de le lire.
+### Vérification des variables inconnues
+Ajout de conditions pour vérifier l'existence des variables avant leur utilisation afin de prévenir les erreurs fatales.
+* **Fichiers concernés :** `Web-ISFinder_PHP8.2/scripts/subIS.php`, `Web-ISFinder_PHP8.2/scripts/request_name.php`, `Web-ISFinder_PHP8.2/include/function.inc.php`
+* **Statut :** Validé
+
+### Nettoyage des sessions
+Nettoyage des données avant stockage en mémoire pour respecter les formats d'identifiant stricts de PHP 8.
+* **Fichiers concernés :** `Web-ISFinder_PHP8.2/request_name_form.php`, `Web-ISFinder_PHP8.2/feedback.php`, `Web-ISFinder_PHP8.2/scripts/subIS.php`
+* **Statut :** Validé
+
+### Insertion en base de données
+Remplacement des valeurs vides par "NULL" ou "DEFAULT" lors de l'insertion pour les champs obligatoires, conformément aux nouvelles restrictions de la base de données.
+* **Fichiers concernés :** `Web-ISFinder_PHP8.2/scripts/subIS.php`, `Web-ISFinder_PHP8.2/scripts/request_name.php`
+* **Tables concernées :** `submission`, `submiters`, `element_transposable`
+* **Statut :** Validé
+
+### Vérification des images manquantes
+Ajout d'un test d'existence du fichier image avant la lecture de ses dimensions pour éviter le plantage du serveur.
+* **Fichiers concernés :** `isadmin-copy/isadmin/ficheIS.php`, `isadmin-copy/webadm/fonctions_fichiers.inc.php`
+* **Statut :** Validé
 
 ## 2. Modifications sur ISfinder (Site public)
 
-* **Le Captcha :** J'ai mis un Captcha sur les formulaires pour bloquer les robots. Mais voici le point important : si on se trompe, on garde toutes les données tapées. La page se recharge avec le texte déjà rempli.
-* **Page des liens :** C'est devenu un carrousel avec des cartes. J'ai aussi mis les bases de données clés tout en haut.
-* **Ajustements visuels :** J'ai juste centré des titres et harmonisé les boutons. Rien de lourd.
+### Intégration du Captcha
+Ajout d'un Captcha sur les formulaires pour la protection contre les requêtes automatisées. En cas d'erreur de validation, les données du formulaire sont conservées et rechargées automatiquement.
+* **Fichiers concernés :** `Web-ISFinder_PHP8.2/scripts/ptitcaptcha.php`, `Web-ISFinder_PHP8.2/request_name_form.php`, `Web-ISFinder_PHP8.2/feedback.php`
+* **Statut :** Validé
+
+### Refonte de la page des liens
+Transformation de l'affichage sous forme de carrousel de cartes. Mise en avant des bases de données clés en haut de page.
+* **Fichiers concernés :** `Web-ISFinder_PHP8.2/links.php`, `Web-ISFinder_PHP8.2/styles/links.css`
+* **Statut :** Validé
+
+### Ajustements visuels
+Centrage des titres et harmonisation de l'affichage des boutons.
+* **Fichiers concernés :** `Web-ISFinder_PHP8.2/styles/submission.css`, `Web-ISFinder_PHP8.2/styles/styles_feedback.css`
+* **Statut :** Validé
 
 ## 3. Modifications sur ISadmin (Site interne)
 
-* **Boutons rapides :** Sur la liste des séquences, j'ai ajouté deux boutons : une poubelle (supprimer) et un retour (renvoyer en brouillon). Une boîte de confirmation avec le nom de la base s'affiche pour éviter les erreurs.
-* **Suppression propre :** Quand on supprime, ça enlève bien les séquences et les ORF liés. Mais ça garde les soumetteurs et les hôtes, parce que d'autres fiches en ont peut-être besoin.
+### Boutons d'action rapide (Séquences)
+Ajout de boutons de suppression et de retour en brouillon sur la liste des séquences. Intégration d'une boîte de dialogue de confirmation affichant le nom de la base.
+* **Fichiers concernés :** `isadmin-copy/isadmin/liste.php`, `isadmin-copy/isadmin/scripts/function.js`
+* **Statut :** Validé
 
-## 4. Les nouveaux outils
+### Logique de suppression
+La suppression d'une séquence entraîne la suppression des `orf` liés, mais conserve les enregistrements `submiters` et `host` pour maintenir l'intégrité des autres fiches existantes.
+* **Fichiers concernés :** `isadmin-copy/isadmin/liste.php`, `isadmin-copy/isadmin/ficheIS.php`
+* **Tables concernées :** `submission`, `orf` (Supprimés) / `submiters`, `host` (Conservés)
+* **Statut :** Validé
+
+## 4. Nouveaux outils
 
 ### Export CSV
-* Vous choisissez une table et des filtres, et l'outil crée la requête SQL.
-* Pour la sécurité, ça bloque toute tentative de modification (il ne fait que des SELECT).
-* J'ai aussi contourné un vieux bug qui bloquait les requêtes sur les tables avec le mot "insert" (comme `et_insertion_site`).
+Génération de requêtes SQL de type `SELECT` basées sur la sélection d'une table et de filtres. Contournement d'un bug bloquant les requêtes contenant le mot "insert". L'outil bloque toute tentative de modification de données.
+* **Fichiers concernés :** `isadmin-copy/isadmin/export_csv.php`
+* **Tables concernées :** Toutes les tables exportables (ex: `et_insertion_site`)
+* **Statut :** Validé
 
-### Gestion des listes déroulantes
-* Vous pouvez ajouter ou supprimer des éléments de référence (familles, groupes) depuis l'interface.
-* Le code vérifie si le nom existe déjà quand on l'ajoute.
-* Pour la suppression, le système gère les dépendances : il bloque la suppression d'une famille si elle est encore utilisée, et il affiche une alerte pour les groupes en indiquant le nombre de fiches touchées.
+### Gestion des listes déroulantes (Éléments de référence)
+Interface d'ajout et de suppression d'éléments de référence (familles, groupes).
+- Vérification de l'existence du nom lors de l'ajout.
+- Blocage de la suppression d'une famille si elle est déjà référencée.
+- Affichage d'une alerte avec le nombre de fiches impactées lors de la suppression d'un groupe.
+* **Fichiers concernés :** `isadmin-copy/isadmin/add_reference.php`, `isadmin-copy/isadmin/delete_reference.php`
+* **Tables concernées :** `family`, `groups`, `tnp_chemestry`, `type_element_transposable`, `ag_description`, `pg_function`, `nom_type`
+* **Statut :** Validé
 
-### Fiches incomplètes
-* Une nouvelle page repère les fiches sauvegardées mais qui n'ont pas les données nécessaires (comme les ORF).
-* On clique sur la ligne, et on arrive directement sur la page pour corriger.
+### Suivi des fiches incomplètes
+Ajout d'une interface listant les fiches sauvegardées mais incomplètes (ex: absence d'ORF). Redirection directe vers l'édition de la fiche au clic.
+* **Fichiers concernés :** `isadmin-copy/isadmin/liste_incomplete.php`
+* **Tables concernées :** `submission`, `orf`
+* **Statut :** Validé
 
 ## 5. Tests obligatoires (Pour les prochains développeurs)
 
-Si quelqu'un touche au code, voici ce qu'il faut absolument vérifier :
+Lors de futures modifications, les vérifications suivantes sont nécessaires :
 
-* **L'intégrité de la base :** Après une modification, regardez dans la base si vous n'avez pas effacé un hôte ou un soumetteur utilisé ailleurs.
-* **Les erreurs de formulaire :** Remplissez un formulaire, plantez le Captcha exprès, et vérifiez que les champs (surtout ceux ajoutés dynamiquement) ne sont pas effacés.
-* **Le renvoi en brouillon :** Renvoyez une fiche et vérifiez dans la base que son statut repasse bien à 1 (ISsubmit).
+* **L'intégrité de la base de données :** S'assurer de ne pas supprimer en cascade un hôte ou un soumetteur partagé avec d'autres entités.
+* **Les erreurs de formulaire :** Simuler une erreur de validation (ex: Captcha invalide) et s'assurer que les champs (notamment les champs dynamiques ajoutés) conservent leurs valeurs.
+* **Le changement de statut :** Lors du renvoi d'une fiche en brouillon, vérifier dans la base de données que son statut repasse à 1 (`ISsubmit`).
 
-## 6. Limites actuelles et prochaines étapes
+## 6. Limites actuelles et points d'attention
 
-* **Ancien style :** L'affichage (HTML) et les calculs sont mélangés dans les mêmes fichiers. C'est normal pour du vieux code, mais ça reste lourd à lire.
-* **Déconnexions :** Le vieux système de sessions peut parfois créer de petites erreurs si le serveur est trop pointilleux.
-* **Passer à PDO :** C'est ce qu'il faudrait faire ensuite pour la base de données. Ça réglerait beaucoup de soucis de sécurité.
-* **Gérer les clés étrangères côté base :** Ce serait mieux que la base de données interdise elle-même de supprimer une famille utilisée, plutôt que de laisser le PHP s'en occuper.
+* **Architecture existante :** La logique PHP et l'affichage HTML sont intriqués dans les mêmes fichiers.
+* **Gestion des sessions :** Le système de session actuel peut s'avérer sensible selon la configuration du serveur (risques de déconnexion).
+* **Intégrité référentielle :** L'intégrité des contraintes (ex: interdiction de supprimer une famille utilisée) est actuellement gérée de manière applicative (code PHP) plutôt que par des clés étrangères (`FOREIGN KEY`) dans la base de données.
